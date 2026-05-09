@@ -74,8 +74,8 @@ export default function Header() {
 
             {/* Logo - Mobile responsive */}
             <div className="flex items-center overflow-visible">
-              <img
-                src="/logo.png"
+                <img
+                  src="/Logo.png"
                 alt="AL-BURHAN Industrial Drives"
                 className="h-14 sm:h-16 md:h-20 w-auto object-contain scale-[1.45] sm:scale-[2.05] md:scale-[2.8] lg:scale-[3.6] origin-left"
               />

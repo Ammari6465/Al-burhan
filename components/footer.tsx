@@ -34,8 +34,8 @@ export default function Footer() {
 
             {/* Brand */}
             <div className="flex flex-col items-center text-center">
-              <img
-                src="/logo.png"
+                <img
+                  src="/Logo.png"
                 alt="AL-BURHAN Industrial Drives"
                 className="h-24 sm:h-24 md:h-28 w-auto max-w-none object-contain scale-[1.4] sm:scale-[1.1] origin-center"
               />
