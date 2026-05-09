@@ -6,7 +6,7 @@ import Image from 'next/image'
 export default function Hero() {
   return (
     <section id="home" className="relative overflow-hidden pt-20 pb-16 sm:pt-24 sm:pb-20">
-      <div className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_top_left,rgba(185,28,28,0.12),transparent_28%),radial-gradient(circle_at_top_right,rgba(29,78,216,0.12),transparent_30%),linear-gradient(180deg,rgba(255,255,255,0.95),rgba(248,250,252,0.85))]" />
+      <div className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_12%_18%,rgba(45,99,199,0.20),transparent_32%),radial-gradient(circle_at_88%_12%,rgba(185,28,28,0.18),transparent_30%),radial-gradient(circle_at_50%_35%,rgba(255,255,255,0.45),transparent_55%),linear-gradient(180deg,rgba(255,255,255,0.28),rgba(255,255,255,0.10))] md:bg-[radial-gradient(circle_at_top_left,rgba(185,28,28,0.12),transparent_28%),radial-gradient(circle_at_top_right,rgba(29,78,216,0.12),transparent_30%),linear-gradient(180deg,rgba(255,255,255,0.82),rgba(248,250,252,0.70))]" />
       <div className="absolute inset-x-0 top-0 -z-10 h-px bg-gradient-to-r from-transparent via-border to-transparent" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
