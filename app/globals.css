@@ -120,29 +120,25 @@
     scroll-behavior: smooth;
   }
   body {
-    /* Default to a mobile-safe gradient; desktop gets the richer layered version below. */
+    /* Same rich gradient for all screen sizes */
     background:
-      radial-gradient(circle at 8% 4%, rgba(45, 99, 199, 0.34) 0%, rgba(45, 99, 199, 0) 38%),
-      radial-gradient(circle at 92% 10%, rgba(179, 0, 0, 0.3) 0%, rgba(179, 0, 0, 0) 42%),
-      linear-gradient(180deg, #eef3fb 0%, #e7eef8 44%, #dde7f4 100%);
+      linear-gradient(135deg, #2d63c7 0%, #2d63c7 15%, transparent 35%),
+      linear-gradient(135deg, #3a75db 0%, #3a75db 12%, transparent 32%),
+      linear-gradient(135deg, #4a86ea 0%, #4a86ea 10%, transparent 30%),
+      linear-gradient(135deg, #6297f0 0%, #6297f0 8%, transparent 28%),
+      linear-gradient(135deg, #7fb0f7 0%, #7fb0f7 6%, transparent 26%),
+      linear-gradient(315deg, #b30000 0%, #b30000 15%, transparent 35%),
+      linear-gradient(315deg, #cc0000 0%, #cc0000 12%, transparent 32%),
+      linear-gradient(315deg, #e60000 0%, #e60000 10%, transparent 30%),
+      linear-gradient(315deg, #ff2222 0%, #ff2222 8%, transparent 28%),
+      linear-gradient(315deg, #ff6666 0%, #ff6666 6%, transparent 26%),
+      linear-gradient(180deg, #dbe4f3 0%, #e6eef8 16%, #d1dcef 100%);
     background-attachment: scroll;
     color: var(--foreground);
   }
 
   @media (min-width: 768px) {
     body {
-      background:
-        linear-gradient(135deg, #2d63c7 0%, #2d63c7 15%, transparent 35%),
-        linear-gradient(135deg, #3a75db 0%, #3a75db 12%, transparent 32%),
-        linear-gradient(135deg, #4a86ea 0%, #4a86ea 10%, transparent 30%),
-        linear-gradient(135deg, #6297f0 0%, #6297f0 8%, transparent 28%),
-        linear-gradient(135deg, #7fb0f7 0%, #7fb0f7 6%, transparent 26%),
-        linear-gradient(315deg, #b30000 0%, #b30000 15%, transparent 35%),
-        linear-gradient(315deg, #cc0000 0%, #cc0000 12%, transparent 32%),
-        linear-gradient(315deg, #e60000 0%, #e60000 10%, transparent 30%),
-        linear-gradient(315deg, #ff2222 0%, #ff2222 8%, transparent 28%),
-        linear-gradient(315deg, #ff6666 0%, #ff6666 6%, transparent 26%),
-        linear-gradient(180deg, #dbe4f3 0%, #e6eef8 16%, #d1dcef 100%);
       background-attachment: fixed;
     }
   }
