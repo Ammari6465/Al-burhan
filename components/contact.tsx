@@ -73,7 +73,7 @@ export default function Contact() {
             <div className="flex gap-4 items-start">
               <div className="flex-shrink-0">
                 <div className="flex items-center justify-center h-12 w-12 rounded-lg bg-red-700">
-                  <MapPin size={20} className="text-white" />
+                  <MapPin size={20 } className="text-white" />
                 </div>
               </div>
               <div>
@@ -129,118 +129,26 @@ export default function Contact() {
             <div className="border-t border-border pt-4 sm:pt-6 mt-4 sm:mt-6">
               <h4 className="font-semibold text-foreground mb-3">Business Hours</h4>
               <div className="space-y-2 text-sm text-foreground/70">
-                <p>Monday - Saturday: 9:00 AM - 6:00 PM</p>
-                <p>Sunday: By Appointment</p>
+                <p>Monday - Saturday: 10:00 AM - 1:00 PM and 2:00 PM - 7:00 PM</p>
+                <p>Sunday: <span className="text-red-700 font-semibold"> Closed</span></p>
               </div>
             </div>
           </div>
 
-          {/* Contact Form */}
-          <div>
-            <form onSubmit={handleSubmit} className="bg-white rounded-xl border border-border p-5 sm:p-8 shadow-sm">
-              {submitted && (
-                <div className="mb-6 p-4 bg-green-50 border border-green-200 rounded-lg">
-                  <p className="text-green-700 font-medium">Thank you! We&apos;ll be in touch soon.</p>
-                </div>
-              )}
-
-              {errorMessage && (
-                <div className="mb-6 p-4 bg-red-50 border border-red-200 rounded-lg">
-                  <p className="text-red-700 font-medium">{errorMessage}</p>
-                </div>
-              )}
-
-              <div className="space-y-4">
-                {/* Name */}
-                <div>
-                  <label className="block text-sm font-medium text-foreground mb-2">
-                    Your Name
-                  </label>
-                  <input
-                    type="text"
-                    name="name"
-                    value={formData.name}
-                    onChange={handleChange}
-                    placeholder="John Doe"
-                    required
-                    className="w-full px-4 py-3 border border-input rounded-lg focus:outline-none focus:ring-2 focus:ring-red-700/50 bg-background"
-                  />
-                </div>
-
-                {/* Email */}
-                <div>
-                  <label className="block text-sm font-medium text-foreground mb-2">
-                    Email Address
-                  </label>
-                  <input
-                    type="email"
-                    name="email"
-                    value={formData.email}
-                    onChange={handleChange}
-                    placeholder="john@example.com"
-                    required
-                    className="w-full px-4 py-3 border border-input rounded-lg focus:outline-none focus:ring-2 focus:ring-red-700/50 bg-background"
-                  />
-                </div>
-
-                {/* Phone */}
-                <div>
-                  <label className="block text-sm font-medium text-foreground mb-2">
-                    Phone Number
-                  </label>
-                  <input
-                    type="tel"
-                    name="phone"
-                    value={formData.phone}
-                    onChange={handleChange}
-                    placeholder="+91 XXXXXXXXXX"
-                    className="w-full px-4 py-3 border border-input rounded-lg focus:outline-none focus:ring-2 focus:ring-red-700/50 bg-background"
-                  />
-                </div>
-
-                {/* Subject */}
-                <div>
-                  <label className="block text-sm font-medium text-foreground mb-2">
-                    Subject
-                  </label>
-                  <input
-                    type="text"
-                    name="subject"
-                    value={formData.subject}
-                    onChange={handleChange}
-                    placeholder="Inquiry about products"
-                    required
-                    className="w-full px-4 py-3 border border-input rounded-lg focus:outline-none focus:ring-2 focus:ring-red-700/50 bg-background"
-                  />
-                </div>
-
-                {/* Message */}
-                <div>
-                  <label className="block text-sm font-medium text-foreground mb-2">
-                    Message
-                  </label>
-                  <textarea
-                    name="message"
-                    value={formData.message}
-                    onChange={handleChange}
-                    placeholder="Tell us about your requirements..."
-                    rows={4}
-                    required
-                    className="w-full px-4 py-3 border border-input rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/50 bg-background resize-none"
-                  />
-                </div>
-
-                {/* Submit Button */}
-                <button
-                  type="submit"
-                  disabled={isSubmitting}
-                  className="w-full bg-red-700 text-white px-6 py-3.5 rounded-lg font-medium hover:bg-red-800 transition-all flex items-center justify-center gap-2 mt-6 disabled:cursor-not-allowed disabled:opacity-70"
-                >
-                  <Send size={18} />
-                  {isSubmitting ? 'Sending...' : 'Send Message'}
-                </button>
-              </div>
-            </form>
+          {/* Map (replaces contact form) */}
+          <div className="mt-2 sm:mt-0">
+            <div className="overflow-hidden rounded-xl border border-border bg-white shadow-sm">
+              <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15094.19073479426!2d72.81480185687545!3d18.951404827656734!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be7ce2540b220cd%3A0xcb8075dba5dd428!2sAL-BURHAN%20INDUSTRIAL%20DRIVES!5e0!3m2!1sen!2sin!4v1778271312424!5m2!1sen!2sin"
+                width="100%"
+                height="520"
+                style={{ border: 0 }}
+                allowFullScreen
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+                className="w-full h-[520px] md:h-[620px] lg:h-[550px]"
+              />
+            </div>
           </div>
         </div>
       </div>

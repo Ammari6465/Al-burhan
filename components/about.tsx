@@ -1,13 +1,8 @@
 'use client'
 
-import { Award, Zap, Target } from 'lucide-react'
+import { Zap, Target } from 'lucide-react'
 
 const highlights = [
-  {
-    icon: Award,
-    title: 'ISO Certified',
-    description: 'Maintaining highest quality standards with ISO certifications',
-  },
   {
     icon: Zap,
     title: 'Fast Delivery',
@@ -30,7 +25,7 @@ export default function About() {
             <div>
               <p className="text-sm font-bold text-red-700 uppercase tracking-wider mb-4">About AL-BURHAN</p>
               <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-balance leading-tight mb-6">
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-700 to-blue-700">20+ Years of Excellence</span>
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-700 to-blue-700">25 Years of Excellence</span>
               </h2>
             </div>
 
@@ -72,7 +67,7 @@ export default function About() {
             <div className="relative space-y-6">
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
                 {[
-                  { number: '20+', label: 'Years in Industry' },
+                  { number: '25+', label: 'Years in Industry' },
                   { number: '500+', label: 'Happy Clients' },
                   { number: '1000+', label: 'Products Stock' },
                   { number: '15+', label: 'States Covered' },
@@ -96,7 +91,7 @@ export default function About() {
                 <ul className="space-y-3">
                   <li className="flex items-center gap-3">
                     <span className="w-2 h-2 rounded-full bg-white"></span>
-                    <span className="text-sm">Quality assured products from certified suppliers</span>
+                    <span className="text-sm">Quality assured products </span>
                   </li>
                   <li className="flex items-center gap-3">
                     <span className="w-2 h-2 rounded-full bg-white"></span>

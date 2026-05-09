@@ -1,6 +1,6 @@
 'use client'
 
-import { Rocket, Eye } from 'lucide-react'
+import { Rocket } from 'lucide-react'
 
 export default function MissionVision() {
   return (
@@ -10,14 +10,14 @@ export default function MissionVision() {
         <div className="text-center mb-12 sm:mb-16 lg:mb-20 animate-in fade-in slide-in-from-bottom-8 duration-1000">
           <p className="text-sm font-bold text-red-700 uppercase tracking-wider mb-4">Our Direction</p>
           <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-balance">
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-700 to-blue-700">Mission & Vision</span>
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-700 to-blue-700">Mission</span>
           </h2>
         </div>
 
         {/* Mission and Vision Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 sm:gap-12">
+        <div className="flex justify-center">
           {/* Mission Card */}
-          <div className="group relative animate-in fade-in slide-in-from-left-8 duration-1000" style={{animationDelay: '200ms'}}>
+          <div className="group relative animate-in fade-in slide-in-from-left-8 duration-1000 w-full md:max-w-2xl" style={{animationDelay: '200ms'}}>
             <div className="absolute -inset-1 bg-gradient-to-r from-red-700/20 to-red-600/20 rounded-3xl blur-2xl group-hover:blur-3xl transition-all duration-300 opacity-0 group-hover:opacity-100"></div>
             
             <div className="relative bg-white rounded-3xl border-2 border-red-700/20 p-6 sm:p-8 lg:p-12 hover:border-red-700/50 transition-all duration-300">
@@ -54,43 +54,7 @@ export default function MissionVision() {
             </div>
           </div>
 
-          {/* Vision Card */}
-          <div className="group relative animate-in fade-in slide-in-from-right-8 duration-1000" style={{animationDelay: '400ms'}}>
-            <div className="absolute -inset-1 bg-gradient-to-r from-blue-700/20 to-blue-600/20 rounded-3xl blur-2xl group-hover:blur-3xl transition-all duration-300 opacity-0 group-hover:opacity-100"></div>
-            
-            <div className="relative bg-white rounded-3xl border-2 border-blue-700/20 p-6 sm:p-8 lg:p-12 hover:border-blue-700/50 transition-all duration-300">
-              <div className="flex items-start gap-4 sm:gap-6 mb-6 sm:mb-8">
-                <div className="w-16 h-16 sm:w-20 sm:h-20 bg-gradient-to-br from-blue-700 to-blue-600 rounded-2xl flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-300">
-                  <Eye size={28} className="text-white sm:size-10" />
-                </div>
-                <h3 className="text-2xl sm:text-3xl md:text-4xl font-black text-foreground">Our Vision</h3>
-              </div>
 
-              <p className="text-base sm:text-lg text-foreground/70 leading-relaxed mb-6 sm:mb-8">
-                To be the most trusted and innovative industrial components provider in India, recognized for quality, reliability, and commitment to excellence in every partnership.
-              </p>
-
-              <div className="space-y-4 border-l-4 border-blue-700 pl-4 sm:pl-6">
-                <div>
-                  <h4 className="font-bold text-foreground mb-2">Our Promise</h4>
-                  <ul className="space-y-2">
-                    <li className="flex items-center gap-3">
-                      <span className="w-2 h-2 rounded-full bg-gradient-to-r from-red-700 to-blue-700"></span>
-                      <span className="text-foreground/70">Authentic, certified products</span>
-                    </li>
-                    <li className="flex items-center gap-3">
-                      <span className="w-2 h-2 rounded-full bg-gradient-to-r from-red-700 to-blue-700"></span>
-                      <span className="text-foreground/70">Competitive pricing always</span>
-                    </li>
-                    <li className="flex items-center gap-3">
-                      <span className="w-2 h-2 rounded-full bg-gradient-to-r from-red-700 to-blue-700"></span>
-                      <span className="text-foreground/70">Dedicated customer support</span>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-          </div>
         </div>
       </div>
     </section>

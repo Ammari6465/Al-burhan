@@ -37,7 +37,7 @@ export default function Footer() {
                 <img
                   src="/Logo.png"
                 alt="AL-BURHAN Industrial Drives"
-                className="h-24 sm:h-24 md:h-28 w-auto max-w-none object-contain scale-[1.4] sm:scale-[1.1] origin-center"
+                className="h-24 sm:h-24 md:h-28 w-auto max-w-none object-contain scale-[1.4] sm:scale-[2.1] origin-center"
               />
 
               <p className="mt-5 text-slate-600 leading-relaxed text-sm max-w-sm mx-auto">
@@ -138,19 +138,7 @@ export default function Footer() {
 
           </div>
 
-          {/* Google Map */}
-          <div className="mt-8 sm:mt-10 overflow-hidden rounded-3xl border border-white/20 shadow-2xl">
-            <iframe
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15094.19073479426!2d72.81480185687545!3d18.951404827656734!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be7ce2540b220cd%3A0xcb8075dba5dd428!2sAL-BURHAN%20INDUSTRIAL%20DRIVES!5e0!3m2!1sen!2sin!4v1778271312424!5m2!1sen!2sin"
-              width="100%"
-              height="260"
-              style={{ border: 0 }}
-              allowFullScreen
-              loading="lazy"
-              referrerPolicy="no-referrer-when-downgrade"
-              className="w-full"
-            />
-          </div>
+          {/* Google Map removed per request */}
 
           {/* Bottom */}
           <div className="mt-8 sm:mt-10 border-t border-slate-200 pt-5 flex flex-col md:flex-row items-center justify-between gap-4 text-center md:text-left">

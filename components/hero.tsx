@@ -23,9 +23,9 @@ export default function Hero() {
             <div className="space-y-3">
               <h1 className="max-w-xl text-3xl font-semibold tracking-tight text-balance text-slate-950 sm:text-4xl md:text-5xl lg:text-6xl">
                 <span className="bg-gradient-to-r from-red-700 via-red-600 to-blue-700 bg-clip-text text-transparent">
-                  Precision engineered
+                  Industrial and Power
                 </span>{' '}
-                industrial components.
+                Transmission Products
               </h1>
               <p className="mx-auto md:mx-0 max-w-lg text-base sm:text-lg leading-7 sm:leading-8 text-slate-600">
                 Al-Burhan Industrial Drives supplies pulleys, sprockets, roller chains, gears, and couplings with a clean, dependable presentation built for industrial buyers.
@@ -53,7 +53,7 @@ export default function Hero() {
             {/* Trust Indicators */}
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4 border-t border-border pt-6 sm:pt-8">
               <div className="rounded-xl border border-border/60 bg-white/60 px-4 py-3 text-center sm:text-left">
-                <p className="text-xl sm:text-2xl font-semibold text-red-700">20+</p>
+                <p className="text-xl sm:text-2xl font-semibold text-red-700">25+</p>
                 <p className="text-xs text-slate-500">Years Experience</p>
               </div>
               <div className="rounded-xl border border-border/60 bg-white/60 px-4 py-3 text-center sm:text-left">

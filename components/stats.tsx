@@ -5,7 +5,7 @@ import { Award, Users, Package, Globe } from 'lucide-react'
 const stats = [
   {
     icon: Award,
-    number: '20+',
+    number: '25+',
     label: 'Years of Excellence',
     description: 'Trusted by industries across India',
     color: 'from-red-700 to-red-600',
