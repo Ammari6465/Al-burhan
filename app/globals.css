@@ -1,0 +1,182 @@
+@import 'tailwindcss';
+@import 'tw-animate-css';
+
+@custom-variant dark (&:is(.dark *));
+
+:root {
+  --background: oklch(0.98 0 0);
+  --foreground: oklch(0.15 0 0);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.15 0 0);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.15 0 0);
+  --primary: oklch(0.45 0.22 15);
+  --primary-foreground: oklch(0.98 0 0);
+  --secondary: oklch(0.35 0.22 270);
+  --secondary-foreground: oklch(0.98 0 0);
+  --muted: oklch(0.9 0 0);
+  --muted-foreground: oklch(0.45 0 0);
+  --accent: oklch(0.55 0.25 10);
+  --accent-foreground: oklch(0.98 0 0);
+  --destructive: oklch(0.45 0.22 15);
+  --destructive-foreground: oklch(0.98 0 0);
+  --border: oklch(0.92 0 0);
+  --input: oklch(0.96 0 0);
+  --ring: oklch(0.35 0.22 270);
+  --chart-1: oklch(0.45 0.22 15);
+  --chart-2: oklch(0.35 0.22 270);
+  --chart-3: oklch(0.55 0.25 10);
+  --chart-4: oklch(0.4 0.2 20);
+  --chart-5: oklch(0.5 0.15 265);
+  --radius: 0.625rem;
+  --sidebar: oklch(0.985 0 0);
+  --sidebar-foreground: oklch(0.15 0 0);
+  --sidebar-primary: oklch(0.45 0.22 15);
+  --sidebar-primary-foreground: oklch(0.98 0 0);
+  --sidebar-accent: oklch(0.55 0.25 10);
+  --sidebar-accent-foreground: oklch(0.98 0 0);
+  --sidebar-border: oklch(0.92 0 0);
+  --sidebar-ring: oklch(0.35 0.22 270);
+}
+
+.dark {
+  --background: oklch(0.145 0 0);
+  --foreground: oklch(0.985 0 0);
+  --card: oklch(0.145 0 0);
+  --card-foreground: oklch(0.985 0 0);
+  --popover: oklch(0.145 0 0);
+  --popover-foreground: oklch(0.985 0 0);
+  --primary: oklch(0.985 0 0);
+  --primary-foreground: oklch(0.205 0 0);
+  --secondary: oklch(0.269 0 0);
+  --secondary-foreground: oklch(0.985 0 0);
+  --muted: oklch(0.269 0 0);
+  --muted-foreground: oklch(0.708 0 0);
+  --accent: oklch(0.269 0 0);
+  --accent-foreground: oklch(0.985 0 0);
+  --destructive: oklch(0.396 0.141 25.723);
+  --destructive-foreground: oklch(0.637 0.237 25.331);
+  --border: oklch(0.269 0 0);
+  --input: oklch(0.269 0 0);
+  --ring: oklch(0.439 0 0);
+  --chart-1: oklch(0.488 0.243 264.376);
+  --chart-2: oklch(0.696 0.17 162.48);
+  --chart-3: oklch(0.769 0.188 70.08);
+  --chart-4: oklch(0.627 0.265 303.9);
+  --chart-5: oklch(0.645 0.246 16.439);
+  --sidebar: oklch(0.205 0 0);
+  --sidebar-foreground: oklch(0.985 0 0);
+  --sidebar-primary: oklch(0.488 0.243 264.376);
+  --sidebar-primary-foreground: oklch(0.985 0 0);
+  --sidebar-accent: oklch(0.269 0 0);
+  --sidebar-accent-foreground: oklch(0.985 0 0);
+  --sidebar-border: oklch(0.269 0 0);
+  --sidebar-ring: oklch(0.439 0 0);
+}
+
+@theme inline {
+  --font-sans: var(--font-sora), 'Sora', sans-serif;
+  --font-mono: var(--font-ibm-plex-mono), 'IBM Plex Mono', monospace;
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    /* Lighter blue with less white center and stronger red-blue balance */
+    background: 
+      /* Bottom-left lighter blue base */
+      linear-gradient(135deg, #2d63c7 0%, #2d63c7 15%, transparent 35%),
+      
+      /* Blue layered diagonal shapes - lighter and softer */
+      linear-gradient(135deg, #3a75db 0%, #3a75db 12%, transparent 32%),
+      linear-gradient(135deg, #4a86ea 0%, #4a86ea 10%, transparent 30%),
+      linear-gradient(135deg, #6297f0 0%, #6297f0 8%, transparent 28%),
+      linear-gradient(135deg, #7fb0f7 0%, #7fb0f7 6%, transparent 26%),
+      
+      /* Top-right strong red base */
+      linear-gradient(315deg, #b30000 0%, #b30000 15%, transparent 35%),
+      
+      /* Red layered diagonal shapes */
+      linear-gradient(315deg, #cc0000 0%, #cc0000 12%, transparent 32%),
+      linear-gradient(315deg, #e60000 0%, #e60000 10%, transparent 30%),
+      linear-gradient(315deg, #ff2222 0%, #ff2222 8%, transparent 28%),
+      linear-gradient(315deg, #ff6666 0%, #ff6666 6%, transparent 26%),
+      
+      /* Reduced white center even more */
+      linear-gradient(180deg, #dbe4f3 0%, #e6eef8 16%, #d1dcef 100%);
+    background-attachment: fixed;
+    color: var(--foreground);
+  }
+  * {
+    @apply border-border outline-ring/50;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  @keyframes levitate {
+    0%, 100% {
+      transform: translateY(0px) rotate(0deg);
+    }
+    50% {
+      transform: translateY(-12px) rotate(10deg);
+    }
+  }
+
+  .animate-levitate {
+    animation: levitate 4s ease-in-out infinite;
+  }
+
+  .animate-levitate-2 {
+    animation: levitate 5s ease-in-out infinite;
+  }
+
+  .animate-levitate-3 {
+    animation: levitate 6s ease-in-out infinite;
+  }
+
+  .animate-levitate-4 {
+    animation: levitate 4.5s ease-in-out infinite;
+  }
+}
