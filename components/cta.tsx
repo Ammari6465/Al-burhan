@@ -1,40 +1,82 @@
 'use client'
 
-import { ArrowRight, MessageCircle } from 'lucide-react'
+import { ArrowRight, CheckCircle2, CreditCard, Headphones, Truck } from 'lucide-react'
+
+const benefits = [
+  {
+    icon: CheckCircle2,
+    title: 'Quality Assured',
+    description: 'Products selected for dependable performance and industrial fit.',
+  },
+  {
+    icon: CreditCard,
+    title: 'Competitive Pricing',
+    description: 'Transparent value without sacrificing service or material reliability.',
+  },
+  {
+    icon: Headphones,
+    title: 'Dedicated Support',
+    description: 'Quick responses for quotes, stock checks, and order coordination.',
+  },
+  {
+    icon: Truck,
+    title: 'Fast Delivery',
+    description: 'Built around practical dispatch timelines for India-wide shipping.',
+  },
+]
 
 export default function CTA() {
   return (
-    <section className="py-16 sm:py-20 bg-gradient-to-r from-red-700 to-blue-700">
-      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-        <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-5 sm:mb-6 text-balance">
-          Ready to Find Your Perfect Industrial Components?
-        </h2>
-        <p className="text-base sm:text-lg lg:text-xl text-white/90 mb-8 max-w-3xl mx-auto">
-          Contact our expert team today and get premium quality components with fast delivery and competitive pricing.
-        </p>
-        
-        <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center">
-          <a
-            href="#contact"
-            className="inline-flex w-full sm:w-auto items-center justify-center gap-2 bg-white text-red-700 px-6 sm:px-8 py-3.5 sm:py-4 rounded-lg font-semibold hover:bg-gray-100 transition-all"
-          >
-            Request a Quote
-            <ArrowRight size={20} />
-          </a>
-          <a
-            href="https://wa.me/919819036787?text=Hi%20AL-BURHAN,%20I%20am%20interested%20in%20your%20products"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex w-full sm:w-auto items-center justify-center gap-2 border-2 border-white text-white px-6 sm:px-8 py-3.5 sm:py-4 rounded-lg font-semibold hover:bg-white/10 transition-all"
-          >
-            <MessageCircle size={20} />
-            Chat on WhatsApp
-          </a>
+    <section className="section-shell section-surface-alt py-16 sm:py-20">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="mx-auto mb-12 max-w-3xl text-center">
+          <p className="section-kicker mb-4 text-sm font-semibold text-[#C0392B]">Why Choose Us</p>
+          <h2 className="text-3xl font-black text-slate-900 sm:text-4xl lg:text-5xl text-balance">
+            The practical partner for quality industrial supply.
+          </h2>
         </div>
 
-        <p className="text-white/70 text-sm mt-8">
-          Available 24/7 for your inquiries | Fast Response Time | Expert Support
-        </p>
+        <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
+          {benefits.map((benefit, index) => {
+            const Icon = benefit.icon
+            return (
+              <article key={benefit.title} className="industrial-card rounded-3xl p-6 transition-transform duration-300 hover:-translate-y-1" style={{ animationDelay: `${index * 90}ms` }}>
+                <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-[#0A3D62] text-white shadow-lg">
+                  <Icon size={20} />
+                </div>
+                <h3 className="mt-5 text-xl font-bold text-slate-900">{benefit.title}</h3>
+                <p className="mt-3 text-sm leading-6 text-slate-600">{benefit.description}</p>
+              </article>
+            )
+          })}
+        </div>
+
+        <div className="mt-8 rounded-[2rem] bg-[#0A3D62] px-6 py-8 text-center text-white shadow-[0_18px_55px_rgba(10,24,38,0.14)] sm:px-8 sm:py-10">
+          <h3 className="text-2xl font-bold text-balance sm:text-3xl">
+            Ready to source the right industrial components?
+          </h3>
+          <p className="mx-auto mt-3 max-w-3xl text-sm leading-7 text-white/80 sm:text-base">
+            Request a quote and we’ll help you choose the correct pulleys, couplings, gears, or sprockets for the application.
+          </p>
+
+          <div className="mt-6 flex flex-col justify-center gap-3 sm:flex-row">
+            <a
+              href="#contact"
+              className="inline-flex items-center justify-center gap-2 rounded-full bg-[#C0392B] px-6 py-3.5 text-sm font-semibold text-white shadow-lg shadow-black/15 transition hover:-translate-y-0.5"
+            >
+              Request a Quote
+              <ArrowRight size={18} />
+            </a>
+            <a
+              href="https://wa.me/919819036787?text=Hi%20AL-BURHAN,%20I%20would%20like%20a%20quote"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center justify-center gap-2 rounded-full border border-white/20 bg-white/10 px-6 py-3.5 text-sm font-semibold text-white transition hover:bg-white/15"
+            >
+              WhatsApp Inquiry
+            </a>
+          </div>
+        </div>
       </div>
     </section>
   )

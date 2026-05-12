@@ -1,10 +1,7 @@
 'use client'
 
-import {
-  MapPin,
-  Mail,
-  Phone,
-} from 'lucide-react'
+import BrandLogo from '@/components/brand-logo'
+import { Mail, MapPin, Phone } from 'lucide-react'
 
 const quickLinks = [
   { name: 'Home', href: '#home' },
@@ -17,153 +14,65 @@ export default function Footer() {
   const currentYear = new Date().getFullYear()
 
   return (
-    <footer className="relative mt-16 sm:mt-20 px-4 sm:px-6 pb-6">
-      {/* Floating Glass Footer */}
-      <div className="relative mx-auto max-w-6xl overflow-hidden rounded-3xl border border-white/20 bg-white/70 backdrop-blur-2xl shadow-[0_8px_40px_rgba(0,0,0,0.08)]">
+    <footer className="mt-16 px-4 pb-6 sm:mt-20 sm:px-6">
+      <div className="relative mx-auto max-w-7xl overflow-hidden rounded-[2rem] bg-[#0A3D62] text-white shadow-[0_20px_60px_rgba(10,24,38,0.2)]">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(255,255,255,0.10),transparent_28%),radial-gradient(circle_at_top_right,rgba(192,57,43,0.18),transparent_25%)]" />
 
-        {/* Background Glow */}
-        <div className="absolute inset-0 bg-gradient-to-r from-blue-500/5 via-transparent to-red-500/5 pointer-events-none" />
-
-        <div className="absolute -left-16 top-0 h-40 w-40 rounded-full bg-blue-500/10 blur-3xl" />
-        <div className="absolute right-0 top-0 h-40 w-40 rounded-full bg-red-500/10 blur-3xl" />
-
-        <div className="relative z-10 px-4 sm:px-8 lg:px-12 py-8 sm:py-12">
-
-          {/* Top Section */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 sm:gap-10">
-
-            {/* Brand */}
-            <div className="flex flex-col items-center text-center">
-                <img
-                  src="/Logo.png"
-                alt="AL-BURHAN Industrial Drives"
-                className="h-24 sm:h-24 md:h-28 w-auto max-w-none object-contain scale-[1.4] sm:scale-[2.1] origin-center"
-              />
-
-              <p className="mt-5 text-slate-600 leading-relaxed text-sm max-w-sm mx-auto">
-                Premium industrial components trusted by businesses
-                across India for over 20 years.
+        <div className="relative z-10 px-6 py-10 sm:px-8 sm:py-12 lg:px-12">
+          <div className="grid gap-10 lg:grid-cols-[1.15fr_0.85fr_0.9fr]">
+            <div className="space-y-5">
+              <BrandLogo compact inverse />
+              <p className="max-w-md text-sm leading-7 text-white/78">
+                Premium industrial and power transmission products for manufacturers, maintenance teams, and distributors across India.
               </p>
             </div>
 
-            {/* Quick Links */}
             <div>
-              <h4 className="text-lg sm:text-xl font-bold text-slate-900 mb-4 sm:mb-6">
-                Quick Links
-              </h4>
-
-              <ul className="space-y-4">
+              <h4 className="text-lg font-bold">Quick Links</h4>
+              <ul className="mt-5 space-y-3 text-sm text-white/80">
                 {quickLinks.map((link) => (
                   <li key={link.name}>
-                    <a
-                      href={link.href}
-                      className="group relative inline-block text-[15px] font-semibold text-slate-700 transition-all duration-300 hover:text-blue-600"
-                    >
+                    <a href={link.href} className="transition hover:text-white">
                       {link.name}
-
-                      {/* Hover Underline */}
-                      <span className="absolute -bottom-1 left-0 h-[2px] w-0 rounded-full bg-gradient-to-r from-blue-600 to-red-500 transition-all duration-300 group-hover:w-full" />
                     </a>
                   </li>
                 ))}
               </ul>
             </div>
 
-            {/* Contact */}
             <div>
-              <h4 className="text-lg sm:text-xl font-bold text-slate-900 mb-4 sm:mb-6">
-                Contact
-              </h4>
-
-              <div className="space-y-5">
-
-                <div className="flex items-start gap-4">
-                  <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-gradient-to-r from-blue-600 to-red-500 text-white shadow-lg">
-                    <MapPin size={18} />
-                  </div>
-
-                  <div>
-                    <p className="font-semibold text-slate-900 mb-1">
-                      Address
-                    </p>
-
-                    <p className="text-slate-600 text-sm leading-relaxed">
-                      109/111 Nagdevi Street,
-                      <br />
-                      Mumbai 400003
-                    </p>
-                  </div>
+              <h4 className="text-lg font-bold">Contact</h4>
+              <div className="mt-5 space-y-4 text-sm text-white/80">
+                <div className="flex items-start gap-3">
+                  <MapPin size={16} className="mt-1 shrink-0 text-[#F5F5F5]" />
+                  <p>
+                    109/111 Nagdevi Street,
+                    <br />
+                    Mumbai 400003
+                  </p>
                 </div>
-
-                <div className="flex items-start gap-4">
-                  <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-gradient-to-r from-blue-600 to-red-500 text-white shadow-lg">
-                    <Mail size={18} />
-                  </div>
-
-                  <div>
-                    <p className="font-semibold text-slate-900 mb-1">
-                      Email
-                    </p>
-
-                    <a
-                      href="mailto:alburhanind.drives@gmail.com"
-                      className="text-slate-600 text-sm hover:text-blue-600 transition-colors"
-                    >
-                      alburhanind.drives@gmail.com
-                    </a>
-                  </div>
+                <div className="flex items-start gap-3">
+                  <Mail size={16} className="mt-1 shrink-0 text-[#F5F5F5]" />
+                  <a href="mailto:alburhanind.drives@gmail.com" className="transition hover:text-white">
+                    alburhanind.drives@gmail.com
+                  </a>
                 </div>
-
-                <div className="flex items-start gap-4">
-                  <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-gradient-to-r from-blue-600 to-red-500 text-white shadow-lg">
-                    <Phone size={18} />
-                  </div>
-
-                  <div>
-                    <p className="font-semibold text-slate-900 mb-1">
-                      Phone
-                    </p>
-
-                    <a
-                      href="tel:+919819036787"
-                      className="text-slate-600 text-sm hover:text-blue-600 transition-colors"
-                    >
-                      +91 98190 36787
-                    </a>
-                  </div>
+                <div className="flex items-start gap-3">
+                  <Phone size={16} className="mt-1 shrink-0 text-[#F5F5F5]" />
+                  <a href="tel:+919819036787" className="transition hover:text-white">
+                    +91 98190 36787
+                  </a>
                 </div>
-
               </div>
             </div>
-
           </div>
 
-          {/* Google Map removed per request */}
-
-          {/* Bottom */}
-          <div className="mt-8 sm:mt-10 border-t border-slate-200 pt-5 flex flex-col md:flex-row items-center justify-between gap-4 text-center md:text-left">
-
-            <p className="text-sm text-slate-500">
-              © {currentYear} AL-BURHAN Industrial Drives.
-              All rights reserved.
-            </p>
-
-            <div className="flex items-center gap-6">
-              <a
-                href="#"
-                className="text-sm font-medium text-slate-500 hover:text-blue-600 transition-colors"
-              >
-                Privacy Policy
-              </a>
-
-              <a
-                href="#"
-                className="text-sm font-medium text-slate-500 hover:text-blue-600 transition-colors"
-              >
-                Terms of Service
-              </a>
+          <div className="mt-10 flex flex-col gap-4 border-t border-white/10 pt-6 text-center text-sm text-white/70 md:flex-row md:items-center md:justify-between md:text-left">
+            <p>© {currentYear} AL-BURHAN Industrial Drives. All rights reserved.</p>
+            <div className="flex flex-wrap items-center justify-center gap-5 md:justify-end">
+              <a href="#" className="transition hover:text-white">Privacy Policy</a>
+              <a href="#" className="transition hover:text-white">Terms of Service</a>
             </div>
-
           </div>
         </div>
       </div>

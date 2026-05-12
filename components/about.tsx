@@ -1,113 +1,92 @@
 'use client'
 
-import { Zap, Target } from 'lucide-react'
+import Link from 'next/link'
+import Image from 'next/image'
+import { ShieldCheck, Target, Truck } from 'lucide-react'
 
 const highlights = [
   {
-    icon: Zap,
+    icon: Truck,
     title: 'Fast Delivery',
-    description: 'Quick turnaround with pan-India logistics network',
+    description: 'Responsive dispatch for urgent production schedules',
   },
   {
     icon: Target,
     title: 'Precision Focus',
-    description: 'Accuracy and quality in every product we deliver',
+    description: 'Tight quality control across every shipment',
+  },
+  {
+    icon: ShieldCheck,
+    title: 'Quality Assurance',
+    description: 'Reliable materials, tested processes, and dependable support',
   },
 ]
 
 export default function About() {
   return (
-    <section id="about" className="py-16 sm:py-20 lg:py-24 bg-gradient-to-br from-red-50/50 to-blue-50/50">
+    <section id="about" aria-labelledby="about-heading" className="section-shell section-surface-alt py-16 sm:py-20 lg:py-24">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-10 lg:gap-16 items-center">
-          {/* Left Content */}
-          <div className="space-y-6 sm:space-y-8 animate-in fade-in slide-in-from-left-8 duration-1000 text-center md:text-left">
+        <div className="grid items-center gap-10 lg:grid-cols-[0.95fr_1.05fr] lg:gap-14">
+          <div className="relative overflow-hidden rounded-[2rem] border border-white/60 shadow-[0_20px_70px_rgba(10,24,38,0.12)] animate-fade-rise">
+            <Image src="/hero-industrial.jpg" alt="AL-BURHAN industrial facility" width={1200} height={900} className="h-full w-full object-cover" />
+            <div className="absolute inset-0 bg-gradient-to-t from-[#0A3D62]/80 via-[#0A3D62]/20 to-transparent" />
+
+            <div className="absolute bottom-5 left-5 right-5 grid gap-3 sm:grid-cols-3">
+              {[
+                { label: 'Precision', value: 'Engineered for fit and performance' },
+                { label: 'Reliability', value: 'Stable supply and dependable support' },
+                { label: 'Customer-first', value: 'Clear communication and quick response' },
+              ].map((item) => (
+                <div key={item.label} className="rounded-2xl bg-white/92 p-4 text-slate-900 shadow-lg backdrop-blur-md">
+                  <p className="text-xs font-semibold uppercase tracking-[0.18em] text-[#C0392B] font-subheading">{item.label}</p>
+                  <p className="mt-2 text-sm leading-6 text-slate-600">{item.value}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div className="space-y-6 sm:space-y-8 animate-fade-rise text-center lg:text-left">
             <div>
-              <p className="text-sm font-bold text-red-700 uppercase tracking-wider mb-4">About AL-BURHAN</p>
-              <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-balance leading-tight mb-6">
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-700 to-blue-700">25 Years of Excellence</span>
+              <p className="section-kicker text-sm font-semibold text-[#C0392B] mb-2">About AL-BURHAN</p>
+              <h2 id="about-heading" className="text-3xl sm:text-4xl lg:text-5xl font-black text-slate-900 leading-tight mb-4">
+                Industrial supply with a disciplined, dependable operating style.
               </h2>
+              <p className="max-w-2xl text-base sm:text-lg font-subheading text-slate-600">
+                We support manufacturers, maintenance teams, and dealers with practical solutions for power transmission, combining stock depth, responsive service, and consistent product quality.
+              </p>
             </div>
 
-            <p className="text-base sm:text-lg text-foreground/70 leading-relaxed">
-              AL-BURHAN Industrial Drives has been a trusted partner for industrial components across India. With over two decades of experience, we've built our reputation on quality, reliability, and customer-centric service.
-            </p>
-
-            <div className="space-y-3 sm:space-y-4">
+            <div className="grid gap-4 sm:gap-5">
               {highlights.map((highlight, idx) => {
                 const Icon = highlight.icon
                 return (
                   <div
                     key={idx}
-                    className="flex items-start gap-3 sm:gap-4 p-4 rounded-xl bg-white/60 backdrop-blur-sm border border-white/40 hover:border-red-700/30 hover:bg-white transition-all duration-300 group cursor-pointer text-left"
+                    className="industrial-card flex items-start gap-4 rounded-2xl p-4 text-left transition-transform duration-300 hover:-translate-y-0.5"
+                    role="article"
+                    aria-labelledby={`highlight-${idx}-title`}
                   >
-                    <div className="w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-br from-red-700 to-blue-700 rounded-xl flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-300">
-                      <Icon size={20} className="text-white sm:size-6" />
+                    <div className="flex h-11 w-11 flex-shrink-0 items-center justify-center rounded-xl bg-[#0A3D62] text-white shadow-lg" aria-hidden="true">
+                      <Icon size={18} />
                     </div>
                     <div>
-                      <h4 className="font-bold text-foreground mb-1">{highlight.title}</h4>
-                      <p className="text-sm text-foreground/60">{highlight.description}</p>
+                      <h3 id={`highlight-${idx}-title`} className="mb-1 text-base font-bold text-slate-900">{highlight.title}</h3>
+                      <p className="text-sm leading-6 text-slate-600">{highlight.description}</p>
                     </div>
                   </div>
                 )
               })}
+
+              <div className="pt-2">
+                <Link href="#contact" className="inline-flex items-center gap-3 rounded-full bg-[#C0392B] px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-[#C0392B]/20 transition hover:-translate-y-0.5">
+                  Get a Quote
+                </Link>
+              </div>
             </div>
 
-            <p className="text-foreground/70 leading-relaxed">
-              We specialize in distributing a comprehensive range of industrial components including pulleys, couplings, sprockets, roller chains, and precision gears. Our commitment to excellence and customer satisfaction makes us the preferred choice for industries across India.
+            <p className="max-w-2xl leading-7 text-slate-600">
+              Our range covers pulleys, couplings, sprockets, roller chains, gears, and related transmission parts. The goal is straightforward: reduce friction in procurement and keep your operations moving.
             </p>
-          </div>
-
-          {/* Right Content */}
-          <div className="relative animate-in fade-in slide-in-from-right-8 duration-1000" style={{animationDelay: '200ms'}}>
-            {/* Decorative elements */}
-            <div className="absolute -inset-8 bg-gradient-to-br from-red-700/10 to-blue-700/10 rounded-3xl blur-3xl"></div>
-
-            {/* Stats Grid */}
-            <div className="relative space-y-6">
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
-                {[
-                  { number: '25+', label: 'Years in Industry' },
-                  { number: '500+', label: 'Happy Clients' },
-                  { number: '1000+', label: 'Products Stock' },
-                  { number: '15+', label: 'States Covered' },
-                ].map((stat, idx) => (
-                  <div
-                    key={idx}
-                    className="group bg-white rounded-2xl border border-border/40 p-5 sm:p-6 text-center hover:border-red-700/50 hover:shadow-lg hover:-translate-y-1 transition-all duration-300 animate-in fade-in scale-in-50"
-                    style={{ animationDelay: `${idx * 100}ms` }}
-                  >
-                    <p className="text-2xl sm:text-3xl md:text-4xl font-black text-transparent bg-clip-text bg-gradient-to-r from-red-700 to-blue-700 mb-2">
-                      {stat.number}
-                    </p>
-                    <p className="text-xs sm:text-sm font-semibold text-foreground/70">{stat.label}</p>
-                  </div>
-                ))}
-              </div>
-
-              {/* Info Box */}
-              <div className="bg-gradient-to-br from-red-700 to-blue-700 rounded-2xl p-6 sm:p-8 text-white shadow-lg">
-                <h4 className="text-xl sm:text-2xl font-bold mb-4">Why Choose Us?</h4>
-                <ul className="space-y-3">
-                  <li className="flex items-center gap-3">
-                    <span className="w-2 h-2 rounded-full bg-white"></span>
-                    <span className="text-sm">Quality assured products </span>
-                  </li>
-                  <li className="flex items-center gap-3">
-                    <span className="w-2 h-2 rounded-full bg-white"></span>
-                    <span className="text-sm">Competitive pricing without compromising quality</span>
-                  </li>
-                  <li className="flex items-center gap-3">
-                    <span className="w-2 h-2 rounded-full bg-white"></span>
-                    <span className="text-sm">Dedicated customer support and technical expertise</span>
-                  </li>
-                  <li className="flex items-center gap-3">
-                    <span className="w-2 h-2 rounded-full bg-white"></span>
-                    <span className="text-sm">Fast, reliable delivery across India</span>
-                  </li>
-                </ul>
-              </div>
-            </div>
           </div>
         </div>
       </div>

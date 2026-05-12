@@ -1,6 +1,7 @@
+
 'use client'
 
-import { Award, Users, Package, Globe } from 'lucide-react'
+import { Award, Users, Package, Globe, Building2 } from 'lucide-react'
 
 const stats = [
   {
@@ -31,46 +32,47 @@ const stats = [
     description: 'Pan-India distribution network',
     color: 'from-blue-600 to-blue-700',
   },
+  {
+    icon: Building2,
+    number: '1',
+    label: 'Focused Brand',
+    description: 'Specialized in power transmission systems',
+    color: 'from-[#0A3D62] to-[#123f68]',
+  },
 ]
 
 export default function Stats() {
   return (
-    <section className="py-16 sm:py-20 bg-gradient-to-b from-transparent to-red-700/5">
+    <section className="section-shell section-surface-alt py-12 sm:py-16">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 lg:gap-8">
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-5 lg:gap-6">
           {stats.map((stat, index) => {
             const Icon = stat.icon
             return (
               <div
                 key={index}
-                className="group relative bg-white rounded-2xl border border-border/40 p-6 sm:p-8 hover:border-red-700/50 hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1 sm:hover:-translate-y-2 animate-in fade-in slide-in-from-bottom-8"
+                className="industrial-card group relative overflow-hidden rounded-3xl p-6 sm:p-7 transition-all duration-300 hover:-translate-y-1"
                 style={{ animationDelay: `${index * 100}ms` }}
               >
-                {/* Gradient background on hover */}
-                <div className="absolute inset-0 bg-gradient-to-br opacity-0 group-hover:opacity-5 from-red-700 to-blue-700 rounded-2xl transition-opacity duration-300"></div>
+                <div className="absolute inset-0 bg-gradient-to-br from-[#0A3D62]/5 to-[#C0392B]/5 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
 
-                {/* Icon Container */}
-                <div className={`w-14 h-14 sm:w-16 sm:h-16 bg-gradient-to-br ${stat.color} rounded-xl flex items-center justify-center mb-5 sm:mb-6 transform group-hover:scale-110 group-hover:rotate-6 transition-all duration-300 relative z-10`}>
-                  <Icon size={28} className="text-white sm:size-8" />
+                <div className={`relative z-10 mb-5 flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br ${stat.color} text-white shadow-lg transition-transform duration-300 group-hover:scale-105 group-hover:rotate-3`}>
+                  <Icon size={24} />
                 </div>
 
-                {/* Number */}
-                <h3 className="text-3xl sm:text-4xl font-black text-transparent bg-clip-text bg-gradient-to-r from-red-700 to-blue-700 mb-3 group-hover:from-red-800 group-hover:to-blue-800 transition-all">
+                <h3 className="relative z-10 mb-2 text-3xl font-black text-[#0A3D62] sm:text-4xl">
                   {stat.number}
                 </h3>
 
-                {/* Label */}
-                <p className="font-bold text-foreground mb-2 text-lg">
+                <p className="relative z-10 mb-2 text-lg font-bold text-slate-900">
                   {stat.label}
                 </p>
 
-                {/* Description */}
-                <p className="text-sm text-foreground/60 leading-relaxed">
+                <p className="relative z-10 text-sm leading-relaxed text-slate-600">
                   {stat.description}
                 </p>
 
-                {/* Bottom line indicator */}
-                <div className="absolute bottom-0 left-0 h-1 bg-gradient-to-r from-red-700 to-blue-700 w-0 group-hover:w-full transition-all duration-500 rounded-b-2xl"></div>
+                <div className="absolute bottom-0 left-0 h-1 w-0 bg-[#C0392B] transition-all duration-500 group-hover:w-full" />
               </div>
             )
           })}

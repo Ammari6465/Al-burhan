@@ -1,8 +1,8 @@
 'use client'
 
 import Image from 'next/image'
-import { MessageCircle, X, Search } from 'lucide-react'
-import { useState } from 'react'
+import { ChevronDown, Filter, MessageCircle, Search } from 'lucide-react'
+import { useEffect, useMemo, useState } from 'react'
 
 const whatsappNumber = '919819036787'
 
@@ -55,6 +55,19 @@ const products = [
   { name: 'Worm Gear', image: 'worm gear.jpg' },
 ]
 
+const categoryOrder = ['All', 'Pulleys', 'Couplings', 'Gears', 'Sprockets', 'Others'] as const
+const materialOrder = ['All', 'Aluminium', 'CI', 'Nylon', 'Rubber', 'Metal'] as const
+
+type Category = (typeof categoryOrder)[number]
+type Material = (typeof materialOrder)[number]
+
+type ProductItem = {
+  name: string
+  image: string
+  category: Exclude<Category, 'All'>
+  material: Exclude<Material, 'All'>
+}
+
 const getImagePath = (fileName: string) => `/Images/${encodeURIComponent(fileName)}`
 
 const getWhatsappLink = (productName: string) => {
@@ -62,115 +75,207 @@ const getWhatsappLink = (productName: string) => {
   return `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`
 }
 
-export default function Products() {  const [selectedImage, setSelectedImage] = useState<string | null>(null)
+const getCategory = (name: string): ProductItem['category'] => {
+  if (/pulley/i.test(name)) return 'Pulleys'
+  if (/coupling|spider|mounting|lock|handle|sleeve|gr/i.test(name)) return 'Couplings'
+  if (/gear|pinion/i.test(name)) return 'Gears'
+  if (/sprocket|chain/i.test(name)) return 'Sprockets'
+  return 'Others'
+}
+
+const getMaterial = (name: string): ProductItem['material'] => {
+  if (/aluminium/i.test(name)) return 'Aluminium'
+  if (/\bci\b|\bc\.i\./i.test(name)) return 'CI'
+  if (/nylon/i.test(name)) return 'Nylon'
+  if (/rubber/i.test(name)) return 'Rubber'
+  return 'Metal'
+}
+
+const getShortDescription = (product: ProductItem) => {
+  const lead = {
+    Pulleys: 'Reliable pulley solution',
+    Couplings: 'Precision coupling for drive alignment',
+    Gears: 'Durable gear component',
+    Sprockets: 'Chain-ready transmission part',
+    Others: 'Industrial transmission accessory',
+  }[product.category]
+
+  return `${lead} in ${product.material.toLowerCase()} build for industrial use.`
+}
+
+const materialChips: Material[] = ['All', 'Aluminium', 'CI', 'Nylon', 'Rubber', 'Metal']
+
+export default function Products() {
   const [searchQuery, setSearchQuery] = useState('')
+  const [materialFilter, setMaterialFilter] = useState<Material>('All')
+  const [categoryFilter, setCategoryFilter] = useState<Category>('All')
+  const [visibleCount, setVisibleCount] = useState(12)
 
-  const filteredProducts = products.filter(product =>
-    product.name.toLowerCase().includes(searchQuery.toLowerCase())
+  const catalog = useMemo<ProductItem[]>(
+    () =>
+      products.map((product) => ({
+        ...product,
+        category: getCategory(product.name),
+        material: getMaterial(product.name),
+      })),
+    [],
   )
-  return (
-    <section id="products" className="py-24 bg-gradient-to-b from-blue-700/5 via-white/0 to-red-700/5">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-16 animate-in fade-in slide-in-from-bottom-8 duration-1000">
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-red-700/10 border border-red-700/20 mb-6">
-            <span className="text-sm font-bold text-red-700 uppercase tracking-wider">Our Products</span>
-          </div>
-          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-balance mb-4">
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-700 to-blue-700">Product Gallery</span>
-          </h2>
-          <p className="text-lg text-foreground/60 max-w-2xl mx-auto mb-8">
-            Browse our product images and contact us directly on WhatsApp for the selected item.
-          </p>
 
-          {/* Search Bar */}
-          <div className="max-w-md mx-auto">
-            <div className="relative">
+  const filteredProducts = useMemo(
+    () =>
+      catalog.filter((product) => {
+        const matchesSearch = product.name.toLowerCase().includes(searchQuery.toLowerCase())
+        const matchesMaterial = materialFilter === 'All' || product.material === materialFilter
+        const matchesCategory = categoryFilter === 'All' || product.category === categoryFilter
+
+        return matchesSearch && matchesMaterial && matchesCategory
+      }),
+    [catalog, categoryFilter, materialFilter, searchQuery],
+  )
+
+  const visibleProducts = filteredProducts.slice(0, visibleCount)
+
+  useEffect(() => {
+    setVisibleCount(12)
+  }, [searchQuery, materialFilter, categoryFilter])
+
+  return (
+    <section id="products" className="section-shell section-surface py-16 sm:py-20 lg:py-24">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="mx-auto mb-10 max-w-3xl text-center sm:mb-14">
+          <p className="section-kicker mb-4 text-sm font-semibold text-[#C0392B]">Products Gallery</p>
+          <h2 className="text-3xl font-black text-slate-900 sm:text-4xl lg:text-5xl text-balance">
+            Explore our power transmission catalog.
+          </h2>
+          <p className="mt-4 text-base leading-7 text-slate-600 sm:text-lg">
+            Filter by material or product family, then send a WhatsApp inquiry directly from the card you need.
+          </p>
+        </div>
+
+        <div className="industrial-card mb-8 rounded-[1.75rem] p-4 sm:p-5">
+          <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
+            <div className="relative w-full lg:max-w-xl">
+              <Search size={18} className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400" />
               <input
                 type="text"
-                placeholder="Search products..."
+                placeholder="Search products by name"
                 value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full px-5 py-3 pl-12 text-sm rounded-lg border border-blue-200/50 bg-white/60 backdrop-blur-sm focus:outline-none focus:border-blue-600 focus:bg-white/80 transition-all shadow-sm"
+                onChange={(event) => setSearchQuery(event.target.value)}
+                className="w-full rounded-2xl border border-slate-200 bg-white py-3 pl-11 pr-4 text-sm text-slate-800 outline-none transition focus:border-[#2E86C1]"
               />
-              <Search size={18} className="absolute left-4 top-3.5 text-blue-600/60" />
             </div>
-            {searchQuery && (
-              <p className="text-sm text-slate-600 mt-2">
-                Found {filteredProducts.length} product{filteredProducts.length !== 1 ? 's' : ''}
-              </p>
-            )}
+
+            <div className="flex items-center gap-2 text-sm font-medium text-slate-600">
+              <Filter size={16} className="text-[#2E86C1]" />
+              Material and family filters
+            </div>
+          </div>
+
+          <div className="mt-5 flex flex-wrap gap-2">
+            {materialChips.map((chip) => (
+              <button
+                key={chip}
+                type="button"
+                onClick={() => setMaterialFilter(chip)}
+                className={`rounded-full px-4 py-2 text-sm font-medium transition ${materialFilter === chip ? 'bg-[#0A3D62] text-white' : 'bg-white text-slate-600 hover:bg-slate-100'}`}
+              >
+                {chip}
+              </button>
+            ))}
+          </div>
+
+          <div className="mt-5 flex flex-wrap gap-2 border-t border-slate-100 pt-5">
+            {categoryOrder.map((chip) => (
+              <button
+                key={chip}
+                type="button"
+                onClick={() => setCategoryFilter(chip)}
+                className={`inline-flex items-center gap-2 rounded-full px-4 py-2 text-sm font-medium transition ${categoryFilter === chip ? 'bg-[#C0392B] text-white' : 'bg-white text-slate-600 hover:bg-slate-100'}`}
+              >
+                {chip}
+                <ChevronDown size={14} className="opacity-70" />
+              </button>
+            ))}
           </div>
         </div>
 
-        <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5">
-          {filteredProducts.map((product, idx) => (
+        <div className="space-y-10">
+          <div id="products-pulleys" className="scroll-mt-32">
+            <h3 className="mb-4 text-lg font-bold text-slate-900">Pulleys</h3>
+          </div>
+          <div id="products-couplings" className="scroll-mt-32">
+            <h3 className="mb-4 text-lg font-bold text-slate-900">Couplings</h3>
+          </div>
+          <div id="products-gears" className="scroll-mt-32">
+            <h3 className="mb-4 text-lg font-bold text-slate-900">Gears</h3>
+          </div>
+          <div id="products-sprockets" className="scroll-mt-32">
+            <h3 className="mb-4 text-lg font-bold text-slate-900">Sprockets</h3>
+          </div>
+        </div>
+
+        <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+          {visibleProducts.map((product, index) => (
             <article
               key={product.name}
-              className="group h-full animate-in fade-in slide-in-from-bottom-8"
-              style={{ animationDelay: `${idx * 30}ms` }}
+              className="group overflow-hidden rounded-[12px] bg-white transition duration-300 hover:-translate-y-1"
+              style={{ animationDelay: `${index * 40}ms` }}
             >
-              {/* Polaroid-style card */}
-              <div className="h-full flex flex-col bg-white rounded-xl shadow-md shadow-gray-900/10 hover:shadow-xl hover:shadow-blue-600/20 transition-all duration-300 hover:-translate-y-2 overflow-hidden border border-gray-100/50 hover:border-blue-200/50">
-                {/* Image container with clean white padding */}
-                <div className="relative aspect-square overflow-hidden bg-gradient-to-br from-blue-100/40 via-white to-red-100/40 p-6 flex items-center justify-center flex-shrink-0 cursor-pointer group/image hover:from-blue-200/50 hover:to-red-200/50 transition-all duration-300" onClick={() => setSelectedImage(getImagePath(product.image))}>
-                  <Image
-                    src={getImagePath(product.image)}
-                    alt={product.name}
-                    fill
-                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
-                    className="object-contain p-4 transition-transform duration-500 group-hover:scale-115"
-                  />
-                  <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover/image:opacity-100 transition-opacity duration-300 bg-gradient-to-t from-black/5 to-transparent" />
+              <div className="relative aspect-square overflow-hidden rounded-t-[12px] bg-[#F5F7FA]">
+                <Image
+                  src={getImagePath(product.image)}
+                  alt={product.name}
+                  fill
+                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+                  className="object-contain p-6 transition duration-500 group-hover:scale-110"
+                />
+              </div>
+
+              <div className="space-y-4 border border-transparent border-t-[#2E86C1] border-t-0 p-5 transition-all duration-300 group-hover:border-t-[3px] group-hover:border-t-[#2E86C1] group-hover:shadow-[0_8px_32px_rgba(10,61,98,0.18),0_2px_8px_rgba(10,61,98,0.10)]">
+                <div className="flex items-center justify-between gap-3">
+                  <span className="rounded-full bg-[#0A3D62]/10 px-3 py-1 text-[0.7rem] font-semibold uppercase tracking-[0.18em] text-[#0A3D62]">
+                    {product.category}
+                  </span>
+                  <span className="text-xs font-medium text-slate-500">{product.material}</span>
                 </div>
 
-                {/* Card footer with enhanced styling */}
-                <div className="flex-1 p-5 pb-6 flex flex-col justify-between bg-gradient-to-b from-white/50 to-white/80">
-                  <h3 className="text-sm font-bold text-gray-900 group-hover:text-blue-600 transition-colors line-clamp-2 leading-snug h-full flex items-start pt-1">
-                    {product.name}
-                  </h3>
-
-                  {/* WhatsApp button enhanced */}
-                  <a
-                    href={getWhatsappLink(product.name)}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="mt-4 inline-flex w-full items-center justify-center gap-1.5 rounded-lg bg-gradient-to-r from-green-500 to-green-600 px-3.5 py-2.5 text-xs font-bold text-white shadow-md shadow-green-600/40 transition-all duration-300 hover:shadow-lg hover:shadow-green-600/60 hover:scale-[1.04] flex-shrink-0 border border-green-400/30"
-                  >
-                    <MessageCircle size={15} />
-                    WhatsApp
-                  </a>
+                <div>
+                  <h4 className="text-base font-bold text-slate-900">{product.name}</h4>
+                  <p className="mt-2 text-sm leading-6 text-slate-600">{getShortDescription(product)}</p>
                 </div>
+
+                <a
+                  href={getWhatsappLink(product.name)}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-[#C0392B] px-4 py-3 text-sm font-semibold text-white shadow-lg shadow-[#C0392B]/20 transition hover:-translate-y-0.5 hover:bg-[#a53127]"
+                >
+                  <MessageCircle size={16} />
+                  WhatsApp Inquiry
+                </a>
               </div>
             </article>
           ))}
         </div>
-      </div>
 
-      {/* Image Lightbox Modal */}
-      {selectedImage && (
-        <div
-          className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm animate-in fade-in duration-300"
-          onClick={() => setSelectedImage(null)}
-        >
-          <div className="relative w-full h-full max-w-5xl max-h-5xl flex items-center justify-center p-4 animate-in zoom-in-95 duration-300">
+        {filteredProducts.length > visibleCount && (
+          <div className="mt-8 text-center">
             <button
-              onClick={() => setSelectedImage(null)}
-              className="absolute top-4 right-4 z-10 p-2 rounded-full bg-white/10 hover:bg-white/20 transition-colors backdrop-blur-sm"
-              aria-label="Close"
+              type="button"
+              onClick={() => setVisibleCount((current) => current + 12)}
+              className="inline-flex items-center justify-center rounded-full border border-[#0A3D62]/20 bg-white px-6 py-3 text-sm font-semibold text-[#0A3D62] transition hover:bg-slate-50"
             >
-              <X size={28} className="text-white" />
+              Load more products
             </button>
-            
-            <Image
-              src={selectedImage}
-              alt="Enlarged product view"
-              fill
-              className="object-contain"
-              onClick={(e) => e.stopPropagation()}
-            />
           </div>
-        </div>
-      )}
+        )}
+
+        {filteredProducts.length === 0 && (
+          <div className="mt-10 rounded-[1.75rem] border border-dashed border-slate-300 bg-white/70 p-10 text-center text-slate-600">
+            No products match the current filters.
+          </div>
+        )}
+      </div>
     </section>
   )
 }

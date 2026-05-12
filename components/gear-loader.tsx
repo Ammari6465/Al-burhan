@@ -8,9 +8,9 @@ export default function GearLoader() {
   const [progress, setProgress] = useState(0)
 
   useEffect(() => {
-    // smoothly animate progress to 100% over ~900ms (faster), then hide
+    // smoothly animate progress to 100% over ~2200ms, then hide
     let start: number | null = null
-    const duration = 900
+    const duration = 2200
 
     const step = (timestamp: number) => {
       if (!start) start = timestamp
@@ -21,7 +21,7 @@ export default function GearLoader() {
         requestAnimationFrame(step)
       } else {
         // hold a tiny moment at 100% for UX, then hide
-        setTimeout(() => setIsVisible(false), 150)
+        setTimeout(() => setIsVisible(false), 250)
       }
     }
 
@@ -37,18 +37,18 @@ export default function GearLoader() {
   return (
     <div
       aria-label="Loading"
-      className="fixed inset-0 z-50 overflow-hidden bg-white"
-      style={{ animation: 'loaderFadeOut 0.25s ease-in 0.95s forwards' }}
+      className="fixed inset-0 z-50 overflow-hidden"
+      style={{ animation: 'loaderFadeOut 0.25s ease-in 0.98s forwards', background: '#FFFFFF' }}
     >
       <div className="absolute inset-0 flex items-center justify-center px-6 pb-6">
         <div className="w-full max-w-md text-center text-black">
           <div className="mx-auto flex flex-col items-center">
             <div className="flex items-center justify-center -space-x-4">
-              <div className="gear-small">
+                <div className="gear-small">
                 <Cog
                   className="h-14 w-14"
                   strokeWidth={2.4}
-                  style={{ color: '#0b5bd7', filter: 'drop-shadow(0 6px 14px rgba(11,91,215,0.08))' }}
+                  style={{ color: '#0A3D62', filter: 'drop-shadow(0 6px 14px rgba(10,61,98,0.12))' }}
                   aria-hidden="true"
                 />
               </div>
@@ -56,7 +56,7 @@ export default function GearLoader() {
                 <Cog
                   className="h-20 w-20"
                   strokeWidth={2.6}
-                  style={{ color: '#c12b2b', filter: 'drop-shadow(0 8px 18px rgba(193,43,43,0.10))' }}
+                  style={{ color: '#C0392B', filter: 'drop-shadow(0 8px 18px rgba(192,57,43,0.14))' }}
                   aria-hidden="true"
                 />
               </div>
@@ -120,14 +120,14 @@ export default function GearLoader() {
         }
 
         .gear-small {
-          animation: gearSpinReverse 0.9s linear infinite;
+          animation: gearSpinReverse 1.6s linear infinite;
           display: inline-flex;
           align-items: center;
           justify-content: center;
         }
 
         .gear-large {
-          animation: gearSpin 0.9s linear infinite;
+          animation: gearSpin 1.6s linear infinite;
           display: inline-flex;
           align-items: center;
           justify-content: center;

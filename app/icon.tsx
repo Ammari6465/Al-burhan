@@ -21,7 +21,7 @@ export default function Icon() {
           background: 'transparent',
         }}
       >
-        <Cog size={40} strokeWidth={2.6} color="#d11b2b" fill="none" />
+        <Cog size={40} strokeWidth={2.6} color="#C0392B" fill="none" />
       </div>
     ),
     {

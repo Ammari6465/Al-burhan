@@ -1,60 +1,45 @@
 'use client'
 
-import { Rocket } from 'lucide-react'
+import { Sparkles } from 'lucide-react'
 
 export default function MissionVision() {
   return (
-    <section className="py-16 sm:py-20 lg:py-24 bg-white">
+    <section className="section-shell section-surface py-16 sm:py-20 lg:py-24">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Section Header */}
-        <div className="text-center mb-12 sm:mb-16 lg:mb-20 animate-in fade-in slide-in-from-bottom-8 duration-1000">
-          <p className="text-sm font-bold text-red-700 uppercase tracking-wider mb-4">Our Direction</p>
-          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-balance">
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-700 to-blue-700">Mission</span>
+        <div className="mx-auto mb-12 max-w-3xl text-center animate-fade-rise sm:mb-16 lg:mb-20">
+          <p className="section-kicker mb-4 text-sm font-bold text-[#C0392B]">Mission & Values</p>
+          <h2 className="text-3xl font-black text-balance text-slate-900 sm:text-4xl lg:text-5xl">
+            An industrial journey shaped by consistency, reliability, and customer focus.
           </h2>
+          <p className="mt-4 text-base leading-7 text-slate-600 sm:text-lg">
+            AL-BURHAN Industrial Drives operates with a long-term mindset: improve the process, tighten the service experience, and keep production moving for the customer.
+          </p>
         </div>
 
-        {/* Mission and Vision Cards */}
-        <div className="flex justify-center">
-          {/* Mission Card */}
-          <div className="group relative animate-in fade-in slide-in-from-left-8 duration-1000 w-full md:max-w-2xl" style={{animationDelay: '200ms'}}>
-            <div className="absolute -inset-1 bg-gradient-to-r from-red-700/20 to-red-600/20 rounded-3xl blur-2xl group-hover:blur-3xl transition-all duration-300 opacity-0 group-hover:opacity-100"></div>
-            
-            <div className="relative bg-white rounded-3xl border-2 border-red-700/20 p-6 sm:p-8 lg:p-12 hover:border-red-700/50 transition-all duration-300">
-              <div className="flex items-start gap-4 sm:gap-6 mb-6 sm:mb-8">
-                <div className="w-16 h-16 sm:w-20 sm:h-20 bg-gradient-to-br from-red-700 to-red-600 rounded-2xl flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-300">
-                  <Rocket size={28} className="text-white sm:size-10" />
-                </div>
-                <h3 className="text-2xl sm:text-3xl md:text-4xl font-black text-foreground">Our Mission</h3>
+        <div className="mx-auto max-w-2xl">
+          <div className="rounded-[2rem] bg-[#0A3D62] p-6 text-white shadow-[0_18px_55px_rgba(10,24,38,0.14)] sm:p-8 lg:p-10">
+            <p className="section-kicker text-xs font-semibold text-white/65">Our Mission</p>
+            <h3 className="mt-3 text-2xl font-black sm:text-3xl">Deliver dependable industrial components with clear service and quick response.</h3>
+            <p className="mt-4 text-sm leading-7 text-white/80">
+              We want customers to feel confident ordering from us because the communication is straightforward, the products are fit-for-purpose, and the delivery process is predictable.
+            </p>
+
+            <div className="mt-8 rounded-2xl bg-white/10 p-4 backdrop-blur-sm">
+              <div className="mb-3 flex items-center justify-between text-sm text-white/80">
+                <span>Continuous Improvement</span>
+                <span>88%</span>
               </div>
-
-              <p className="text-base sm:text-lg text-foreground/70 leading-relaxed mb-6 sm:mb-8">
-                To deliver exceptional quality industrial components through innovative manufacturing processes, ensuring customer satisfaction and maintaining the highest standards of excellence.
-              </p>
-
-              <div className="space-y-4 border-l-4 border-red-700 pl-4 sm:pl-6">
-                <div>
-                  <h4 className="font-bold text-foreground mb-2">Core Values</h4>
-                  <ul className="space-y-2">
-                    <li className="flex items-center gap-3">
-                      <span className="w-2 h-2 rounded-full bg-gradient-to-r from-red-700 to-blue-700"></span>
-                      <span className="text-foreground/70">Precision in every component</span>
-                    </li>
-                    <li className="flex items-center gap-3">
-                      <span className="w-2 h-2 rounded-full bg-gradient-to-r from-red-700 to-blue-700"></span>
-                      <span className="text-foreground/70">Customer-first approach</span>
-                    </li>
-                    <li className="flex items-center gap-3">
-                      <span className="w-2 h-2 rounded-full bg-gradient-to-r from-red-700 to-blue-700"></span>
-                      <span className="text-foreground/70">Continuous improvement</span>
-                    </li>
-                  </ul>
-                </div>
+              <div className="h-3 overflow-hidden rounded-full bg-white/15">
+                <div className="h-full w-[88%] rounded-full bg-[#C0392B] transition-all duration-1000" />
               </div>
             </div>
+
+            <ul className="mt-8 grid gap-3 text-sm text-white/85 sm:grid-cols-2">
+              {['Precision manufacturing support', 'Reliable supply chain', 'Customer-first communication', 'Fast delivery expectations'].map((item) => (
+                <li key={item} className="rounded-2xl border border-white/10 bg-white/5 px-4 py-3">{item}</li>
+              ))}
+            </ul>
           </div>
-
-
         </div>
       </div>
     </section>
