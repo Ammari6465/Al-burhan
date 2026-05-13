@@ -3,6 +3,7 @@ import { getFirestoreInstance } from '@/lib/firebase-admin'
 
 type ContactPayload = {
   name?: string
+  company?: string
   email?: string
   phone?: string
   subject?: string
@@ -15,6 +16,7 @@ export async function POST(request: Request) {
   try {
     const body = (await request.json()) as ContactPayload
     const name = body.name?.trim()
+    const company = body.company?.trim()
     const email = body.email?.trim()
     const phone = body.phone?.trim()
     const subject = body.subject?.trim()
@@ -29,6 +31,7 @@ export async function POST(request: Request) {
 
     const payload = {
       name,
+      company: company || '',
       email,
       phone: phone || '',
       subject,

@@ -1,45 +1,63 @@
 'use client'
 
-import { Sparkles } from 'lucide-react'
+import { useScrollReveal } from '@/hooks/use-scroll-reveal'
 
 export default function MissionVision() {
+  const sectionRef = useScrollReveal<HTMLElement>()
+
   return (
-    <section className="section-shell bg-[rgba(255,255,255,0.015)] py-20 sm:py-24 lg:py-28">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="mx-auto mb-12 max-w-3xl text-center animate-fade-rise sm:mb-16 lg:mb-20">
-          <p className="section-kicker mb-4 text-[11px] font-bold text-[#C0392B]">Mission & Values</p>
-          <h2 className="text-3xl font-black text-balance text-white sm:text-4xl lg:text-5xl">
-            An industrial journey shaped by consistency, reliability, and customer focus.
+    <section ref={sectionRef} className="section-shell bg-[#0A3D62] py-24 text-white">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="mx-auto max-w-3xl text-center">
+          <p data-reveal className="reveal-item section-kicker mb-3 text-[12px] font-semibold text-white/45">Testimonials</p>
+          <h2 data-reveal className="reveal-item text-[28px] font-bold sm:text-[40px]">
+            Trusted by Buyers Across India
           </h2>
-          <p className="mt-4 text-sm leading-7 text-white/55 sm:text-base">
-            AL-BURHAN Industrial Drives operates with a long-term mindset: improve the process, tighten the service experience, and keep production moving for the customer.
-          </p>
         </div>
 
-        <div className="mx-auto max-w-2xl">
-          <div className="rounded-[2rem] border border-white/8 bg-[rgba(255,255,255,0.04)] p-6 text-white shadow-[0_18px_55px_rgba(10,24,38,0.14)] sm:p-8 lg:p-10">
-            <p className="section-kicker text-[11px] font-semibold text-white/45">Our Mission</p>
-            <h3 className="mt-3 text-2xl font-black sm:text-3xl">Deliver dependable industrial components with clear service and quick response.</h3>
-            <p className="mt-4 text-sm leading-7 text-white/65">
-              We want customers to feel confident ordering from us because the communication is straightforward, the products are fit-for-purpose, and the delivery process is predictable.
-            </p>
-
-            <div className="mt-8 rounded-2xl bg-white/10 p-4 backdrop-blur-sm">
-              <div className="mb-3 flex items-center justify-between text-sm text-white/65">
-                <span>Continuous Improvement</span>
-                <span>88%</span>
+        <div className="mt-12 grid gap-6 lg:grid-cols-3">
+          {[
+            {
+              quote: 'Fast responses, clear communication, and the right stock when we need it. The team is dependable.',
+              name: 'Rajesh Mehta',
+              company: 'Manufacturing Procurement',
+              initials: 'RM',
+            },
+            {
+              quote: 'AL-BURHAN makes sourcing industrial parts simpler. The quality is consistent and delivery stays on schedule.',
+              name: 'Anita Shah',
+              company: 'OEM Operations',
+              initials: 'AS',
+            },
+            {
+              quote: 'They understand urgent maintenance requirements and respond with practical options, not delays.',
+              name: 'Vikram Rao',
+              company: 'Maintenance Manager',
+              initials: 'VR',
+            },
+          ].map((item, index) => (
+            <article
+              key={item.name}
+              data-reveal
+              className="reveal-item rounded-2xl border border-white/12 bg-white/8 p-6"
+              style={{ animationDelay: `${index * 80}ms` }}
+            >
+              <div className="mb-4 text-[64px] leading-none text-[#C0392B]">“</div>
+              <div className="mb-3 flex gap-1 text-[14px] text-[#F59E0B]">★★★★★</div>
+              <p className="text-[15px] italic leading-7 text-white/80">{item.quote}</p>
+              <div className="mt-5 border-t border-white/10 pt-4">
+                <div className="flex items-center gap-3">
+                  <div className="flex h-10 w-10 items-center justify-center rounded-full bg-[#C0392B] text-[14px] font-bold text-white">
+                    {item.initials}
+                  </div>
+                  <div>
+                    <p className="font-ui text-[14px] font-semibold text-white">{item.name}</p>
+                    <p className="text-[13px] text-white/50">{item.company}</p>
+                  </div>
+                </div>
               </div>
-              <div className="h-3 overflow-hidden rounded-full bg-white/15">
-                <div className="h-full w-[88%] rounded-full bg-[#C0392B] transition-all duration-1000" />
-              </div>
-            </div>
-
-            <ul className="mt-8 grid gap-3 text-sm text-white/75 sm:grid-cols-2">
-              {['Precision manufacturing support', 'Reliable supply chain', 'Customer-first communication', 'Fast delivery expectations'].map((item) => (
-                <li key={item} className="rounded-2xl border border-white/10 bg-white/5 px-4 py-3">{item}</li>
-              ))}
-            </ul>
-          </div>
+            </article>
+          ))}
         </div>
       </div>
     </section>

@@ -1,8 +1,13 @@
 'use client'
 
 import Image from 'next/image'
-import { ChevronDown, Filter, MessageCircle, Search } from 'lucide-react'
+import { ArrowRight, Cog, Link2, RotateCw, Settings2 } from 'lucide-react'
 import { useEffect, useMemo, useState } from 'react'
+import { useScrollReveal } from '@/hooks/use-scroll-reveal'
+
+const categoryOrder = ['All', 'Pulleys', 'Couplings', 'Gears', 'Sprockets'] as const
+
+type Category = (typeof categoryOrder)[number]
 
 const whatsappNumber = '919819036787'
 
@@ -55,17 +60,10 @@ const products = [
   { name: 'Worm Gear', image: 'worm gear.jpg' },
 ]
 
-const categoryOrder = ['All', 'Pulleys', 'Couplings', 'Gears', 'Sprockets', 'Others'] as const
-const materialOrder = ['All', 'Aluminium', 'CI', 'Nylon', 'Rubber', 'Metal'] as const
-
-type Category = (typeof categoryOrder)[number]
-type Material = (typeof materialOrder)[number]
-
 type ProductItem = {
   name: string
   image: string
   category: Exclude<Category, 'All'>
-  material: Exclude<Material, 'All'>
 }
 
 const getImagePath = (fileName: string) => `/Images/${encodeURIComponent(fileName)}`
@@ -80,15 +78,7 @@ const getCategory = (name: string): ProductItem['category'] => {
   if (/coupling|spider|mounting|lock|handle|sleeve|gr/i.test(name)) return 'Couplings'
   if (/gear|pinion/i.test(name)) return 'Gears'
   if (/sprocket|chain/i.test(name)) return 'Sprockets'
-  return 'Others'
-}
-
-const getMaterial = (name: string): ProductItem['material'] => {
-  if (/aluminium/i.test(name)) return 'Aluminium'
-  if (/\bci\b|\bc\.i\./i.test(name)) return 'CI'
-  if (/nylon/i.test(name)) return 'Nylon'
-  if (/rubber/i.test(name)) return 'Rubber'
-  return 'Metal'
+  return 'Couplings'
 }
 
 const getShortDescription = (product: ProductItem) => {
@@ -97,26 +87,28 @@ const getShortDescription = (product: ProductItem) => {
     Couplings: 'Precision coupling for drive alignment',
     Gears: 'Durable gear component',
     Sprockets: 'Chain-ready transmission part',
-    Others: 'Industrial transmission accessory',
   }[product.category]
 
-  return `${lead} in ${product.material.toLowerCase()} build for industrial use.`
+  return `${lead} built for dependable industrial use and efficient procurement.`
 }
 
-const materialChips: Material[] = ['All', 'Aluminium', 'CI', 'Nylon', 'Rubber', 'Metal']
+const categoryIcons: Record<Exclude<Category, 'All'>, typeof RotateCw> = {
+  Pulleys: RotateCw,
+  Couplings: Link2,
+  Gears: Settings2,
+  Sprockets: Cog,
+}
 
 export default function Products() {
-  const [searchQuery, setSearchQuery] = useState('')
-  const [materialFilter, setMaterialFilter] = useState<Material>('All')
   const [categoryFilter, setCategoryFilter] = useState<Category>('All')
   const [visibleCount, setVisibleCount] = useState(12)
+  const sectionRef = useScrollReveal<HTMLElement>()
 
   const catalog = useMemo<ProductItem[]>(
     () =>
       products.map((product) => ({
         ...product,
         category: getCategory(product.name),
-        material: getMaterial(product.name),
       })),
     [],
   )
@@ -124,135 +116,89 @@ export default function Products() {
   const filteredProducts = useMemo(
     () =>
       catalog.filter((product) => {
-        const matchesSearch = product.name.toLowerCase().includes(searchQuery.toLowerCase())
-        const matchesMaterial = materialFilter === 'All' || product.material === materialFilter
         const matchesCategory = categoryFilter === 'All' || product.category === categoryFilter
 
-        return matchesSearch && matchesMaterial && matchesCategory
+        return matchesCategory
       }),
-    [catalog, categoryFilter, materialFilter, searchQuery],
+    [catalog, categoryFilter],
   )
 
   const visibleProducts = filteredProducts.slice(0, visibleCount)
 
   useEffect(() => {
     setVisibleCount(12)
-  }, [searchQuery, materialFilter, categoryFilter])
+  }, [categoryFilter])
 
   return (
-    <section id="products" className="section-shell bg-[rgba(255,255,255,0.015)] py-20 sm:py-24 lg:py-28">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="mx-auto mb-10 max-w-3xl text-center sm:mb-14">
-          <p className="section-kicker mb-4 text-[11px] font-semibold text-[#C0392B]">Our Catalogue</p>
-          <h2 className="text-3xl font-black text-white sm:text-4xl lg:text-5xl text-balance">
-            Explore our power transmission catalog.
+    <section ref={sectionRef} id="products" className="section-shell bg-[#F5F7FA] py-24">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="mx-auto max-w-3xl text-center">
+          <p data-reveal className="section-kicker reveal-item mb-3 text-[12px] font-semibold text-[#C0392B]">Our Catalogue</p>
+          <h2 data-reveal className="reveal-item text-[28px] font-bold text-[#0A3D62] sm:text-[40px]">
+            Products Built for Industry
           </h2>
-          <p className="mt-4 text-sm leading-7 text-white/55 sm:text-base">
-            Filter by material or product family, then send a WhatsApp inquiry directly from the card you need.
+          <p data-reveal className="reveal-item mx-auto mt-4 max-w-2xl text-[17px] leading-7 text-[#4A5568]">
+            A focused catalogue of industrial drives and power transmission products for manufacturers, distributors, and maintenance teams.
           </p>
+          <div data-reveal className="reveal-item mx-auto mt-5 h-[3px] w-12 rounded-full bg-[#C0392B]" />
         </div>
 
-        <div className="industrial-card mb-8 rounded-[1.75rem] p-4 sm:p-5">
-          <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
-            <div className="relative w-full lg:max-w-xl">
-              <Search size={18} className="absolute left-4 top-1/2 -translate-y-1/2 text-white/35" />
-              <input
-                type="text"
-                placeholder="Search products by name"
-                value={searchQuery}
-                onChange={(event) => setSearchQuery(event.target.value)}
-                className="w-full rounded-2xl border border-white/8 bg-white/6 py-3 pl-11 pr-4 text-sm text-white outline-none transition placeholder:text-white/30 focus:border-[rgba(192,57,43,0.5)]"
-              />
-            </div>
-
-            <div className="flex items-center gap-2 text-sm font-medium text-white/55">
-              <Filter size={16} className="text-[#C0392B]" />
-              Material and family filters
-            </div>
-          </div>
-
-          <div className="mt-5 flex flex-wrap gap-2">
-            {materialChips.map((chip) => (
-              <button
-                key={chip}
-                type="button"
-                onClick={() => setMaterialFilter(chip)}
-                className={`rounded-full px-4 py-2 text-sm font-medium transition ${materialFilter === chip ? 'bg-[#C0392B] text-white' : 'border border-white/8 bg-white/4 text-white/65 hover:bg-white/8'}`}
-              >
-                {chip}
-              </button>
-            ))}
-          </div>
-
-          <div className="mt-5 flex flex-wrap gap-2 border-t border-white/6 pt-5">
-            {categoryOrder.map((chip) => (
-              <button
-                key={chip}
-                type="button"
-                onClick={() => setCategoryFilter(chip)}
-                className={`inline-flex items-center gap-2 rounded-full px-4 py-2 text-sm font-medium transition ${categoryFilter === chip ? 'bg-[#C0392B] text-white' : 'border border-white/8 bg-white/4 text-white/65 hover:bg-white/8'}`}
-              >
-                {chip}
-                <ChevronDown size={14} className="opacity-70" />
-              </button>
-            ))}
-          </div>
+        <div data-reveal className="reveal-item mt-10 flex flex-wrap justify-center gap-2">
+          {categoryOrder.map((chip) => (
+            <button
+              key={chip}
+              type="button"
+              onClick={() => setCategoryFilter(chip)}
+              className={`rounded-full px-5 py-2 font-ui text-[13px] font-semibold transition-all duration-200 ${categoryFilter === chip ? 'bg-[#0A3D62] text-white' : 'border border-[#E8ECF0] bg-white text-[#4A5568] hover:border-[#0A3D62] hover:text-[#0A3D62]'}`}
+            >
+              {chip}
+            </button>
+          ))}
         </div>
 
-        <div className="space-y-10">
-          <div id="products-pulleys" className="scroll-mt-32">
-            <h3 className="mb-4 text-lg font-bold text-white">Pulleys</h3>
-          </div>
-          <div id="products-couplings" className="scroll-mt-32">
-            <h3 className="mb-4 text-lg font-bold text-white">Couplings</h3>
-          </div>
-          <div id="products-gears" className="scroll-mt-32">
-            <h3 className="mb-4 text-lg font-bold text-white">Gears</h3>
-          </div>
-          <div id="products-sprockets" className="scroll-mt-32">
-            <h3 className="mb-4 text-lg font-bold text-white">Sprockets</h3>
-          </div>
-        </div>
-
-        <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+        <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
           {visibleProducts.map((product, index) => (
             <article
               key={product.name}
-              className="group overflow-hidden rounded-[14px] border border-white/8 bg-white/3 transition duration-300 hover:-translate-y-1 hover:border-white/15"
-              style={{ animationDelay: `${index * 40}ms` }}
+              data-reveal
+              className="group overflow-hidden rounded-2xl border border-[#E8ECF0] bg-white shadow-[0_1px_3px_rgba(0,0,0,0.06),0_4px_16px_rgba(0,0,0,0.06)] transition-all duration-300 hover:-translate-y-1 hover:border-[#C0392B] hover:shadow-[0_4px_12px_rgba(0,0,0,0.08),0_16px_40px_rgba(0,0,0,0.10)]"
+              style={{ animationDelay: `${index * 80}ms` }}
             >
-              <div className="relative aspect-[4/3] overflow-hidden rounded-t-[14px] bg-[#0D1F2F]">
+              <div className="relative aspect-[4/3] overflow-hidden bg-[#EBF3FB]">
                 <Image
                   src={getImagePath(product.image)}
                   alt={product.name}
                   fill
                   sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
-                  className="object-cover opacity-90 transition duration-500 group-hover:scale-105 group-hover:opacity-100"
+                  className="object-cover transition duration-500 group-hover:scale-[1.04]"
                 />
               </div>
 
-              <div className="space-y-4 p-4 transition-all duration-300">
-                <div className="flex items-center justify-between gap-3">
-                  <span className="rounded-full bg-[rgba(192,57,43,0.15)] px-3 py-1 text-[9px] font-semibold uppercase tracking-[0.18em] text-[#C0392B]">
-                    {product.category}
-                  </span>
-                  <span className="text-xs font-medium text-white/40">{product.material}</span>
+              <div className="p-5">
+                <div className="inline-flex items-center gap-2 rounded-full bg-[#FDECEA] px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.18em] text-[#C0392B]">
+                  {(() => {
+                    const Icon = categoryIcons[product.category]
+                    return <Icon size={12} />
+                  })()}
+                  {product.category}
                 </div>
 
-                <div>
-                  <h4 className="text-[18px] font-bold text-white">{product.name}</h4>
-                  <p className="mt-2 line-clamp-2 text-sm leading-6 text-white/55">{getShortDescription(product)}</p>
+                <div className="mt-4">
+                  <h3 className="text-[18px] font-bold text-[#0A3D62]">{product.name}</h3>
+                  <p className="mt-2 line-clamp-2 text-[14px] leading-6 text-[#4A5568]">{getShortDescription(product)}</p>
                 </div>
 
-                <a
-                  href={getWhatsappLink(product.name)}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="inline-flex min-h-12 w-full items-center justify-center gap-2 rounded-lg bg-[#C0392B] px-4 py-3 text-sm font-semibold text-white transition hover:-translate-y-0.5 hover:bg-[#a53127] active:scale-95"
-                >
-                  <MessageCircle size={16} />
-                  WhatsApp Inquiry
-                </a>
+                <div className="mt-4 border-t border-[#F0F4F8] pt-4">
+                  <a
+                    href={getWhatsappLink(product.name)}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="inline-flex items-center gap-2 font-ui text-[13px] font-semibold text-[#C0392B] transition-all duration-200 hover:gap-3"
+                  >
+                    View Details
+                    <ArrowRight size={16} />
+                  </a>
+                </div>
               </div>
             </article>
           ))}
@@ -263,7 +209,7 @@ export default function Products() {
             <button
               type="button"
               onClick={() => setVisibleCount((current) => current + 12)}
-              className="inline-flex min-h-12 items-center justify-center rounded-lg border border-white/8 bg-white/4 px-6 py-3 text-sm font-semibold text-white transition hover:bg-white/8"
+              className="inline-flex min-h-12 items-center justify-center rounded-lg border border-[#E8ECF0] bg-white px-6 py-3 font-ui text-[14px] font-semibold text-[#0A3D62] transition hover:border-[#0A3D62] hover:bg-[#F5F7FA]"
             >
               Load more products
             </button>
@@ -271,7 +217,7 @@ export default function Products() {
         )}
 
         {filteredProducts.length === 0 && (
-          <div className="mt-10 rounded-[1.75rem] border border-dashed border-white/10 bg-white/4 p-10 text-center text-white/55">
+          <div className="mt-10 rounded-2xl border border-dashed border-[#E8ECF0] bg-white p-10 text-center text-[#4A5568]">
             No products match the current filters.
           </div>
         )}
