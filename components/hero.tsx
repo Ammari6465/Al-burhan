@@ -32,119 +32,120 @@ export default function Hero() {
   }, [])
 
   return (
-    <section id="home" className="relative overflow-hidden pt-28 sm:pt-32 lg:pt-36">
+    <section id="home" className="relative overflow-hidden pb-10 pt-24 sm:pt-28 lg:min-h-screen lg:pb-14 lg:pt-28">
+      <div className="absolute inset-0 -z-30 bg-[#081C2E]" />
+      <div className="absolute inset-0 -z-20 bg-[radial-gradient(circle_at_top_right,rgba(192,57,43,0.12),transparent_35rem),radial-gradient(circle_at_bottom_left,rgba(10,61,98,0.4),transparent_26rem),linear-gradient(180deg,#081C2E_0%,#071520_100%)]" />
+      <div className="absolute inset-0 -z-20 bg-[repeating-linear-gradient(0deg,rgba(255,255,255,0.03)_0_1px,transparent_1px_40px),repeating-linear-gradient(90deg,rgba(255,255,255,0.03)_0_1px,transparent_1px_40px)] opacity-30" />
+      <div className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_20%_20%,rgba(255,255,255,0.05),transparent_0_240px),radial-gradient(circle_at_80%_15%,rgba(192,57,43,0.08),transparent_0_240px)]" />
+
       <div className="absolute inset-0 -z-20">
         <Image
           src="/hero-industrial.jpg"
           alt="Industrial drive systems background"
           fill
           priority
-          className="object-cover object-center"
+          className="object-cover object-center opacity-18 mix-blend-screen"
         />
       </div>
 
-      <div className="absolute inset-0 -z-10 hero-gradient-shimmer bg-[linear-gradient(135deg,rgba(10,61,98,0.95)_0%,rgba(26,82,118,0.75)_50%,rgba(245,245,245,0.15)_100%),linear-gradient(to_bottom,rgba(7,29,50,0.6)_0%,transparent_60%)] bg-[length:200%_200%]" />
-      <div className="hero-vignette -z-10" />
-      <div className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_top_right,rgba(255,255,255,0.18),transparent_30%),radial-gradient(circle_at_10%_15%,rgba(255,255,255,0.10),transparent_24%)]" />
-
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid items-center gap-12 lg:grid-cols-[1.08fr_0.92fr]">
-          <div className="space-y-8 text-center lg:text-left animate-fade-rise">
-            <div className="inline-flex items-center gap-2 rounded-full border border-white/12 bg-white/6 px-4 py-2 text-white/90 backdrop-blur-sm">
-              <ShieldCheck size={16} className="text-[#BDC3C7]" />
-              <span className="section-kicker text-xs text-white/90">Industrial Drives and Power Transmission</span>
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="grid items-center gap-10 lg:grid-cols-[55%_45%] lg:gap-14">
+          <div className="space-y-6 text-center lg:text-left animate-fade-rise">
+            <div className="inline-flex items-center gap-2 rounded-full border border-white/12 bg-white/6 px-4 py-2 text-[10px] uppercase tracking-[0.18em] text-white/85 backdrop-blur-sm">
+              <span className="inline-block h-1.5 w-1.5 rounded-full bg-[#C0392B] animate-pulse" />
+              <span>Industrial Drives & Power Transmission</span>
             </div>
 
-            <div className="hero-frost rounded-[2rem] p-6 sm:p-8 lg:p-10 shadow-[0_18px_45px_rgba(7,29,50,0.28)]">
-              <div className="space-y-5">
-                <h1 className="max-w-3xl text-4xl font-black leading-tight text-white text-balance sm:text-5xl lg:text-6xl">
-                  Premium Industrial & Power Transmission Products
-                </h1>
-                <p className="max-w-2xl text-base leading-7 text-[#BDC3C7] sm:text-lg lg:text-xl">
-                  25+ Years of Excellence, 1000+ Products, Pan-India Delivery
-                </p>
-                <p className="max-w-2xl text-sm leading-7 text-[#BDC3C7] sm:text-base">
-                  AL-BURHAN Industrial Drives combines dependable stock, responsive support, and industrial-grade quality for manufacturers, distributors, and maintenance teams across India.
-                </p>
-              </div>
-            </div>
+            <p className="text-[11px] uppercase tracking-[0.14em] text-white/40">
+              25+ Years · 1000+ Products · Pan-India Delivery
+            </p>
 
-            <div className="flex flex-col justify-center gap-3 sm:flex-row lg:justify-start">
+            <h1 className="max-w-4xl text-4xl font-black uppercase leading-[0.92] text-white text-balance sm:text-5xl lg:text-[72px]">
+              Premium Industrial &amp; Power
+              <br />
+              Transmission <em className="not-italic text-[#C0392B]">Products</em>
+            </h1>
+
+            <p className="max-w-prose text-sm leading-7 text-white/55 sm:text-base">
+              AL-BURHAN Industrial Drives combines dependable stock, responsive support, and industrial-grade quality for manufacturers, distributors, and OEM buyers across India.
+            </p>
+
+            <div className="flex flex-col gap-3 sm:flex-row">
               <a
                 href="#products"
-                className="inline-flex items-center justify-center gap-2 rounded-full bg-[#2E86C1] px-6 py-3.5 text-sm font-semibold text-white shadow-[0_4px_20px_rgba(46,134,193,0.4)] transition hover:-translate-y-0.5 hover:bg-[#2572a7]"
+                className="inline-flex min-h-12 items-center justify-center gap-2 rounded-lg bg-[#C0392B] px-6 py-3 text-sm font-semibold text-white transition hover:-translate-y-0.5 hover:bg-[#a83429]"
               >
                 Explore Products
                 <ArrowRight size={18} />
               </a>
               <a
                 href="#contact"
-                className="inline-flex items-center justify-center gap-2 rounded-full bg-[#C0392B] px-6 py-3.5 text-sm font-semibold text-white shadow-lg shadow-[#C0392B]/25 transition hover:-translate-y-0.5 hover:bg-[#a53127]"
+                className="inline-flex min-h-12 items-center justify-center gap-2 rounded-lg border border-white/12 bg-white/6 px-6 py-3 text-sm font-semibold text-white transition hover:bg-white/10"
               >
                 Contact Us
                 <MessageCircle size={18} />
               </a>
             </div>
 
-            <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
+            <div className="grid grid-cols-2 gap-3 sm:grid-cols-4 sm:divide-x sm:divide-white/10 sm:rounded-2xl sm:border sm:border-white/8 sm:bg-white/4">
               {heroStats.map((stat, index) => (
-                <div
-                  key={stat.label}
-                  className="rounded-2xl border border-white/12 bg-white/6 p-4 text-left text-white backdrop-blur-sm"
-                  style={{ animationDelay: `${index * 90}ms` }}
-                >
-                  <div className="flex items-center gap-2 text-[#BDC3C7]">
+                <div key={stat.label} className={`rounded-2xl border border-white/8 bg-white/4 p-4 text-center sm:rounded-none sm:border-0 sm:bg-transparent ${index < heroStats.length - 1 ? 'sm:pr-4' : ''}`} style={{ animationDelay: `${index * 90}ms` }}>
+                  <div className="flex items-center justify-center gap-2 text-white/40 sm:justify-start">
                     {index === 0 && <TrendingUp size={16} />}
                     {index === 1 && <Warehouse size={16} />}
                     {index === 2 && <ShieldCheck size={16} />}
                     {index === 3 && <MessageCircle size={16} />}
-                    <span className="text-xs font-medium uppercase tracking-[0.18em] font-subheading">{stat.label}</span>
+                    <span className="text-[10px] uppercase tracking-[0.14em] text-white/35">{stat.label}</span>
                   </div>
-                  <p className="mt-2 text-3xl font-black leading-none">
-                    {counts[index]}
-                    <span className="text-xl font-semibold">{stat.suffix}</span>
+                  <p className="mt-2 text-3xl font-black leading-none text-white sm:text-[36px]">
+                    {counts[index]}<span className="text-[#C0392B]">+</span>
                   </p>
                 </div>
               ))}
             </div>
           </div>
 
-          <div className="relative mx-auto w-full max-w-[580px] animate-fade-rise" style={{ animationDelay: '180ms' }}>
-            <div className="absolute -inset-4 rounded-[2rem] bg-white/10 blur-2xl" />
-            <div className="relative overflow-hidden rounded-[2rem] border border-white/20 bg-white/10 p-3 shadow-[0_25px_80px_rgba(2,6,23,0.30)] backdrop-blur-md">
-              <div className="grid gap-3 sm:grid-cols-2">
-                <div className="relative min-h-[240px] overflow-hidden rounded-[1.5rem] sm:min-h-[290px]">
+          <div className="relative animate-fade-rise" style={{ animationDelay: '160ms' }}>
+            <div className="absolute -inset-4 rounded-[1.25rem] bg-[rgba(192,57,43,0.12)] blur-3xl" />
+            <div className="space-y-3">
+              <div className="relative overflow-hidden rounded-[16px] border border-white/8 bg-white/5 shadow-[0_20px_70px_rgba(0,0,0,0.35)]">
+                <div className="relative aspect-[16/9]">
                   <Image src="/hero-industrial.jpg" alt="Industrial facility" fill className="object-cover" />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#0A3D62]/70 via-[#0A3D62]/20 to-transparent" />
-                  <div className="absolute bottom-4 left-4 right-4 rounded-2xl bg-white/90 p-4 text-slate-900 shadow-lg">
-                    <p className="section-kicker text-[0.65rem] text-[#2E86C1]">Trusted supply partner</p>
-                    <p className="mt-1 text-base font-bold">Built for manufacturing, maintenance, and OEM buyers</p>
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/18 to-transparent" />
+                  <div className="absolute bottom-4 left-4 right-4">
+                    <div className="inline-flex items-center rounded-full bg-[#C0392B] px-3 py-1 text-[9px] font-semibold uppercase tracking-[0.18em] text-white">
+                      Why AL-BURHAN
+                    </div>
+                    <p className="mt-3 max-w-md text-sm font-bold text-white sm:text-base">
+                      Built for manufacturing, maintenance, and OEM buyers.
+                    </p>
                   </div>
                 </div>
+              </div>
 
-                <div className="grid gap-3">
-                  <div className="rounded-[1.5rem] bg-[#0A3D62] p-5 text-white">
-                    <p className="text-xs uppercase tracking-[0.18em] text-white/70 font-subheading">Why AL-BURHAN</p>
-                    <p className="mt-3 text-xl font-bold">Reliable stock, fast dispatch, and consistent quality control.</p>
-                  </div>
-                  <div className="rounded-[1.5rem] bg-white p-5 text-slate-800 shadow-sm">
-                    <p className="text-xs uppercase tracking-[0.18em] text-slate-500 font-subheading">Materials</p>
-                    <p className="mt-3 text-lg font-semibold">Aluminium, CI, Nylon, Rubber, and precision components.</p>
-                  </div>
-                  <div className="rounded-[1.5rem] bg-[#C0392B] p-5 text-white">
-                    <p className="text-xs uppercase tracking-[0.18em] text-white/70 font-subheading">Response</p>
-                    <p className="mt-3 text-lg font-semibold">Quote support through WhatsApp and direct contact.</p>
-                  </div>
+              <div className="grid gap-3 sm:grid-cols-2">
+                <div className="rounded-xl bg-[rgba(10,61,98,0.4)] p-4 text-white transition hover:bg-[rgba(10,61,98,0.55)]">
+                  <p className="text-[9px] uppercase tracking-[0.18em] text-white/45">Materials</p>
+                  <p className="mt-3 text-[13px] font-semibold leading-6">Aluminium, CI, Nylon, Rubber, and precision components.</p>
+                </div>
+
+                <div className="rounded-xl bg-white/4 p-4 text-white transition hover:bg-white/8">
+                  <p className="text-[9px] uppercase tracking-[0.18em] text-white/45">Trusted Partner</p>
+                  <p className="mt-3 text-[13px] font-semibold leading-6">Reliable stock, fast dispatch, and consistent quality control.</p>
+                </div>
+
+                <div className="rounded-xl border border-[rgba(192,57,43,0.3)] bg-[rgba(192,57,43,0.15)] p-4 text-white transition hover:bg-[rgba(192,57,43,0.22)]">
+                  <p className="text-[9px] uppercase tracking-[0.18em] text-white/45">Response</p>
+                  <p className="mt-3 text-[13px] font-semibold leading-6">Quote support through WhatsApp and direct contact.</p>
+                </div>
+
+                <div className="rounded-xl bg-white/4 p-4 text-white transition hover:bg-white/8">
+                  <p className="text-[9px] uppercase tracking-[0.18em] text-white/45">Delivery</p>
+                  <p className="mt-3 text-[13px] font-semibold leading-6">Pan-India delivery built for practical industrial timelines.</p>
                 </div>
               </div>
             </div>
           </div>
-        </div>
-
-        <div className="mt-16 overflow-hidden">
-          <svg viewBox="0 0 1440 120" preserveAspectRatio="none" className="block h-14 w-full text-[#FAFAFA]">
-            <path fill="currentColor" d="M0,64L60,64C120,64,240,64,360,58.7C480,53,600,43,720,48C840,53,960,75,1080,74.7C1200,75,1320,53,1380,42.7L1440,32V120H1380C1320,120,1200,120,1080,120C960,120,840,120,720,120C600,120,480,120,360,120C240,120,120,120,60,120H0Z" />
-          </svg>
         </div>
       </div>
     </section>

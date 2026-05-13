@@ -140,14 +140,14 @@ export default function Products() {
   }, [searchQuery, materialFilter, categoryFilter])
 
   return (
-    <section id="products" className="section-shell section-surface py-16 sm:py-20 lg:py-24">
+    <section id="products" className="section-shell bg-[rgba(255,255,255,0.015)] py-20 sm:py-24 lg:py-28">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="mx-auto mb-10 max-w-3xl text-center sm:mb-14">
-          <p className="section-kicker mb-4 text-sm font-semibold text-[#C0392B]">Products Gallery</p>
-          <h2 className="text-3xl font-black text-slate-900 sm:text-4xl lg:text-5xl text-balance">
+          <p className="section-kicker mb-4 text-[11px] font-semibold text-[#C0392B]">Our Catalogue</p>
+          <h2 className="text-3xl font-black text-white sm:text-4xl lg:text-5xl text-balance">
             Explore our power transmission catalog.
           </h2>
-          <p className="mt-4 text-base leading-7 text-slate-600 sm:text-lg">
+          <p className="mt-4 text-sm leading-7 text-white/55 sm:text-base">
             Filter by material or product family, then send a WhatsApp inquiry directly from the card you need.
           </p>
         </div>
@@ -155,18 +155,18 @@ export default function Products() {
         <div className="industrial-card mb-8 rounded-[1.75rem] p-4 sm:p-5">
           <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
             <div className="relative w-full lg:max-w-xl">
-              <Search size={18} className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400" />
+              <Search size={18} className="absolute left-4 top-1/2 -translate-y-1/2 text-white/35" />
               <input
                 type="text"
                 placeholder="Search products by name"
                 value={searchQuery}
                 onChange={(event) => setSearchQuery(event.target.value)}
-                className="w-full rounded-2xl border border-slate-200 bg-white py-3 pl-11 pr-4 text-sm text-slate-800 outline-none transition focus:border-[#2E86C1]"
+                className="w-full rounded-2xl border border-white/8 bg-white/6 py-3 pl-11 pr-4 text-sm text-white outline-none transition placeholder:text-white/30 focus:border-[rgba(192,57,43,0.5)]"
               />
             </div>
 
-            <div className="flex items-center gap-2 text-sm font-medium text-slate-600">
-              <Filter size={16} className="text-[#2E86C1]" />
+            <div className="flex items-center gap-2 text-sm font-medium text-white/55">
+              <Filter size={16} className="text-[#C0392B]" />
               Material and family filters
             </div>
           </div>
@@ -177,20 +177,20 @@ export default function Products() {
                 key={chip}
                 type="button"
                 onClick={() => setMaterialFilter(chip)}
-                className={`rounded-full px-4 py-2 text-sm font-medium transition ${materialFilter === chip ? 'bg-[#0A3D62] text-white' : 'bg-white text-slate-600 hover:bg-slate-100'}`}
+                className={`rounded-full px-4 py-2 text-sm font-medium transition ${materialFilter === chip ? 'bg-[#C0392B] text-white' : 'border border-white/8 bg-white/4 text-white/65 hover:bg-white/8'}`}
               >
                 {chip}
               </button>
             ))}
           </div>
 
-          <div className="mt-5 flex flex-wrap gap-2 border-t border-slate-100 pt-5">
+          <div className="mt-5 flex flex-wrap gap-2 border-t border-white/6 pt-5">
             {categoryOrder.map((chip) => (
               <button
                 key={chip}
                 type="button"
                 onClick={() => setCategoryFilter(chip)}
-                className={`inline-flex items-center gap-2 rounded-full px-4 py-2 text-sm font-medium transition ${categoryFilter === chip ? 'bg-[#C0392B] text-white' : 'bg-white text-slate-600 hover:bg-slate-100'}`}
+                className={`inline-flex items-center gap-2 rounded-full px-4 py-2 text-sm font-medium transition ${categoryFilter === chip ? 'bg-[#C0392B] text-white' : 'border border-white/8 bg-white/4 text-white/65 hover:bg-white/8'}`}
               >
                 {chip}
                 <ChevronDown size={14} className="opacity-70" />
@@ -201,16 +201,16 @@ export default function Products() {
 
         <div className="space-y-10">
           <div id="products-pulleys" className="scroll-mt-32">
-            <h3 className="mb-4 text-lg font-bold text-slate-900">Pulleys</h3>
+            <h3 className="mb-4 text-lg font-bold text-white">Pulleys</h3>
           </div>
           <div id="products-couplings" className="scroll-mt-32">
-            <h3 className="mb-4 text-lg font-bold text-slate-900">Couplings</h3>
+            <h3 className="mb-4 text-lg font-bold text-white">Couplings</h3>
           </div>
           <div id="products-gears" className="scroll-mt-32">
-            <h3 className="mb-4 text-lg font-bold text-slate-900">Gears</h3>
+            <h3 className="mb-4 text-lg font-bold text-white">Gears</h3>
           </div>
           <div id="products-sprockets" className="scroll-mt-32">
-            <h3 className="mb-4 text-lg font-bold text-slate-900">Sprockets</h3>
+            <h3 className="mb-4 text-lg font-bold text-white">Sprockets</h3>
           </div>
         </div>
 
@@ -218,37 +218,37 @@ export default function Products() {
           {visibleProducts.map((product, index) => (
             <article
               key={product.name}
-              className="group overflow-hidden rounded-[12px] bg-white transition duration-300 hover:-translate-y-1"
+              className="group overflow-hidden rounded-[14px] border border-white/8 bg-white/3 transition duration-300 hover:-translate-y-1 hover:border-white/15"
               style={{ animationDelay: `${index * 40}ms` }}
             >
-              <div className="relative aspect-square overflow-hidden rounded-t-[12px] bg-[#F5F7FA]">
+              <div className="relative aspect-[4/3] overflow-hidden rounded-t-[14px] bg-[#0D1F2F]">
                 <Image
                   src={getImagePath(product.image)}
                   alt={product.name}
                   fill
                   sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
-                  className="object-contain p-6 transition duration-500 group-hover:scale-110"
+                  className="object-cover opacity-90 transition duration-500 group-hover:scale-105 group-hover:opacity-100"
                 />
               </div>
 
-              <div className="space-y-4 border border-transparent border-t-[#2E86C1] border-t-0 p-5 transition-all duration-300 group-hover:border-t-[3px] group-hover:border-t-[#2E86C1] group-hover:shadow-[0_8px_32px_rgba(10,61,98,0.18),0_2px_8px_rgba(10,61,98,0.10)]">
+              <div className="space-y-4 p-4 transition-all duration-300">
                 <div className="flex items-center justify-between gap-3">
-                  <span className="rounded-full bg-[#0A3D62]/10 px-3 py-1 text-[0.7rem] font-semibold uppercase tracking-[0.18em] text-[#0A3D62]">
+                  <span className="rounded-full bg-[rgba(192,57,43,0.15)] px-3 py-1 text-[9px] font-semibold uppercase tracking-[0.18em] text-[#C0392B]">
                     {product.category}
                   </span>
-                  <span className="text-xs font-medium text-slate-500">{product.material}</span>
+                  <span className="text-xs font-medium text-white/40">{product.material}</span>
                 </div>
 
                 <div>
-                  <h4 className="text-base font-bold text-slate-900">{product.name}</h4>
-                  <p className="mt-2 text-sm leading-6 text-slate-600">{getShortDescription(product)}</p>
+                  <h4 className="text-[18px] font-bold text-white">{product.name}</h4>
+                  <p className="mt-2 line-clamp-2 text-sm leading-6 text-white/55">{getShortDescription(product)}</p>
                 </div>
 
                 <a
                   href={getWhatsappLink(product.name)}
                   target="_blank"
                   rel="noreferrer"
-                  className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-[#C0392B] px-4 py-3 text-sm font-semibold text-white shadow-lg shadow-[#C0392B]/20 transition hover:-translate-y-0.5 hover:bg-[#a53127]"
+                  className="inline-flex min-h-12 w-full items-center justify-center gap-2 rounded-lg bg-[#C0392B] px-4 py-3 text-sm font-semibold text-white transition hover:-translate-y-0.5 hover:bg-[#a53127] active:scale-95"
                 >
                   <MessageCircle size={16} />
                   WhatsApp Inquiry
@@ -263,7 +263,7 @@ export default function Products() {
             <button
               type="button"
               onClick={() => setVisibleCount((current) => current + 12)}
-              className="inline-flex items-center justify-center rounded-full border border-[#0A3D62]/20 bg-white px-6 py-3 text-sm font-semibold text-[#0A3D62] transition hover:bg-slate-50"
+              className="inline-flex min-h-12 items-center justify-center rounded-lg border border-white/8 bg-white/4 px-6 py-3 text-sm font-semibold text-white transition hover:bg-white/8"
             >
               Load more products
             </button>
@@ -271,7 +271,7 @@ export default function Products() {
         )}
 
         {filteredProducts.length === 0 && (
-          <div className="mt-10 rounded-[1.75rem] border border-dashed border-slate-300 bg-white/70 p-10 text-center text-slate-600">
+          <div className="mt-10 rounded-[1.75rem] border border-dashed border-white/10 bg-white/4 p-10 text-center text-white/55">
             No products match the current filters.
           </div>
         )}

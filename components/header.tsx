@@ -1,7 +1,7 @@
 'use client'
 
 import BrandLogo from '@/components/brand-logo'
-import { ArrowRight, ChevronDown, Menu, X, Settings2 } from 'lucide-react'
+import { ArrowRight, ChevronDown, Menu, X } from 'lucide-react'
 import { useState } from 'react'
 
 const navigationLinks = [
@@ -21,20 +21,17 @@ const productCategories = [
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false)
   const [isDropdownOpen, setIsDropdownOpen] = useState(false)
+  const [isMobileProductsOpen, setIsMobileProductsOpen] = useState(false)
 
   return (
-    <header className="fixed inset-x-0 top-0 z-50 px-2 pt-2 sm:px-4 sm:pt-4">
-      <div className="relative mx-auto max-w-7xl overflow-visible rounded-[1.15rem] border border-white/40 bg-white/88 backdrop-blur-xl shadow-[0_8px_28px_rgba(10,24,38,0.08)]">
-        <div className="absolute inset-0 rounded-[1.15rem] bg-gradient-to-r from-[#0A3D62]/5 via-transparent to-[#C0392B]/5 pointer-events-none" />
-
-        {/* Main nav row */}
-        <div className="relative z-10 flex h-20 items-center justify-between gap-4 px-3 sm:h-24 sm:px-5 lg:px-6">
-          <a href="#home" className="flex h-full items-center shrink-0">
-            <BrandLogo compact className="shrink-0" />
+    <header className="fixed inset-x-0 top-0 z-50 border-b border-white/6 bg-[rgba(8,28,46,0.85)] backdrop-blur-xl">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="flex min-h-16 items-center justify-between gap-4 py-4 lg:min-h-[72px]">
+          <a href="#home" className="flex items-center shrink-0" aria-label="AL-BURHAN Industrial Drives home">
+            <BrandLogo className="shrink-0" />
           </a>
 
-          {/* Desktop nav */}
-          <nav aria-label="Primary" className="hidden items-center gap-5 lg:flex xl:gap-6">
+          <nav aria-label="Primary" className="hidden items-center gap-7 lg:flex">
             {navigationLinks.map((link) =>
               link.name === 'Products' ? (
                 <div
@@ -45,23 +42,20 @@ export default function Header() {
                 >
                   <a
                     href={link.href}
-                    className="inline-flex items-center gap-1 text-[0.92rem] font-medium text-slate-700 transition hover:text-[#0A3D62]"
+                    className="inline-flex items-center gap-1 text-[13px] font-medium tracking-[0.02em] text-white/65 transition hover:text-white"
                   >
                     {link.name}
-                    <ChevronDown
-                      size={15}
-                      className={`transition-transform duration-200 ${isDropdownOpen ? 'rotate-180' : ''}`}
-                    />
+                    <ChevronDown size={14} className={`transition-transform duration-200 ${isDropdownOpen ? 'rotate-180' : ''}`} />
                   </a>
 
                   {isDropdownOpen && (
-                    <div className="absolute left-0 top-full pt-3 z-50">
-                      <div className="w-56 rounded-2xl border border-slate-200 bg-white p-2 shadow-xl">
+                    <div className="absolute left-0 top-full z-50 pt-3">
+                      <div className="w-60 rounded-2xl border border-white/10 bg-[#0D1F2F] p-2 shadow-xl shadow-black/30">
                         {productCategories.map((item) => (
                           <a
                             key={item.name}
                             href={item.href}
-                            className="flex items-center justify-between rounded-xl px-4 py-3 text-sm text-slate-700 transition hover:bg-slate-50 hover:text-[#0A3D62]"
+                            className="flex items-center justify-between rounded-xl px-4 py-3 text-sm text-white/75 transition hover:bg-white/5 hover:text-white"
                           >
                             {item.name}
                             <ArrowRight size={14} className="text-[#C0392B]" />
@@ -75,7 +69,7 @@ export default function Header() {
                 <a
                   key={link.name}
                   href={link.href}
-                  className="text-[0.92rem] font-medium text-slate-700 transition hover:text-[#0A3D62]"
+                  className="text-[13px] font-medium tracking-[0.02em] text-white/65 transition hover:text-white"
                 >
                   {link.name}
                 </a>
@@ -83,17 +77,16 @@ export default function Header() {
             )}
           </nav>
 
-          {/* CTA + mobile toggle */}
           <div className="flex items-center gap-3">
             <a
               href="#contact"
-              className="hidden lg:inline-flex items-center gap-2 rounded-full bg-[#C0392B] px-4 py-2 text-[0.88rem] font-semibold text-white shadow-lg shadow-[#C0392B]/20 transition hover:-translate-y-0.5 hover:bg-[#a83429]"
+              className="btn-glow hidden items-center gap-2 rounded-lg bg-[#C0392B] px-5 py-2.5 text-[13px] font-semibold text-white transition hover:-translate-y-[1px] hover:bg-[#a83429] lg:inline-flex"
             >
               Request a Quote
             </a>
 
             <button
-              className="flex h-9 w-9 items-center justify-center rounded-full border border-slate-200 bg-white text-slate-800 shadow-sm lg:hidden"
+              className="flex h-11 w-11 items-center justify-center rounded-lg border border-white/10 bg-white/5 text-white lg:hidden"
               onClick={() => setIsOpen(!isOpen)}
               aria-label="Toggle navigation"
             >
@@ -102,42 +95,51 @@ export default function Header() {
           </div>
         </div>
 
-        {/* Mobile menu */}
         {isOpen && (
-          <div className="border-t border-slate-200 bg-white/95 px-4 py-4 backdrop-blur-xl lg:hidden rounded-b-[1.15rem]">
-            <nav className="flex flex-col gap-1">
-              {navigationLinks.map((link) => (
-                <a
-                  key={link.name}
-                  href={link.href}
-                  onClick={() => setIsOpen(false)}
-                  className="rounded-xl px-3 py-2.5 text-sm font-medium text-slate-700 transition hover:bg-slate-50 hover:text-[#0A3D62]"
-                >
-                  {link.name}
-                </a>
-              ))}
-
-              <div className="mt-2 rounded-2xl bg-slate-50 p-3">
-                <p className="px-3 pb-2 text-xs font-semibold uppercase tracking-[0.18em] text-slate-500">
-                  Products
-                </p>
-                <div className="grid gap-1">
-                  {productCategories.map((item) => (
-                    <a
-                      key={item.name}
-                      href={item.href}
-                      onClick={() => setIsOpen(false)}
-                      className="rounded-xl px-3 py-2 text-sm text-slate-700 transition hover:bg-white hover:text-[#0A3D62]"
+          <div className="border-t border-white/6 bg-[rgba(8,28,46,0.97)] px-4 py-4 backdrop-blur-xl lg:hidden">
+            <nav className="flex flex-col gap-1 pb-2">
+              {navigationLinks.map((link) =>
+                link.name === 'Products' ? (
+                  <div key={link.name} className="rounded-2xl border border-white/8 bg-white/4 px-3 py-2">
+                    <button
+                      type="button"
+                      onClick={() => setIsMobileProductsOpen((current) => !current)}
+                      className="flex h-12 w-full items-center justify-between rounded-xl text-left text-sm font-medium text-white"
                     >
-                      {item.name}
-                    </a>
-                  ))}
-                </div>
-              </div>
+                      <span>Products</span>
+                      <ChevronDown size={15} className={`transition-transform ${isMobileProductsOpen ? 'rotate-180' : ''}`} />
+                    </button>
+
+                    {isMobileProductsOpen && (
+                      <div className="mt-3 grid grid-cols-2 gap-2">
+                        {productCategories.map((item) => (
+                          <a
+                            key={item.name}
+                            href={item.href}
+                            onClick={() => setIsOpen(false)}
+                            className="flex min-h-12 items-center justify-between rounded-xl border border-white/8 bg-white/4 px-3 py-3 text-sm text-white/75 transition active:scale-95"
+                          >
+                            {item.name}
+                          </a>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                ) : (
+                  <a
+                    key={link.name}
+                    href={link.href}
+                    onClick={() => setIsOpen(false)}
+                    className="flex min-h-12 items-center rounded-xl px-3 text-sm font-medium text-white/80 transition hover:bg-white/5 hover:text-white"
+                  >
+                    {link.name}
+                  </a>
+                )
+              )}
 
               <a
                 href="#contact"
-                className="mt-3 inline-flex items-center justify-center rounded-full bg-[#C0392B] px-4 py-3 text-sm font-semibold text-white"
+                className="mt-3 inline-flex min-h-12 w-full items-center justify-center rounded-lg bg-[#C0392B] px-4 py-3 text-sm font-semibold text-white"
                 onClick={() => setIsOpen(false)}
               >
                 Request a Quote

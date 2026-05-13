@@ -27,11 +27,11 @@ const benefits = [
 
 export default function CTA() {
   return (
-    <section className="section-shell section-surface-alt py-16 sm:py-20">
+    <section className="section-shell bg-[rgba(255,255,255,0.015)] py-20 sm:py-24 lg:py-28">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="mx-auto mb-12 max-w-3xl text-center">
-          <p className="section-kicker mb-4 text-sm font-semibold text-[#C0392B]">Why Choose Us</p>
-          <h2 className="text-3xl font-black text-slate-900 sm:text-4xl lg:text-5xl text-balance">
+          <p className="section-kicker mb-4 text-[11px] font-semibold text-[#C0392B]">Why Choose Us</p>
+          <h2 className="text-3xl font-black text-white sm:text-4xl lg:text-5xl text-balance">
             The practical partner for quality industrial supply.
           </h2>
         </div>
@@ -44,25 +44,25 @@ export default function CTA() {
                 <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-[#0A3D62] text-white shadow-lg">
                   <Icon size={20} />
                 </div>
-                <h3 className="mt-5 text-xl font-bold text-slate-900">{benefit.title}</h3>
-                <p className="mt-3 text-sm leading-6 text-slate-600">{benefit.description}</p>
+                <h3 className="mt-5 text-xl font-bold text-white">{benefit.title}</h3>
+                <p className="mt-3 text-sm leading-6 text-white/55">{benefit.description}</p>
               </article>
             )
           })}
         </div>
 
-        <div className="mt-8 rounded-[2rem] bg-[#0A3D62] px-6 py-8 text-center text-white shadow-[0_18px_55px_rgba(10,24,38,0.14)] sm:px-8 sm:py-10">
+        <div className="mt-8 rounded-[2rem] border border-white/8 bg-[#0D1F2F] px-6 py-8 text-center text-white shadow-[0_18px_55px_rgba(10,24,38,0.14)] sm:px-8 sm:py-10">
           <h3 className="text-2xl font-bold text-balance sm:text-3xl">
             Ready to source the right industrial components?
           </h3>
-          <p className="mx-auto mt-3 max-w-3xl text-sm leading-7 text-white/80 sm:text-base">
+          <p className="mx-auto mt-3 max-w-3xl text-sm leading-7 text-white/65 sm:text-base">
             Request a quote and we’ll help you choose the correct pulleys, couplings, gears, or sprockets for the application.
           </p>
 
           <div className="mt-6 flex flex-col justify-center gap-3 sm:flex-row">
             <a
               href="#contact"
-              className="inline-flex items-center justify-center gap-2 rounded-full bg-[#C0392B] px-6 py-3.5 text-sm font-semibold text-white shadow-lg shadow-black/15 transition hover:-translate-y-0.5"
+              className="inline-flex min-h-12 items-center justify-center gap-2 rounded-lg bg-[#C0392B] px-6 py-3.5 text-sm font-semibold text-white transition hover:-translate-y-0.5 hover:bg-[#a83429]"
             >
               Request a Quote
               <ArrowRight size={18} />
@@ -71,7 +71,7 @@ export default function CTA() {
               href="https://wa.me/919819036787?text=Hi%20AL-BURHAN,%20I%20would%20like%20a%20quote"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center justify-center gap-2 rounded-full border border-white/20 bg-white/10 px-6 py-3.5 text-sm font-semibold text-white transition hover:bg-white/15"
+              className="inline-flex min-h-12 items-center justify-center gap-2 rounded-lg border border-white/12 bg-white/6 px-6 py-3.5 text-sm font-semibold text-white transition hover:bg-white/10"
             >
               WhatsApp Inquiry
             </a>
