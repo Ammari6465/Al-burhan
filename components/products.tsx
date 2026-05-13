@@ -9,8 +9,6 @@ const categoryOrder = ['All', 'Pulleys', 'Couplings', 'Gears', 'Sprockets'] as c
 
 type Category = (typeof categoryOrder)[number]
 
-const whatsappNumber = '919819036787'
-
 const products = [
   { name: 'Aluminium Coupling', image: 'Aluminium Coupling.jpg' },
   { name: 'Aluminium Handle', image: 'Aluminium Handle.jpg' },
@@ -68,11 +66,6 @@ type ProductItem = {
 
 const getImagePath = (fileName: string) => `/Images/${encodeURIComponent(fileName)}`
 
-const getWhatsappLink = (productName: string) => {
-  const message = `Hello, I am interested in the product: ${productName}. Please share more details.`
-  return `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`
-}
-
 const getCategory = (name: string): ProductItem['category'] => {
   if (/pulley/i.test(name)) return 'Pulleys'
   if (/coupling|spider|mounting|lock|handle|sleeve|gr/i.test(name)) return 'Couplings'
@@ -99,8 +92,16 @@ const categoryIcons: Record<Exclude<Category, 'All'>, typeof RotateCw> = {
   Sprockets: Cog,
 }
 
+const whatsappNumber = '919819036787'
+
+const getWhatsappLink = (productName: string) => {
+  const message = `Hello, I am interested in the product: ${productName}. Please share more details.`
+  return `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`
+}
+
 export default function Products() {
   const [categoryFilter, setCategoryFilter] = useState<Category>('All')
+  const [searchQuery, setSearchQuery] = useState('')
   const [visibleCount, setVisibleCount] = useState(12)
   const sectionRef = useScrollReveal<HTMLElement>()
 
@@ -117,10 +118,11 @@ export default function Products() {
     () =>
       catalog.filter((product) => {
         const matchesCategory = categoryFilter === 'All' || product.category === categoryFilter
+        const matchesSearch = product.name.toLowerCase().includes(searchQuery.trim().toLowerCase())
 
-        return matchesCategory
+        return matchesCategory && matchesSearch
       }),
-    [catalog, categoryFilter],
+    [catalog, categoryFilter, searchQuery],
   )
 
   const visibleProducts = filteredProducts.slice(0, visibleCount)
@@ -128,6 +130,10 @@ export default function Products() {
   useEffect(() => {
     setVisibleCount(12)
   }, [categoryFilter])
+
+  useEffect(() => {
+    setVisibleCount(12)
+  }, [searchQuery])
 
   return (
     <section ref={sectionRef} id="products" className="section-shell bg-[#F5F7FA] py-24">
@@ -143,7 +149,23 @@ export default function Products() {
           <div data-reveal className="reveal-item mx-auto mt-5 h-[3px] w-12 rounded-full bg-[#C0392B]" />
         </div>
 
-        <div data-reveal className="reveal-item mt-10 flex flex-wrap justify-center gap-2">
+        <div data-reveal className="reveal-item mt-10 flex justify-center">
+          <div className="w-full max-w-xl">
+            <label className="sr-only" htmlFor="product-search">
+              Search products
+            </label>
+            <input
+              id="product-search"
+              type="search"
+              value={searchQuery}
+              onChange={(event) => setSearchQuery(event.target.value)}
+              placeholder="Search products by name..."
+              className="min-h-12 w-full rounded-full border border-[#E8ECF0] bg-white px-5 py-3 font-ui text-[14px] text-[#0A3D62] outline-none transition placeholder:text-[#8896A8] focus:border-[#0A3D62] focus:ring-0 focus:shadow-[0_0_0_3px_rgba(10,61,98,0.08)]"
+            />
+          </div>
+        </div>
+
+        <div data-reveal className="reveal-item mt-6 flex flex-wrap justify-center gap-2">
           {categoryOrder.map((chip) => (
             <button
               key={chip}
@@ -193,9 +215,9 @@ export default function Products() {
                     href={getWhatsappLink(product.name)}
                     target="_blank"
                     rel="noreferrer"
-                    className="inline-flex items-center gap-2 font-ui text-[13px] font-semibold text-[#C0392B] transition-all duration-200 hover:gap-3"
+                    className="inline-flex items-center gap-2 rounded-full bg-[#25D366] px-4 py-2 font-ui text-[13px] font-semibold text-white transition-all duration-200 hover:bg-[#1EBE57] hover:gap-3"
                   >
-                    View Details
+                    WhatsApp Us
                     <ArrowRight size={16} />
                   </a>
                 </div>
@@ -218,7 +240,7 @@ export default function Products() {
 
         {filteredProducts.length === 0 && (
           <div className="mt-10 rounded-2xl border border-dashed border-[#E8ECF0] bg-white p-10 text-center text-[#4A5568]">
-            No products match the current filters.
+            No products match the current search and filters.
           </div>
         )}
       </div>
