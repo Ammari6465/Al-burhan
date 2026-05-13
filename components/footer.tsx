@@ -1,7 +1,7 @@
 'use client'
 
 import BrandLogo from '@/components/brand-logo'
-import { Facebook, Instagram, Linkedin, Mail, MapPin, Phone, Youtube } from 'lucide-react'
+import { Mail, MapPin, Phone } from 'lucide-react'
 
 const productLinks = [
   { name: 'Pulleys', href: '#products' },
@@ -16,13 +16,6 @@ const companyLinks = [
   { name: 'About', href: '#about' },
   { name: 'Products', href: '#products' },
   { name: 'Contact', href: '#contact' },
-]
-
-const socialIcons = [
-  { icon: Linkedin, label: 'LinkedIn', href: '#' },
-  { icon: Facebook, label: 'Facebook', href: '#' },
-  { icon: Instagram, label: 'Instagram', href: '#' },
-  { icon: Youtube, label: 'YouTube', href: '#' },
 ]
 
 export default function Footer() {
@@ -84,37 +77,6 @@ export default function Footer() {
             >
               Est. 1999 · Mumbai, India
             </p>
-
-            {/* Social Icons */}
-            <div className="flex gap-3 mt-5 justify-center md:justify-start">
-              {socialIcons.map(({ icon: Icon, label, href }) => (
-                <a
-                  key={label}
-                  href={href}
-                  aria-label={label}
-                  className="flex h-10 w-10 items-center justify-center rounded-full border transition-all duration-[0.25s]"
-                  style={{
-                    background: 'rgba(255,255,255,0.08)',
-                    borderColor: 'rgba(255,255,255,0.15)',
-                    color: '#FFFFFF',
-                  }}
-                  onMouseEnter={(e) => {
-                    e.currentTarget.style.background = 'rgba(192,57,43,0.15)'
-                    e.currentTarget.style.borderColor = '#C0392B'
-                    e.currentTarget.style.color = '#C0392B'
-                    e.currentTarget.style.boxShadow = '0 0 14px rgba(192,57,43,0.45)'
-                  }}
-                  onMouseLeave={(e) => {
-                    e.currentTarget.style.background = 'rgba(255,255,255,0.08)'
-                    e.currentTarget.style.borderColor = 'rgba(255,255,255,0.15)'
-                    e.currentTarget.style.color = '#FFFFFF'
-                    e.currentTarget.style.boxShadow = 'none'
-                  }}
-                >
-                  <Icon size={18} />
-                </a>
-              ))}
-            </div>
           </div>
 
           {/* Products Column */}
