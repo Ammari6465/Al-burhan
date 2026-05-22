@@ -1,102 +1,126 @@
 'use client'
 
-import Link from 'next/link'
 import Image from 'next/image'
-import { CheckCircle2, ShieldCheck, Target, Truck } from 'lucide-react'
+import { Award, Building2, Factory, ShieldCheck } from 'lucide-react'
 import { useScrollReveal } from '@/hooks/use-scroll-reveal'
 
-const highlights = [
+const features = [
   {
-    icon: Truck,
-    title: 'Fast Delivery',
-    description: 'Responsive dispatch for urgent production schedules',
-  },
-  {
-    icon: Target,
-    title: 'Precision Focus',
-    description: 'Tight quality control across every shipment',
+    icon: Factory,
+    title: 'Manufacturing Insight',
+    description: 'Practical knowledge of transmission components, fitment, and industrial procurement realities.',
   },
   {
     icon: ShieldCheck,
-    title: 'Quality Assurance',
-    description: 'Reliable materials, tested processes, and dependable support',
+    title: 'Quality Discipline',
+    description: 'Consistent checking of dimensions, finish, and application fit before dispatch.',
   },
+  {
+    icon: Building2,
+    title: 'Buyer Support',
+    description: 'Responsive help for OEM teams, maintenance buyers, and repeat industrial orders.',
+  },
+]
+
+const milestones = [
+  { year: '1999', title: 'Founded in Mumbai', text: 'Built on hands-on supply relationships and a focus on dependable industrial support.' },
+  { year: '2008', title: 'OEM Expansion', text: 'Broadened the catalogue to cover more drive components and repeat buyer requirements.' },
+  { year: '2016', title: 'Pan-India Reach', text: 'Improved dispatch coordination and delivery support across industrial hubs.' },
+  { year: '2026', title: 'Digital First', text: 'Modernized the enquiry experience with faster response paths and structured product discovery.' },
+]
+
+const values = [
+  { title: 'Mission', text: 'Make industrial procurement simpler, faster, and more reliable for teams that cannot afford downtime.' },
+  { title: 'Values', text: 'Integrity, precision, and response speed are the operating principles that shape every enquiry.' },
+  { title: 'Expertise', text: 'Deep familiarity with pulleys, couplings, gears, sprockets, and related power transmission parts.' },
 ]
 
 export default function About() {
   const sectionRef = useScrollReveal<HTMLElement>()
 
   return (
-    <section ref={sectionRef} id="about" aria-labelledby="about-heading" className="section-shell bg-[#F5F7FA] py-24">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="grid items-center gap-12 lg:grid-cols-[45%_55%] lg:gap-16">
-          <div className="order-2 space-y-6 lg:order-1">
-            <p data-reveal className="reveal-item section-kicker text-[12px] font-semibold text-[#C0392B]">About AL-BURHAN</p>
-            <h2 data-reveal id="about-heading" className="reveal-item text-[28px] font-bold text-[#0A3D62] sm:text-[40px]">
-              25 Years of Industrial Excellence
-            </h2>
-            <p data-reveal className="reveal-item max-w-2xl text-[16px] leading-8 text-[#4A5568]">
-              We support manufacturers, maintenance teams, and distributors with practical solutions for power transmission, combining stock depth, responsive service, and consistent product quality.
-            </p>
-            <p data-reveal className="reveal-item max-w-2xl text-[16px] leading-8 text-[#4A5568]">
-              Our range covers pulleys, couplings, sprockets, roller chains, gears, and related transmission parts. The goal is straightforward: reduce friction in procurement and keep your operations moving.
+    <section id="about" ref={sectionRef} className="section-shell bg-white py-24">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 xl:px-20">
+        <div className="grid items-center gap-14 lg:grid-cols-[0.95fr_1.05fr]">
+          <div>
+            <p data-reveal className="section-kicker w-fit">ABOUT US</p>
+            <h2 data-reveal className="section-title mt-4 max-w-[620px]">
+Premium Industrial & Power Transmission Products            </h2>
+            <p data-reveal className="section-copy mt-5 max-w-[620px]">
+              AL-BURHAN Industrial Drives supports OEMs, manufacturers, and maintenance teams with practical procurement support for transmission components across India.
             </p>
 
-            <div className="space-y-4">
-              {[
-                { title: 'Fast Delivery', description: 'Responsive dispatch for urgent production schedules', icon: Truck },
-                { title: 'Precision Focus', description: 'Tight quality control across every shipment', icon: Target },
-                { title: 'Quality Assurance', description: 'Reliable materials, tested processes, and dependable support', icon: ShieldCheck },
-                { title: 'Customer Confidence', description: 'Clear communication from enquiry to delivery', icon: CheckCircle2 },
-              ].map((item, index) => {
+            <div className="mt-8 space-y-4">
+              {features.map((item, index) => {
                 const Icon = item.icon
+
                 return (
-                  <div
-                    key={item.title}
-                    data-reveal
-                    className="reveal-item flex items-start gap-3 border-b border-[#E8ECF0] pb-4"
-                    style={{ animationDelay: `${index * 80}ms` }}
-                  >
-                    <div className="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-[#FDECEA] text-[#C0392B]">
-                      <Icon size={14} />
+                  <div key={item.title} data-reveal className="flex gap-4 rounded-2xl border border-[rgba(0,51,102,0.08)] bg-[var(--color-offwhite)] p-4" style={{ animationDelay: `${index * 80}ms` }}>
+                    <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-white text-[#d62828] shadow-[0_10px_24px_rgba(9,25,41,0.08)]">
+                      <Icon size={20} />
                     </div>
                     <div>
-                      <h3 className="text-[15px] font-semibold text-[#0A3D62]">{item.title}</h3>
-                      <p className="mt-1 text-[14px] leading-6 text-[#4A5568]">{item.description}</p>
+                      <h3 className="text-[15px] font-bold text-[#0f1720] normal-case tracking-normal">{item.title}</h3>
+                      <p className="mt-1 text-[14px] leading-6 text-[#425062]">{item.description}</p>
                     </div>
                   </div>
                 )
               })}
             </div>
-
-            <Link href="#contact" className="inline-flex min-h-12 items-center justify-center rounded-lg border border-[#0A3D62] px-6 py-3.5 font-ui text-[14px] font-semibold text-[#0A3D62] transition hover:bg-[#0A3D62] hover:text-white">
-              Learn More About Us →
-            </Link>
           </div>
 
-          <div className="order-1 lg:order-2">
-            <div className="relative">
-              <div className="absolute -left-6 top-0 h-20 w-20 rounded-full bg-[#C0392B] opacity-12 blur-2xl" />
-
-              <div className="relative">
-                <div className="relative overflow-hidden rounded-2xl shadow-[0_20px_70px_rgba(0,0,0,0.16)]">
-                  <div className="relative aspect-[4/3]">
-                    <Image src="/hero-industrial.jpg" alt="AL-BURHAN industrial facility" fill className="object-cover" />
-                  </div>
-                </div>
-
-                <div className="absolute -bottom-5 right-5 w-[40%] overflow-hidden rounded-xl border-4 border-white shadow-[0_14px_40px_rgba(0,0,0,0.16)]">
-                  <div className="relative aspect-[4/3]">
-                    <Image src="/hero-industrial.jpg" alt="Industrial facility detail" fill className="object-cover" />
-                  </div>
-                </div>
-
-                <div className="absolute bottom-5 left-5 rounded-2xl bg-[#0A3D62] p-4 text-white shadow-[0_16px_40px_rgba(0,0,0,0.18)]">
-                  <p className="text-[32px] font-extrabold leading-none">25+</p>
-                  <p className="mt-1 text-[12px] text-white/70">Years of Excellence</p>
-                </div>
+          <div className="space-y-6" data-reveal>
+            <div className="grid gap-4 sm:grid-cols-2">
+              <div className="about-image-shell sm:row-span-2">
+                <Image src="/hero-industrial.jpg" alt="Industrial workshop operations" fill className="object-cover" />
+              </div>
+              <div className="about-image-shell min-h-[200px]">
+                <Image src="/products/gear.jpg" alt="Industrial gear products" fill className="object-cover" />
+              </div>
+              <div className="about-image-shell min-h-[200px]">
+                <Image src="/products/coupling.jpg" alt="Industrial coupling products" fill className="object-cover" />
               </div>
             </div>
+
+            <div className="rounded-[1.5rem] border border-[rgba(0,51,102,0.08)] bg-[linear-gradient(135deg,#003366,#0b4c7f)] p-6 text-white shadow-[0_18px_46px_rgba(9,25,41,0.15)]">
+              <div className="flex items-center gap-3">
+                <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-white/12 text-[#ff6b00]">
+                  <Award size={22} />
+                </div>
+                <div>
+                  <p className="text-[0.72rem] font-bold uppercase tracking-[0.24em] text-white/72">Mission Statement</p>
+                  <p className="mt-1 text-[1rem] font-semibold normal-case tracking-normal text-white">Reliable industrial supply is a service discipline, not just a product list.</p>
+                </div>
+              </div>
+
+              <div className="mt-6 grid gap-3 sm:grid-cols-3">
+                {values.map((value) => (
+                  <article key={value.title} className="rounded-2xl border border-white/10 bg-white/8 p-4 backdrop-blur-md">
+                    <h3 className="text-[0.8rem] font-bold uppercase tracking-[0.22em] text-white/82 normal-case">{value.title}</h3>
+                    <p className="mt-2 text-[14px] leading-7 text-white/78 normal-case tracking-normal">{value.text}</p>
+                  </article>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div className="mt-16 rounded-[1.5rem] border border-[rgba(0,51,102,0.08)] bg-[var(--color-offwhite)] p-6 sm:p-8">
+          <div className="flex items-center justify-between gap-4">
+            <div>
+              <p className="section-kicker">25 YEAR TIMELINE</p>
+              <h3 className="mt-3 text-[1.6rem] font-black text-[#0f1720] normal-case tracking-normal">Milestones that shaped the company</h3>
+            </div>
+          </div>
+
+          <div className="timeline-grid mt-8 lg:grid-cols-4">
+            {milestones.map((milestone) => (
+              <article key={milestone.year} className="timeline-item rounded-2xl bg-white p-5 shadow-[0_12px_34px_rgba(9,25,41,0.08)]">
+                <p className="text-[1.3rem] font-black text-[#d62828] normal-case tracking-normal">{milestone.year}</p>
+                <h4 className="mt-2 text-[1rem] font-bold text-[#0f1720] normal-case tracking-normal">{milestone.title}</h4>
+                <p className="mt-2 text-[14px] leading-7 text-[#425062] normal-case tracking-normal">{milestone.text}</p>
+              </article>
+            ))}
           </div>
         </div>
       </div>

@@ -1,177 +1,150 @@
 'use client'
 
 import BrandLogo from '@/components/brand-logo'
-import { ArrowRight, ChevronDown, Menu, X } from 'lucide-react'
-import { useEffect, useRef, useState } from 'react'
+import { ChevronDown, ChevronRight, Menu, Phone, X } from 'lucide-react'
+import { useEffect, useState } from 'react'
 
-const navigationLinks = [
+const navLinks = [
   { name: 'Home', href: '#home' },
-  { name: 'Products', href: '#products' },
-  { name: 'About', href: '#about' },
+  { name: 'About Us', href: '#about' },
   { name: 'Contact', href: '#contact' },
 ]
 
-const productCategories = [
-  { name: 'Pulleys', href: '#products-pulleys' },
-  { name: 'Couplings', href: '#products-couplings' },
-  { name: 'Gears', href: '#products-gears' },
-  { name: 'Sprockets', href: '#products-sprockets' },
+const productLinks = [
+  { name: 'Pulleys', href: '#products' },
+  { name: 'Couplings', href: '#products' },
+  { name: 'Gears', href: '#products' },
+  { name: 'Sprockets', href: '#products' },
 ]
 
 export default function Header() {
-  const [isOpen, setIsOpen] = useState(false)
-  const [isDropdownOpen, setIsDropdownOpen] = useState(false)
-  const [isMobileProductsOpen, setIsMobileProductsOpen] = useState(false)
+  const [drawerOpen, setDrawerOpen] = useState(false)
   const [activeHash, setActiveHash] = useState('#home')
-  const hoverTimeoutRef = useRef<number | null>(null)
+  const [isScrolled, setIsScrolled] = useState(false)
 
   useEffect(() => {
-    const updateHash = () => setActiveHash(window.location.hash || '#home')
+    const onScroll = () => setIsScrolled(window.scrollY > 80)
+    const onHashChange = () => setActiveHash(window.location.hash || '#home')
 
-    updateHash()
-    window.addEventListener('hashchange', updateHash)
+    onScroll()
+    onHashChange()
 
-    return () => window.removeEventListener('hashchange', updateHash)
+    window.addEventListener('scroll', onScroll, { passive: true })
+    window.addEventListener('hashchange', onHashChange)
+
+    return () => {
+      window.removeEventListener('scroll', onScroll)
+      window.removeEventListener('hashchange', onHashChange)
+    }
   }, [])
 
-  const scheduleDropdownOpen = (open: boolean) => {
-    if (hoverTimeoutRef.current !== null) {
-      window.clearTimeout(hoverTimeoutRef.current)
-    }
+  useEffect(() => {
+    document.body.style.overflow = drawerOpen ? 'hidden' : ''
 
-    hoverTimeoutRef.current = window.setTimeout(() => {
-      setIsDropdownOpen(open)
-    }, 100)
-  }
+    return () => {
+      document.body.style.overflow = ''
+    }
+  }, [drawerOpen])
 
   return (
-    <header className="fixed inset-x-0 top-0 z-50 h-[64px] border-b border-[#E8ECF0] bg-white shadow-[0_1px_0_rgba(0,0,0,0.06)] lg:h-[72px]">
+    <header className={`fixed top-6 left-1/2 z-50 w-[min(96%,1100px)] -translate-x-1/2 transform rounded-xl bg-white/95 backdrop-blur-md transition-shadow duration-200 ${isScrolled ? 'shadow-sm' : 'shadow-md'}`}>
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="flex h-[64px] items-center justify-between gap-4 lg:h-[72px]">
-          <a href="#home" className="flex items-center shrink-0" aria-label="AL-BURHAN Industrial Drives home">
-            <BrandLogo />
-          </a>
+        <div className="flex h-16 items-center justify-between">
+          <div className="flex items-center gap-4">
+            <a href="#home" className="flex items-center" aria-label="AL-BURHAN Industrial Drives home">
+              <BrandLogo compact className="transform-gpu origin-left scale-[1.65] sm:scale-[3]" />
+            </a>
+          </div>
 
-          <nav aria-label="Primary" className="hidden items-center gap-8 lg:flex">
-            {navigationLinks.map((link) =>
-              link.name === 'Products' ? (
-                <div
-                  key={link.name}
-                  className="relative"
-                  onMouseEnter={() => scheduleDropdownOpen(true)}
-                  onMouseLeave={() => scheduleDropdownOpen(false)}
-                >
-                  <a
-                    href={link.href}
-                    data-active={activeHash === link.href}
-                    className="nav-underline inline-flex items-center gap-1 font-ui text-[14px] font-medium tracking-[0.02em] text-[#4A5568] transition hover:text-[#0A3D62]"
-                  >
-                    {link.name}
-                    <ChevronDown size={14} className={`transition-transform duration-200 ${isDropdownOpen ? 'rotate-180' : ''}`} />
-                  </a>
-
-                  {isDropdownOpen && (
-                    <div className="absolute left-0 top-full z-50 pt-3">
-                      <div className="w-[220px] rounded-2xl border border-[#E8ECF0] bg-white p-2 shadow-[0_8px_40px_rgba(0,0,0,0.12)]">
-                        {productCategories.map((item) => (
-                          <a
-                            key={item.name}
-                            href={item.href}
-                            className="flex items-center justify-between rounded-xl px-4 py-3 font-ui text-sm font-medium text-[#4A5568] transition hover:bg-[#F5F7FA] hover:text-[#0A3D62]"
-                          >
-                            {item.name}
-                            <ArrowRight size={14} className="text-[#C0392B]" />
-                          </a>
-                        ))}
-                      </div>
-                    </div>
-                  )}
-                </div>
-              ) : (
-                <a
-                  key={link.name}
-                  href={link.href}
-                  data-active={activeHash === link.href}
-                  className="nav-underline font-ui text-[14px] font-medium tracking-[0.02em] text-[#4A5568] transition hover:text-[#0A3D62]"
-                >
+          <nav className="hidden lg:flex lg:flex-1 lg:justify-center lg:items-center" aria-label="Primary">
+            <div className="flex items-center gap-8">
+              {navLinks.map((link) => (
+                <a key={link.name} href={link.href} data-active={activeHash === link.href} className={`nav-link-item text-slate-700`}>
                   {link.name}
                 </a>
-              )
-            )}
+              ))}
+
+              <div className="relative group">
+                <a href="#products" className="inline-flex items-center gap-1 nav-link-item text-slate-700">
+                  Products
+                  <ChevronDown size={14} />
+                </a>
+                <div className="invisible absolute left-1/2 top-full mt-3 w-[240px] -translate-x-1/2 translate-y-2 rounded-2xl border border-slate-100 bg-white p-2 opacity-0 shadow-md transition-all duration-150 group-hover:visible group-hover:translate-y-0 group-hover:opacity-100">
+                  {productLinks.map((link) => (
+                    <a key={link.name} href={link.href} className="flex items-center justify-between rounded-xl px-4 py-3 text-[14px] font-semibold text-slate-700 transition hover:bg-slate-50">
+                      {link.name}
+                      <ChevronRight size={14} />
+                    </a>
+                  ))}
+                </div>
+              </div>
+            </div>
           </nav>
 
-          <div className="flex items-center gap-3">
-            <a
-              href="#contact"
-              className="hidden items-center gap-2 rounded-lg bg-[#C0392B] px-5 py-2.5 font-ui text-[14px] font-semibold text-white shadow-[0_2px_8px_rgba(192,57,43,0.25)] transition-all duration-200 hover:-translate-y-[1px] hover:bg-[#a83429] hover:shadow-[0_4px_20px_rgba(192,57,43,0.4)] lg:inline-flex"
-            >
-              Request a Quote
-            </a>
-
+          <div className="flex items-center gap-4">
             <button
-              className="flex h-10 w-10 items-center justify-center rounded-lg border border-[#E8ECF0] bg-white text-[#0A3D62] lg:hidden"
-              onClick={() => setIsOpen(!isOpen)}
-              aria-label="Toggle navigation"
+              type="button"
+              aria-label="Open navigation"
+              onClick={() => setDrawerOpen(true)}
+              className="inline-flex h-10 w-10 items-center justify-center rounded-md border border-slate-200 bg-white text-slate-700 lg:hidden"
             >
-              {isOpen ? <X size={20} /> : <Menu size={20} />}
+              <Menu size={18} />
             </button>
           </div>
         </div>
-
-        {isOpen && (
-          <div className="border-t border-[#E8ECF0] bg-white px-4 py-4 shadow-[0_8px_24px_rgba(0,0,0,0.08)] lg:hidden">
-            <nav className="flex flex-col gap-1">
-              {navigationLinks.map((link) =>
-                link.name === 'Products' ? (
-                  <div key={link.name} className="rounded-2xl border border-[#E8ECF0] bg-[#F5F7FA] px-1 py-1">
-                    <button
-                      type="button"
-                      onClick={() => setIsMobileProductsOpen((current) => !current)}
-                      className="flex min-h-12 w-full items-center justify-between rounded-xl px-4 py-3.5 text-left font-ui text-[14px] font-medium text-[#4A5568]"
-                    >
-                      <span>Products</span>
-                      <ChevronDown size={15} className={`transition-transform duration-200 ${isMobileProductsOpen ? 'rotate-180' : ''}`} />
-                    </button>
-
-                    {isMobileProductsOpen && (
-                      <div className="mt-2 rounded-2xl bg-white p-2">
-                        {productCategories.map((item) => (
-                          <a
-                            key={item.name}
-                            href={item.href}
-                            onClick={() => setIsOpen(false)}
-                            className="flex min-h-12 items-center justify-between rounded-xl px-4 py-3.5 font-ui text-[14px] text-[#4A5568] transition hover:bg-[#F5F7FA] hover:text-[#0A3D62] active:scale-[0.98]"
-                          >
-                            {item.name}
-                            <ArrowRight size={14} className="text-[#C0392B]" />
-                          </a>
-                        ))}
-                      </div>
-                    )}
-                  </div>
-                ) : (
-                  <a
-                    key={link.name}
-                    href={link.href}
-                    onClick={() => setIsOpen(false)}
-                    className="flex min-h-12 items-center rounded-xl px-4 py-3.5 font-ui text-[14px] font-medium text-[#4A5568] transition hover:bg-[#F5F7FA] hover:text-[#0A3D62] active:scale-[0.98]"
-                  >
-                    {link.name}
-                  </a>
-                )
-              )}
-
-              <a
-                href="#contact"
-                className="mt-3 inline-flex min-h-12 w-full items-center justify-center rounded-lg bg-[#C0392B] px-4 py-3.5 font-ui text-[14px] font-semibold text-white shadow-[0_2px_8px_rgba(192,57,43,0.25)] transition hover:bg-[#a83429]"
-                onClick={() => setIsOpen(false)}
-              >
-                Request a Quote
-              </a>
-            </nav>
-          </div>
-        )}
       </div>
+
+      {drawerOpen && (
+        <>
+          <button
+            type="button"
+            className="fixed inset-0 z-[89] bg-black/50 backdrop-blur-[2px]"
+            aria-label="Close navigation overlay"
+            onClick={() => setDrawerOpen(false)}
+          />
+          <aside className="fixed right-0 top-0 z-[91] flex h-dvh w-[320px] max-w-[88vw] flex-col bg-[linear-gradient(180deg,#003366,#001f3d)] p-5 shadow-[-18px_0_45px_rgba(0,0,0,0.35)]">
+            <div className="mb-4 flex items-center justify-between border-b border-white/10 pb-4">
+              <a href="#home" onClick={() => setDrawerOpen(false)} className="inline-flex min-w-[132px] items-center justify-center rounded-2xl bg-white/10 px-5 py-4 ring-1 ring-white/10" aria-label="AL-BURHAN home">
+                <BrandLogo inverse className="transform-gpu origin-center scale-[1.7] sm:scale-[1.9]" />
+              </a>
+              <button
+                type="button"
+                aria-label="Close navigation"
+                onClick={() => setDrawerOpen(false)}
+                className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-white/18 text-white"
+              >
+                <X size={18} />
+              </button>
+            </div>
+
+            <nav className="flex flex-1 flex-col" aria-label="Mobile">
+              {navLinks.map((link) => (
+                <a
+                  key={link.name}
+                  href={link.href}
+                  onClick={() => setDrawerOpen(false)}
+                  className="border-b border-white/8 py-4 text-[16px] font-semibold text-white/86 transition hover:text-white"
+                >
+                  {link.name}
+                </a>
+              ))}
+
+              <div className="mt-5 rounded-2xl border border-white/10 bg-white/5 p-4">
+                <p className="section-kicker border-white/15 bg-white/10 text-white">Products</p>
+                <div className="mt-4 grid gap-2">
+                  {productLinks.map((link) => (
+                    <a key={link.name} href={link.href} onClick={() => setDrawerOpen(false)} className="rounded-xl px-4 py-3 text-[15px] font-medium text-white/80 transition hover:bg-white/8 hover:text-white">
+                      {link.name}
+                    </a>
+                  ))}
+                </div>
+              </div>
+            </nav>
+
+            {/* Removed Request Quote and Call Now per design update */}
+          </aside>
+        </>
+      )}
     </header>
   )
 }

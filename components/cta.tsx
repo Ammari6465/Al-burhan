@@ -1,76 +1,124 @@
 'use client'
 
-import { Award, MapPin, MessageCircle, PackageCheck, Settings2, Zap } from 'lucide-react'
+import { Gauge, Headset, PackageSearch, ShieldCheck, Truck } from 'lucide-react'
+import { useEffect, useState } from 'react'
 import { useScrollReveal } from '@/hooks/use-scroll-reveal'
 
 const benefits = [
   {
-    icon: PackageCheck,
-    title: 'Quality Stock',
-    description: '1000+ ready-to-ship industrial components',
-  },
-  {
-    icon: Zap,
-    title: 'Fast Dispatch',
-    description: 'Reliable timelines for urgent requirements',
-  },
-  {
-    icon: MapPin,
-    title: 'Pan-India Reach',
-    description: '15+ states served with consistent delivery',
-  },
-  {
-    icon: Settings2,
+    icon: ShieldCheck,
     title: 'OEM Expertise',
-    description: 'Precision parts for manufacturing lines',
+    description: 'Support for repetitive industrial procurement, fitment matching, and dependable supply planning.',
   },
   {
-    icon: MessageCircle,
-    title: 'WhatsApp Support',
-    description: 'Instant quote assistance on WhatsApp',
+    icon: Truck,
+    title: 'Fast Dispatch',
+    description: 'Practical stock coordination and prompt shipping built for production timelines.',
   },
   {
-    icon: Award,
-    title: '25 Years Experience',
-    description: 'Trusted by 500+ clients across India',
+    icon: Headset,
+    title: 'Responsive Support',
+    description: 'Direct help from product selection to inquiry follow-up through phone, email, and WhatsApp.',
   },
+]
+
+const stats = [
+  { icon: PackageSearch, value: 1000, suffix: '+', label: 'Products' },
+  { icon: Gauge, value: 500, suffix: '+', label: 'Clients' },
+  { icon: ShieldCheck, value: 25, suffix: '+', label: 'Years' },
 ]
 
 export default function CTA() {
   const sectionRef = useScrollReveal<HTMLElement>()
+  const [counts, setCounts] = useState(stats.map(() => 0))
+
+  useEffect(() => {
+    const start = performance.now()
+    const duration = 1200
+
+    const tick = (now: number) => {
+      const progress = Math.min(1, (now - start) / duration)
+      setCounts(stats.map((item) => Math.floor(item.value * progress)))
+
+      if (progress < 1) {
+        requestAnimationFrame(tick)
+      }
+    }
+
+    requestAnimationFrame(tick)
+  }, [])
 
   return (
-    <section ref={sectionRef} className="section-shell bg-white py-24">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="grid gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-start lg:gap-14">
-          <div className="space-y-4">
-            <p data-reveal className="reveal-item section-kicker text-[12px] font-semibold text-[#C0392B]">Why AL-BURHAN</p>
-            <h2 data-reveal className="reveal-item text-[28px] font-bold text-[#0A3D62] sm:text-[40px]">
-              The Industrial Partner You Can Rely On
-            </h2>
-            <p data-reveal className="reveal-item max-w-xl text-[16px] leading-8 text-[#4A5568]">
-              A focused service model built for manufacturers, OEM buyers, and maintenance teams that need dependable supply and direct support.
+    <section ref={sectionRef} className="section-shell bg-[var(--color-offwhite)] py-24">
+      <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 xl:px-20">
+        <div className="mx-auto max-w-3xl text-center">
+          <p data-reveal className="section-kicker mx-auto">KEY HIGHLIGHTS</p>
+          <h2 data-reveal className="section-title mt-4">
+            Built for Industrial Dependability
+          </h2>
+          <p data-reveal className="section-copy mx-auto mt-4 max-w-2xl">
+            The conversion layer of the site should answer the buyer’s first three questions immediately: what you make, how fast you ship, and why they should trust you.
+          </p>
+        </div>
+
+        <div className="mt-12 grid gap-4 sm:grid-cols-3">
+          {stats.map((item, index) => {
+            const Icon = item.icon
+
+            return (
+              <article
+                key={item.label}
+                data-reveal
+                className="rounded-[1.25rem] border border-[rgba(0,51,102,0.08)] bg-white p-7 text-center shadow-[0_12px_34px_rgba(9,25,41,0.08)]"
+                style={{ animationDelay: `${index * 80}ms` }}
+              >
+                <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-2xl bg-[rgba(0,51,102,0.08)] text-[#003366]">
+                  <Icon size={24} />
+                </div>
+                <p className="mt-4 text-[2rem] font-black leading-none text-[#0f1720]">
+                  {counts[index]}
+                  {item.suffix}
+                </p>
+                <p className="mt-1 text-[0.78rem] font-bold uppercase tracking-[0.2em] text-[#425062]">{item.label}</p>
+              </article>
+            )
+          })}
+        </div>
+
+        <div className="mt-8 grid gap-6 md:grid-cols-3">
+          {benefits.map((benefit, index) => {
+            const Icon = benefit.icon
+            return (
+              <article
+                key={benefit.title}
+                data-reveal
+                className="rounded-[1.2rem] border border-[rgba(0,51,102,0.08)] bg-white px-7 py-8 shadow-[0_12px_34px_rgba(9,25,41,0.08)] transition-all duration-200 hover:-translate-y-1"
+                style={{ animationDelay: `${index * 80}ms` }}
+              >
+                <Icon size={36} className="text-[#d62828]" />
+                <h3 className="mt-4 text-[1.05rem] font-bold text-[#0f1720] normal-case tracking-normal">{benefit.title}</h3>
+                <p className="mt-2 text-[14px] leading-7 text-[#425062]">{benefit.description}</p>
+              </article>
+            )
+          })}
+        </div>
+
+        <div data-reveal className="why-band mt-12 px-8 py-10 lg:flex lg:items-center lg:justify-between lg:px-14">
+          <div className="max-w-2xl">
+            <h3 className="text-[clamp(1.8rem,2.6vw,2.8rem)] font-black leading-tight text-white normal-case tracking-normal">Ready for Reliable Industrial Supply?</h3>
+            <p className="mt-3 text-[15px] leading-7 text-white/78">
+              Share your requirement and the team will suggest the right product combination, quantity, and lead time.
             </p>
           </div>
-
-          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {benefits.map((benefit, index) => {
-              const Icon = benefit.icon
-              return (
-                <article
-                  key={benefit.title}
-                  data-reveal
-                  className="reveal-item group rounded-xl bg-[#F5F7FA] p-5 transition-all duration-200 hover:-translate-y-0.5 hover:bg-white hover:shadow-[0_4px_12px_rgba(0,0,0,0.08),0_16px_40px_rgba(0,0,0,0.10)]"
-                  style={{ animationDelay: `${index * 80}ms` }}
-                >
-                  <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-[#EBF3FB] text-[#0A3D62] transition-colors duration-200 group-hover:bg-[#FDECEA]">
-                    <Icon size={20} />
-                  </div>
-                  <h3 className="mt-3 text-[15px] font-bold text-[#0A3D62]">{benefit.title}</h3>
-                  <p className="mt-1 text-[13px] leading-6 text-[#4A5568]">{benefit.description}</p>
-                </article>
-              )
-            })}
+          <div className="mt-6 flex flex-wrap gap-3 lg:mt-0">
+            <a
+              href={`https://wa.me/919819036787?text=${encodeURIComponent('Hi AL-BURHAN, I would like a WhatsApp quotation for industrial products.')}`}
+              target="_blank"
+              rel="noreferrer"
+              className="inline-flex min-h-11 items-center justify-center rounded-full bg-[#25D366] px-5 py-3 text-[13px] font-bold text-white transition-all duration-200 hover:bg-[#1EBE57]"
+            >
+              WhatsApp Inquiry
+            </a>
           </div>
         </div>
       </div>

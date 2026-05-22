@@ -1,224 +1,267 @@
 'use client'
 
 import Image from 'next/image'
-import { ArrowRight, Cog, Link2, RotateCw, Settings2 } from 'lucide-react'
-import { useEffect, useMemo, useState } from 'react'
+import { Filter, MessageCircle } from 'lucide-react'
+import { useMemo, useState } from 'react'
 import { useScrollReveal } from '@/hooks/use-scroll-reveal'
+import ProductModal, { type CatalogProduct } from '@/components/product-modal'
 
-const categoryOrder = ['All', 'Pulleys', 'Couplings', 'Gears', 'Sprockets'] as const
+const categories = ['All', 'Pulleys', 'Couplings', 'Gears', 'Sprockets', 'Chains', 'Accessories'] as const
 
-type Category = (typeof categoryOrder)[number]
+const imageFiles = [
+  'Aluminium Coupling.jpg',
+  'Aluminium Handle.jpg',
+  'Aluminium Step Pulley.jpg',
+  'Anti Vibration Mounting.jpg',
+  'avm.png',
+  'Bevel Gear.jpg',
+  'C.I. Break Drum Coupling.jpg',
+  'C.I. Flat Pulley.jpg',
+  'C.I. Handle.jpg',
+  'C.I. Step Pulley.jpg',
+  'C.I. V-Belt Pulley - Arms.jpg',
+  'C.I. V-Belt Pulley - Semi Solid.jpg',
+  'C.I. V-Belt Pulley- Solid.jpg',
+  'Chain Coupling.jpg',
+  'CI Spur Gear.jpg',
+  'CI Worm Gear.jpg',
+  'Duplex Sprocket.jpg',
+  'Encoder Coupling.jpg',
+  'Flexible Coupling.jpg',
+  'Full Lock - Diamond.jpg',
+  'Gear Coupling.jpg',
+  'GR Coupling(1).jpg',
+  'GR Coupling.jpg',
+  'GR Spider.jpg',
+  'Half Lock.jpg',
+  'HRC Coupling(1).jpg',
+  'HRC Coupling.jpg',
+  'HRC Rubber.jpg',
+  'M.S. Breakdrum Coupling.jpeg',
+  'Nylon Sleeve Coupling.jpg',
+  'Nylon Sleeve.jpg',
+  'Rack and Pinion.jpg',
+  'Roller Chain.jpg',
+  'rope pulley.png',
+  'rrl coupling.png',
+  'Rubber Spider.jpg',
+  'Rubber Tyre.jpg',
+  'rubber.png',
+  'Simplex Sprocket.jpg',
+  'spur gear.png',
+  'Star Coupling.jpg',
+  'TaperLock Pulley.jpeg',
+  'Timing Belt Pulley.jpg',
+  'Triplex Sprocket.jpg',
+  'Variable Speed Pulley.jpeg',
+  'worm gear.jpg',
+] as const
 
-const products = [
-  { name: 'Aluminium Coupling', image: 'Aluminium Coupling.jpg' },
-  { name: 'Aluminium Handle', image: 'Aluminium Handle.jpg' },
-  { name: 'Aluminium Step Pulley', image: 'Aluminium Step Pulley.jpg' },
-  { name: 'Round Mounting', image: 'Anti Vibration Mounting.jpg' },
-  { name: 'Cushy Foot Mounting', image: 'avm.png' },
-  { name: 'Bevel Gear', image: 'Bevel Gear.jpg' },
-  { name: 'C.I. Break Drum Coupling', image: 'C.I. Break Drum Coupling.jpg' },
-  { name: 'C.I. Flat Pulley', image: 'C.I. Flat Pulley.jpg' },
-  { name: 'C.I. Handle', image: 'C.I. Handle.jpg' },
-  { name: 'C.I. Step Pulley', image: 'C.I. Step Pulley.jpg' },
-  { name: 'C.I. V-Belt Pulley Arms', image: 'C.I. V-Belt Pulley - Arms.jpg' },
-  { name: 'C.I. V-Belt Pulley Semi Solid', image: 'C.I. V-Belt Pulley - Semi Solid.jpg' },
-  { name: 'C.I. V-Belt Pulley Solid', image: 'C.I. V-Belt Pulley- Solid.jpg' },
-  { name: 'Chain Coupling', image: 'Chain Coupling.jpg' },
-  { name: 'CI Spur Gear', image: 'CI Spur Gear.jpg' },
-  { name: 'CI Worm Gear', image: 'CI Worm Gear.jpg' },
-  { name: 'Duplex Sprocket', image: 'Duplex Sprocket.jpg' },
-  { name: 'Encoder Coupling', image: 'Encoder Coupling.jpg' },
-  { name: 'Flexible Coupling', image: 'Flexible Coupling.jpg' },
-  { name: 'Full Lock - Diamond', image: 'Full Lock - Diamond.jpg' },
-  { name: 'Gear Coupling', image: 'Gear Coupling.jpg' },
-  { name: 'GR Coupling', image: 'GR Coupling.jpg' },
-  { name: 'GR Coupling 1', image: 'GR Coupling(1).jpg' },
-  { name: 'GR Spider', image: 'GR Spider.jpg' },
-  { name: 'Half Lock', image: 'Half Lock.jpg' },
-  { name: 'HRC Coupling', image: 'HRC Coupling.jpg' },
-  { name: 'HRC Coupling 1', image: 'HRC Coupling(1).jpg' },
-  { name: 'HRC Rubber', image: 'HRC Rubber.jpg' },
-  { name: 'M.S. Breakdrum Coupling', image: 'M.S. Breakdrum Coupling.jpeg' },
-  { name: 'Nylon Sleeve', image: 'Nylon Sleeve.jpg' },
-  { name: 'Nylon Sleeve Coupling', image: 'Nylon Sleeve Coupling.jpg' },
-  { name: 'Rack and Pinion', image: 'Rack and Pinion.jpg' },
-  { name: 'Roller Chain', image: 'Roller Chain.jpg' },
-  { name: 'RRL Coupling', image: 'rrl coupling.png' },
-  { name: 'Rope Pulley', image: 'rope pulley.png' },
-  { name: 'Rubber', image: 'rubber.png' },
-  { name: 'Rubber Spider', image: 'Rubber Spider.jpg' },
-  { name: 'Rubber Tyre', image: 'Rubber Tyre.jpg' },
-  { name: 'Simplex Sprocket', image: 'Simplex Sprocket.jpg' },
-  { name: 'Spur Gear', image: 'spur gear.png' },
-  { name: 'Star Coupling', image: 'Star Coupling.jpg' },
-  { name: 'TaperLock Pulley', image: 'TaperLock Pulley.jpeg' },
-  { name: 'Timing Belt Pulley', image: 'Timing Belt Pulley.jpg' },
-  { name: 'Triplex Sprocket', image: 'Triplex Sprocket.jpg' },
-  { name: 'Variable Speed Pulley', image: 'Variable Speed Pulley.jpeg' },
-  { name: 'Worm Gear', image: 'worm gear.jpg' },
-]
-
-type ProductItem = {
-  name: string
-  image: string
-  category: Exclude<Category, 'All'>
+const categoryDetails: Record<Exclude<CatalogProduct['category'], never>, {
+  spec: string
+  description: string
+  features: string[]
+  specs: { label: string; value: string }[]
+}> = {
+  Pulleys: {
+    spec: 'Precision pulley solution for dependable belt transfer',
+    description: 'Pulley products for stable fitment, clean belt tracking, and repeatable industrial use.',
+    features: ['Stable groove profile', 'Reliable belt transfer', 'Easy replacement planning'],
+    specs: [
+      { label: 'Material', value: 'CI / Steel / Alloy' },
+      { label: 'Use', value: 'Power transmission' },
+      { label: 'Fit', value: 'Industrial pulley' },
+      { label: 'Supply', value: 'Made to order' },
+    ],
+  },
+  Couplings: {
+    spec: 'Industrial coupling for torque transfer and alignment support',
+    description: 'Coupling products for shaft connection, shock control, and low-maintenance field use.',
+    features: ['Shock absorption', 'Torque transfer', 'Service-friendly design'],
+    specs: [
+      { label: 'Material', value: 'CI / Steel / Rubber' },
+      { label: 'Use', value: 'Shaft connection' },
+      { label: 'Type', value: 'Coupling part' },
+      { label: 'Supply', value: 'Custom order' },
+    ],
+  },
+  Gears: {
+    spec: 'Precision gear component for stable motion transfer',
+    description: 'Gear products for dependable engagement, controlled movement, and industrial durability.',
+    features: ['Controlled motion', 'Durable tooth form', 'Industrial-ready profile'],
+    specs: [
+      { label: 'Material', value: 'CI / Steel / Bronze' },
+      { label: 'Use', value: 'Gear drive' },
+      { label: 'Profile', value: 'Precision gear' },
+      { label: 'Supply', value: 'Made to order' },
+    ],
+  },
+  Sprockets: {
+    spec: 'Chain-ready sprocket for dependable engagement',
+    description: 'Sprocket products for industrial chain systems that need clean engagement and long service life.',
+    features: ['Chain engagement', 'Durable profile', 'Industrial fit'],
+    specs: [
+      { label: 'Material', value: 'CI / Steel' },
+      { label: 'Use', value: 'Chain drive' },
+      { label: 'Type', value: 'Sprocket' },
+      { label: 'Supply', value: 'Custom tooth count' },
+    ],
+  },
+  Chains: {
+    spec: 'Industrial chain solution for drive applications',
+    description: 'Chain products for motion transfer, load handling, and industrial replacement planning.',
+    features: ['Load handling', 'Repeatable drive transfer', 'Industrial replacement ready'],
+    specs: [
+      { label: 'Material', value: 'Alloy steel' },
+      { label: 'Use', value: 'Chain drive' },
+      { label: 'Type', value: 'Roller chain' },
+      { label: 'Supply', value: 'By length / custom' },
+    ],
+  },
+  Accessories: {
+    spec: 'Industrial accessory for support and fitment use',
+    description: 'Accessory products used for mounting, protection, or application-specific fitment.',
+    features: ['Support component', 'Fitment aid', 'Industrial use ready'],
+    specs: [
+      { label: 'Material', value: 'Varies' },
+      { label: 'Use', value: 'Accessory' },
+      { label: 'Type', value: 'Support part' },
+      { label: 'Supply', value: 'Custom order' },
+    ],
+  },
 }
 
-const getImagePath = (fileName: string) => `/Images/${encodeURIComponent(fileName)}`
+const inferCategory = (fileName: string): CatalogProduct['category'] => {
+  const name = fileName.toLowerCase()
 
-const getCategory = (name: string): ProductItem['category'] => {
-  if (/pulley/i.test(name)) return 'Pulleys'
-  if (/coupling|spider|mounting|lock|handle|sleeve|gr/i.test(name)) return 'Couplings'
-  if (/gear|pinion/i.test(name)) return 'Gears'
-  if (/sprocket|chain/i.test(name)) return 'Sprockets'
-  return 'Couplings'
+  if (name.includes('pulley')) return 'Pulleys'
+  if (name.includes('coupling') || name.includes('spider') || name.includes('lock') || name.includes('sleeve') || name.includes('diamond')) return 'Couplings'
+  if (name.includes('gear') || name.includes('pinion')) return 'Gears'
+  if (name.includes('sprocket')) return 'Sprockets'
+  if (name.includes('chain')) return 'Chains'
+
+  return 'Accessories'
 }
 
-const getShortDescription = (product: ProductItem) => {
-  const lead = {
-    Pulleys: 'Reliable pulley solution',
-    Couplings: 'Precision coupling for drive alignment',
-    Gears: 'Durable gear component',
-    Sprockets: 'Chain-ready transmission part',
-  }[product.category]
+const toTitleFromFileName = (fileName: string) =>
+  fileName
+    .replace(/\.[^.]+$/, '')
+    .replace(/\s+/g, ' ')
+    .trim()
 
-  return `${lead} built for dependable industrial use and efficient procurement.`
+const toProductId = (fileName: string) =>
+  fileName
+    .toLowerCase()
+    .replace(/\.[^.]+$/, '')
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-+|-+$/g, '')
+
+const createCatalogProduct = (fileName: string): CatalogProduct => {
+  const category = inferCategory(fileName)
+  const details = categoryDetails[category]
+
+  return {
+    id: toProductId(fileName),
+    name: toTitleFromFileName(fileName),
+    category,
+    image: `/Images/${encodeURI(fileName)}`,
+    spec: details.spec,
+    description: details.description,
+    features: details.features,
+    specs: details.specs,
+  }
 }
 
-const categoryIcons: Record<Exclude<Category, 'All'>, typeof RotateCw> = {
-  Pulleys: RotateCw,
-  Couplings: Link2,
-  Gears: Settings2,
-  Sprockets: Cog,
-}
-
-const whatsappNumber = '919819036787'
-
-const getWhatsappLink = (productName: string) => {
-  const message = `Hello, I am interested in the product: ${productName}. Please share more details.`
-  return `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`
-}
+const catalogItems: CatalogProduct[] = imageFiles.map(createCatalogProduct)
 
 export default function Products() {
-  const [categoryFilter, setCategoryFilter] = useState<Category>('All')
-  const [searchQuery, setSearchQuery] = useState('')
-  const [visibleCount, setVisibleCount] = useState(12)
+  const [category, setCategory] = useState<(typeof categories)[number]>('All')
+  const [selectedProduct, setSelectedProduct] = useState<CatalogProduct | null>(null)
   const sectionRef = useScrollReveal<HTMLElement>()
 
-  const catalog = useMemo<ProductItem[]>(
-    () =>
-      products.map((product) => ({
-        ...product,
-        category: getCategory(product.name),
-      })),
-    [],
+  const filteredProducts = useMemo<CatalogProduct[]>(
+    () => catalogItems.filter((product) => category === 'All' || product.category === category),
+    [category],
   )
-
-  const filteredProducts = useMemo(
-    () =>
-      catalog.filter((product) => {
-        const matchesCategory = categoryFilter === 'All' || product.category === categoryFilter
-        const matchesSearch = product.name.toLowerCase().includes(searchQuery.trim().toLowerCase())
-
-        return matchesCategory && matchesSearch
-      }),
-    [catalog, categoryFilter, searchQuery],
-  )
-
-  const visibleProducts = filteredProducts.slice(0, visibleCount)
-
-  useEffect(() => {
-    setVisibleCount(12)
-  }, [categoryFilter])
-
-  useEffect(() => {
-    setVisibleCount(12)
-  }, [searchQuery])
 
   return (
-    <section ref={sectionRef} id="products" className="section-shell bg-[#F5F7FA] py-24">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <section ref={sectionRef} id="products" className="section-shell bg-[var(--color-offwhite)] py-24">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 xl:px-20">
         <div className="mx-auto max-w-3xl text-center">
-          <p data-reveal className="section-kicker reveal-item mb-3 text-[12px] font-semibold text-[#C0392B]">Our Catalogue</p>
-          <h2 data-reveal className="reveal-item text-[28px] font-bold text-[#0A3D62] sm:text-[40px]">
-            Products Built for Industry
-          </h2>
-          <p data-reveal className="reveal-item mx-auto mt-4 max-w-2xl text-[17px] leading-7 text-[#4A5568]">
-            A focused catalogue of industrial drives and power transmission products for manufacturers, distributors, and maintenance teams.
+          <p data-reveal className="section-kicker mx-auto">PRODUCT CATALOGUE</p>
+          <h2 data-reveal className="section-title mt-4">Products Built for Industry</h2>
+          <p data-reveal className="section-copy mx-auto mt-4 max-w-2xl">
+            A complete catalogue of the product images stored in the public Images folder.
           </p>
-          <div data-reveal className="reveal-item mx-auto mt-5 h-[3px] w-12 rounded-full bg-[#C0392B]" />
         </div>
 
-        <div data-reveal className="reveal-item mt-10 flex justify-center">
-          <div className="w-full max-w-xl">
-            <label className="sr-only" htmlFor="product-search">
-              Search products
-            </label>
-            <input
-              id="product-search"
-              type="search"
-              value={searchQuery}
-              onChange={(event) => setSearchQuery(event.target.value)}
-              placeholder="Search products by name..."
-              className="min-h-12 w-full rounded-full border border-[#E8ECF0] bg-white px-5 py-3 font-ui text-[14px] text-[#0A3D62] outline-none transition placeholder:text-[#8896A8] focus:border-[#0A3D62] focus:ring-0 focus:shadow-[0_0_0_3px_rgba(10,61,98,0.08)]"
-            />
+        <div data-reveal className="mt-10 flex flex-wrap items-center justify-center gap-3">
+          <div className="inline-flex items-center gap-2 rounded-full border border-[rgba(0,51,102,0.12)] bg-white px-4 py-2 text-[#003366] shadow-[0_10px_24px_rgba(9,25,41,0.06)]">
+            <Filter size={16} />
+            <span className="text-[14px] font-semibold">Filter by category</span>
           </div>
-        </div>
 
-        <div data-reveal className="reveal-item mt-6 flex flex-wrap justify-center gap-2">
-          {categoryOrder.map((chip) => (
-            <button
-              key={chip}
-              type="button"
-              onClick={() => setCategoryFilter(chip)}
-              className={`rounded-full px-5 py-2 font-ui text-[13px] font-semibold transition-all duration-200 ${categoryFilter === chip ? 'bg-[#0A3D62] text-white' : 'border border-[#E8ECF0] bg-white text-[#4A5568] hover:border-[#0A3D62] hover:text-[#0A3D62]'}`}
-            >
-              {chip}
-            </button>
-          ))}
+          <div className="flex flex-wrap items-center justify-center gap-2">
+            {categories.map((option) => (
+              <button
+                key={option}
+                type="button"
+                onClick={() => setCategory(option)}
+                className={`rounded-full border px-4 py-2 text-[13px] font-semibold transition ${category === option ? 'border-[#0A3D62] bg-[#0A3D62] text-white' : 'border-[rgba(0,51,102,0.12)] bg-white text-[#0A3D62] hover:border-[#0A3D62] hover:bg-[#F3F8FC]'}`}
+              >
+                {option}
+              </button>
+            ))}
+          </div>
+
+          <select value={category} onChange={(event) => setCategory(event.target.value as (typeof categories)[number])} className="product-filter min-w-[220px]">
+            {categories.map((option) => (
+              <option key={option} value={option}>
+                {option}
+              </option>
+            ))}
+          </select>
         </div>
 
         <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-          {visibleProducts.map((product, index) => (
-            <article
-              key={product.name}
-              data-reveal
-              className="group overflow-hidden rounded-2xl border border-[#E8ECF0] bg-white shadow-[0_1px_3px_rgba(0,0,0,0.06),0_4px_16px_rgba(0,0,0,0.06)] transition-all duration-300 hover:-translate-y-1 hover:border-[#C0392B] hover:shadow-[0_4px_12px_rgba(0,0,0,0.08),0_16px_40px_rgba(0,0,0,0.10)]"
-              style={{ animationDelay: `${index * 80}ms` }}
-            >
-              <div className="relative aspect-[4/3] overflow-hidden bg-[#EBF3FB]">
+          {filteredProducts.map((product, index) => (
+            <article key={product.id} data-reveal className="product-card group" style={{ animationDelay: `${index * 80}ms` }}>
+              <div className="relative h-[220px] overflow-hidden bg-white">
                 <Image
-                  src={getImagePath(product.image)}
+                  src={product.image}
                   alt={product.name}
                   fill
                   sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
-                  className="object-cover transition duration-500 group-hover:scale-[1.04]"
+                  className="object-contain p-6 transition duration-300 group-hover:scale-105"
                 />
               </div>
 
-              <div className="p-5">
-                <div className="inline-flex items-center gap-2 rounded-full bg-[#FDECEA] px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.18em] text-[#C0392B]">
-                  {(() => {
-                    const Icon = categoryIcons[product.category]
-                    return <Icon size={12} />
-                  })()}
-                  {product.category}
+              <div className="px-5 pt-4">
+                <div className="flex flex-wrap gap-2">
+                  <button
+                    type="button"
+                    onClick={() => setCategory(product.category)}
+                    className="rounded-full bg-[#FDECEA] px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.18em] text-[#C0392B] transition hover:bg-[#F7D8D5]"
+                  >
+                    {product.category}
+                  </button>
+                  <span className="rounded-full bg-[#EAF6FF] px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.18em] text-[#0A3D62]">
+                    Fast quote
+                  </span>
                 </div>
 
-                <div className="mt-4">
-                  <h3 className="text-[18px] font-bold text-[#0A3D62]">{product.name}</h3>
-                  <p className="mt-2 line-clamp-2 text-[14px] leading-6 text-[#4A5568]">{getShortDescription(product)}</p>
-                </div>
+                <h3 className="mt-4 text-[18px] font-bold text-[#0A3D62]">{product.name}</h3>
+                <p className="mt-1 text-[14px] leading-6 text-[#4A5568]">{product.spec}</p>
 
-                <div className="mt-4 border-t border-[#F0F4F8] pt-4">
+                <div className="mt-5 grid grid-cols-1 gap-3 pb-5">
                   <a
-                    href={getWhatsappLink(product.name)}
+                    href={`https://wa.me/919819036787?text=${encodeURIComponent(`Hello AL-BURHAN, I am interested in ${product.name}. Please share details and pricing.`)}`}
                     target="_blank"
                     rel="noreferrer"
-                    className="inline-flex items-center gap-2 rounded-full bg-[#25D366] px-4 py-2 font-ui text-[13px] font-semibold text-white transition-all duration-200 hover:bg-[#1EBE57] hover:gap-3"
+                    className="inline-flex items-center justify-center gap-2 rounded-full bg-[#25D366] px-4 py-3 text-[13px] font-semibold text-white transition hover:bg-[#1EBE57]"
                   >
+                    <MessageCircle size={16} />
                     WhatsApp Us
-                    <ArrowRight size={16} />
                   </a>
                 </div>
               </div>
@@ -226,24 +269,14 @@ export default function Products() {
           ))}
         </div>
 
-        {filteredProducts.length > visibleCount && (
-          <div className="mt-8 text-center">
-            <button
-              type="button"
-              onClick={() => setVisibleCount((current) => current + 12)}
-              className="inline-flex min-h-12 items-center justify-center rounded-lg border border-[#E8ECF0] bg-white px-6 py-3 font-ui text-[14px] font-semibold text-[#0A3D62] transition hover:border-[#0A3D62] hover:bg-[#F5F7FA]"
-            >
-              Load more products
-            </button>
-          </div>
-        )}
-
         {filteredProducts.length === 0 && (
-          <div className="mt-10 rounded-2xl border border-dashed border-[#E8ECF0] bg-white p-10 text-center text-[#4A5568]">
-            No products match the current search and filters.
+          <div className="mt-10 rounded-2xl border border-dashed border-[rgba(0,51,102,0.14)] bg-white p-10 text-center text-[#425062]">
+            No products match the current filters.
           </div>
         )}
       </div>
+
+      <ProductModal product={selectedProduct} onClose={() => setSelectedProduct(null)} />
     </section>
   )
 }
