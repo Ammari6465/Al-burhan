@@ -1,12 +1,10 @@
 'use client'
 
 import Image from 'next/image'
-import { Filter, MessageCircle, Search } from 'lucide-react'
+import { MessageCircle, Search } from 'lucide-react'
 import { useMemo, useState } from 'react'
 import { useScrollReveal } from '@/hooks/use-scroll-reveal'
 import ProductModal, { type CatalogProduct } from '@/components/product-modal'
-
-const categories = ['All', 'Pulleys', 'Couplings', 'Gears', 'Sprockets', 'Chains', 'Accessories'] as const
 
 const imageFiles = [
   'Aluminium Coupling.jpg',
@@ -175,82 +173,52 @@ const createCatalogProduct = (fileName: string): CatalogProduct => {
 const catalogItems: CatalogProduct[] = imageFiles.map(createCatalogProduct)
 
 export default function Products() {
-  const [category, setCategory] = useState<(typeof categories)[number]>('All')
   const [searchQuery, setSearchQuery] = useState('')
   const [selectedProduct, setSelectedProduct] = useState<CatalogProduct | null>(null)
   const sectionRef = useScrollReveal<HTMLElement>()
 
   const filteredProducts = useMemo<CatalogProduct[]>(() => {
     const query = searchQuery.trim().toLowerCase()
+    if (!query) return catalogItems
 
     return catalogItems.filter((product) => {
-      const matchesCategory = category === 'All' || product.category === category
-      if (!matchesCategory) return false
-      if (!query) return true
-
       const haystack = `${product.name} ${product.category} ${product.spec} ${product.description}`.toLowerCase()
       return haystack.includes(query)
     })
-  }, [category, searchQuery])
+  }, [searchQuery])
 
   return (
-    <section ref={sectionRef} id="products" className="section-shell bg-[var(--color-offwhite)] py-24">
+    <section ref={sectionRef} id="products" className="section-shell bg-[var(--color-offwhite)] py-16 sm:py-24">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 xl:px-20">
         <div className="mx-auto max-w-3xl text-center">
           <p data-reveal className="section-kicker mx-auto">PRODUCT CATALOGUE</p>
           <h2 data-reveal className="section-title mt-4">Products Built for Industry</h2>
           <p data-reveal className="section-copy mx-auto mt-4 max-w-2xl">
-            A complete catalogue of the product images stored in the public Images folder.
+            Browse our full range of industrial drive and power transmission products.
           </p>
         </div>
 
-        <div data-reveal className="mx-auto mt-10 w-full max-w-2xl">
-          <label htmlFor="product-search" className="product-search">
-            <Search size={18} className="product-search__icon shrink-0" aria-hidden />
+        <div data-reveal className="mx-auto mt-8 w-full max-w-xl sm:mt-10">
+          <label htmlFor="product-search" className="sr-only">
+            Search products
+          </label>
+          <div className="product-search-wrap">
+            <Search size={18} className="product-search-wrap__icon" aria-hidden />
             <input
               id="product-search"
               type="search"
               value={searchQuery}
               onChange={(event) => setSearchQuery(event.target.value)}
-              placeholder="Search products by name or category..."
-              aria-label="Search products"
-              className="product-search__input"
+              placeholder="Search products..."
+              className="product-search-wrap__field"
             />
-          </label>
+          </div>
         </div>
 
-        <div data-reveal className="mt-6 flex flex-wrap items-center justify-center gap-3">
-          <div className="inline-flex items-center gap-2 rounded-full border border-[rgba(0,51,102,0.12)] bg-white px-4 py-2 text-[#003366] shadow-[0_10px_24px_rgba(9,25,41,0.06)]">
-            <Filter size={16} />
-            <span className="text-[14px] font-semibold">Filter by category</span>
-          </div>
-
-          <div className="flex flex-wrap items-center justify-center gap-2">
-            {categories.map((option) => (
-              <button
-                key={option}
-                type="button"
-                onClick={() => setCategory(option)}
-                className={`rounded-full border px-4 py-2 text-[13px] font-semibold transition ${category === option ? 'border-[#0A3D62] bg-[#0A3D62] text-white' : 'border-[rgba(0,51,102,0.12)] bg-white text-[#0A3D62] hover:border-[#0A3D62] hover:bg-[#F3F8FC]'}`}
-              >
-                {option}
-              </button>
-            ))}
-          </div>
-
-          <select value={category} onChange={(event) => setCategory(event.target.value as (typeof categories)[number])} className="product-filter min-w-[220px]">
-            {categories.map((option) => (
-              <option key={option} value={option}>
-                {option}
-              </option>
-            ))}
-          </select>
-        </div>
-
-        <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+        <div className="mt-10 grid gap-5 sm:mt-12 sm:grid-cols-2 sm:gap-6 lg:grid-cols-3 xl:grid-cols-4">
           {filteredProducts.map((product, index) => (
-            <article key={product.id} data-reveal className="product-card group" style={{ animationDelay: `${index * 80}ms` }}>
-              <div className="relative h-[220px] overflow-hidden bg-white">
+            <article key={product.id} data-reveal className="product-card group flex h-full flex-col" style={{ animationDelay: `${index * 80}ms` }}>
+              <div className="product-card__media relative shrink-0 overflow-hidden bg-white">
                 <Image
                   src={product.image}
                   alt={product.name}
@@ -260,29 +228,25 @@ export default function Products() {
                 />
               </div>
 
-              <div className="px-5 pt-4">
+              <div className="product-card__body flex flex-1 flex-col px-5 pt-4 pb-5">
                 <div className="flex flex-wrap gap-2">
-                  <button
-                    type="button"
-                    onClick={() => setCategory(product.category)}
-                    className="rounded-full bg-[#FDECEA] px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.18em] text-[#C0392B] transition hover:bg-[#F7D8D5]"
-                  >
+                  <span className="rounded-full bg-[#FDECEA] px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.18em] text-[#C0392B]">
                     {product.category}
-                  </button>
+                  </span>
                   <span className="rounded-full bg-[#EAF6FF] px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.18em] text-[#0A3D62]">
                     Fast quote
                   </span>
                 </div>
 
-                <h3 className="mt-4 text-[18px] font-bold text-[#0A3D62]">{product.name}</h3>
-                <p className="mt-1 text-[14px] leading-6 text-[#4A5568]">{product.spec}</p>
+                <h3 className="product-card__title mt-4 text-[18px] font-bold text-[#0A3D62]">{product.name}</h3>
+                <p className="product-card__spec mt-1 text-[14px] leading-6 text-[#4A5568]">{product.spec}</p>
 
-                <div className="mt-5 grid grid-cols-1 gap-3 pb-5">
+                <div className="product-card__action mt-auto pt-5">
                   <a
                     href={`https://wa.me/919819036787?text=${encodeURIComponent(`Hello AL-BURHAN, I am interested in ${product.name}. Please share details and pricing.`)}`}
                     target="_blank"
                     rel="noreferrer"
-                    className="inline-flex items-center justify-center gap-2 rounded-full bg-[#25D366] px-4 py-3 text-[13px] font-semibold text-white transition hover:bg-[#1EBE57]"
+                    className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-[#25D366] px-4 py-3 text-[13px] font-semibold text-white transition hover:bg-[#1EBE57]"
                   >
                     <MessageCircle size={16} />
                     WhatsApp Us
@@ -294,10 +258,10 @@ export default function Products() {
         </div>
 
         {filteredProducts.length === 0 && (
-          <div className="mt-10 rounded-2xl border border-dashed border-[rgba(0,51,102,0.14)] bg-white p-10 text-center text-[#425062]">
+          <div className="mt-10 rounded-2xl border border-dashed border-[rgba(0,51,102,0.14)] bg-white p-8 text-center text-[#425062] sm:p-10">
             {searchQuery.trim()
-              ? `No products found for "${searchQuery.trim()}". Try another name or clear the search.`
-              : 'No products match the current filters.'}
+              ? `No products found for "${searchQuery.trim()}". Try another search term.`
+              : 'No products available.'}
           </div>
         )}
       </div>

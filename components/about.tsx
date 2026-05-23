@@ -22,13 +22,6 @@ const features = [
   },
 ]
 
-const milestones = [
-  { year: '1999', title: 'Founded in Mumbai', text: 'Built on hands-on supply relationships and a focus on dependable industrial support.' },
-  { year: '2008', title: 'OEM Expansion', text: 'Broadened the catalogue to cover more drive components and repeat buyer requirements.' },
-  { year: '2016', title: 'Pan-India Reach', text: 'Improved dispatch coordination and delivery support across industrial hubs.' },
-  { year: '2026', title: 'Digital First', text: 'Modernized the enquiry experience with faster response paths and structured product discovery.' },
-]
-
 const values = [
   { title: 'Mission', text: 'Make industrial procurement simpler, faster, and more reliable for teams that cannot afford downtime.' },
   { title: 'Values', text: 'Integrity, precision, and response speed are the operating principles that shape every enquiry.' },
@@ -39,7 +32,7 @@ export default function About() {
   const sectionRef = useScrollReveal<HTMLElement>()
 
   return (
-    <section id="about" ref={sectionRef} className="section-shell bg-white py-24">
+    <section id="about" ref={sectionRef} className="section-shell bg-white py-16 sm:py-24">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 xl:px-20">
         <div className="grid items-center gap-14 lg:grid-cols-[0.95fr_1.05fr]">
           <div>
@@ -93,7 +86,7 @@ Premium Industrial & Power Transmission Products            </h2>
                 </div>
               </div>
 
-              <div className="mt-6 grid gap-3 sm:grid-cols-3">
+              <div className="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
                 {values.map((value) => (
                   <article key={value.title} className="rounded-2xl border border-white/10 bg-white/8 p-4 backdrop-blur-md">
                     <h3 className="text-[0.8rem] font-bold uppercase tracking-[0.22em] text-white/82 normal-case">{value.title}</h3>
@@ -102,25 +95,6 @@ Premium Industrial & Power Transmission Products            </h2>
                 ))}
               </div>
             </div>
-          </div>
-        </div>
-
-        <div className="mt-16 rounded-[1.5rem] border border-[rgba(0,51,102,0.08)] bg-[var(--color-offwhite)] p-6 sm:p-8">
-          <div className="flex items-center justify-between gap-4">
-            <div>
-              <p className="section-kicker">25 YEAR TIMELINE</p>
-              <h3 className="mt-3 text-[1.6rem] font-black text-[#0f1720] normal-case tracking-normal">Milestones that shaped the company</h3>
-            </div>
-          </div>
-
-          <div className="timeline-grid mt-8 lg:grid-cols-4">
-            {milestones.map((milestone) => (
-              <article key={milestone.year} className="timeline-item rounded-2xl bg-white p-5 shadow-[0_12px_34px_rgba(9,25,41,0.08)]">
-                <p className="text-[1.3rem] font-black text-[#d62828] normal-case tracking-normal">{milestone.year}</p>
-                <h4 className="mt-2 text-[1rem] font-bold text-[#0f1720] normal-case tracking-normal">{milestone.title}</h4>
-                <p className="mt-2 text-[14px] leading-7 text-[#425062] normal-case tracking-normal">{milestone.text}</p>
-              </article>
-            ))}
           </div>
         </div>
       </div>
