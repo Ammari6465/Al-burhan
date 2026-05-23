@@ -204,21 +204,19 @@ export default function Products() {
           </p>
         </div>
 
-        <div data-reveal className="mx-auto mt-10 max-w-xl w-full">
-          <label htmlFor="product-search" className="sr-only">
-            Search products
-          </label>
-          <div className="relative">
-            <Search size={18} className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-[#0A3D62]" aria-hidden />
+        <div data-reveal className="mx-auto mt-10 w-full max-w-2xl">
+          <label htmlFor="product-search" className="product-search">
+            <Search size={18} className="product-search__icon shrink-0" aria-hidden />
             <input
               id="product-search"
               type="search"
               value={searchQuery}
               onChange={(event) => setSearchQuery(event.target.value)}
               placeholder="Search products by name or category..."
-              className="product-filter w-full py-3 pl-11 pr-4"
+              aria-label="Search products"
+              className="product-search__input"
             />
-          </div>
+          </label>
         </div>
 
         <div data-reveal className="mt-6 flex flex-wrap items-center justify-center gap-3">
