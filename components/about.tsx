@@ -63,15 +63,22 @@ Premium Industrial & Power Transmission Products            </h2>
           </div>
 
           <div className="space-y-6" data-reveal>
+            <div className="about-image-shell about-image-shell--featured">
+              <Image
+                src="/BG%20Image%20.jpeg"
+                alt="AL-BURHAN Industries storefront in Mumbai"
+                fill
+                sizes="(max-width: 1024px) 100vw, 50vw"
+                className="object-contain object-center"
+              />
+            </div>
+
             <div className="grid gap-4 sm:grid-cols-2">
-              <div className="about-image-shell sm:row-span-2">
-                <Image src="/BG%20Image%20.jpeg" alt="Industrial facility and precision drive components" fill className="object-cover object-center" />
+              <div className="about-image-shell about-image-shell--thumb">
+                <Image src="/products/gear.jpg" alt="Industrial gear products" fill sizes="(max-width: 640px) 50vw, 25vw" className="object-cover" />
               </div>
-              <div className="about-image-shell min-h-[200px]">
-                <Image src="/products/gear.jpg" alt="Industrial gear products" fill className="object-cover" />
-              </div>
-              <div className="about-image-shell min-h-[200px]">
-                <Image src="/products/coupling.jpg" alt="Industrial coupling products" fill className="object-cover" />
+              <div className="about-image-shell about-image-shell--thumb">
+                <Image src="/products/coupling.jpg" alt="Industrial coupling products" fill sizes="(max-width: 640px) 50vw, 25vw" className="object-cover" />
               </div>
             </div>
 

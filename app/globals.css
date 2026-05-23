@@ -768,10 +768,22 @@
 
 .about-image-shell {
   position: relative;
-  min-height: 420px;
   overflow: hidden;
   border-radius: 1.25rem;
   box-shadow: var(--shadow-lift);
+}
+
+.about-image-shell--featured {
+  width: 100%;
+  min-height: clamp(360px, 72vw, 620px);
+  aspect-ratio: 3 / 4;
+  max-height: 680px;
+  margin-inline: auto;
+  background: linear-gradient(180deg, #f7f9fc 0%, #eef2f7 100%);
+}
+
+.about-image-shell--thumb {
+  min-height: 200px;
 }
 
 .about-image-shell::before,
@@ -937,7 +949,13 @@
     line-height: 1.7;
   }
 
-  .about-image-shell {
+  .about-image-shell--featured {
+    min-height: 320px;
+    max-height: 520px;
+    aspect-ratio: 2 / 3;
+  }
+
+  .about-image-shell--thumb {
     min-height: 180px;
   }
 
