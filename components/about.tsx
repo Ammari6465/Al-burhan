@@ -34,11 +34,14 @@ export default function About() {
   return (
     <section id="about" ref={sectionRef} className="section-shell bg-white py-16 sm:py-24">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 xl:px-20">
-        <div className="grid items-center gap-14 lg:grid-cols-[0.95fr_1.05fr]">
-          <div>
-            <p data-reveal className="section-kicker w-fit">ABOUT US</p>
+        <div className="grid items-start gap-14 lg:grid-cols-[0.95fr_1.05fr]">
+          <div className="min-w-0 self-start">
+            <p data-reveal className="section-kicker w-fit">
+              ABOUT US
+            </p>
             <h2 data-reveal className="section-title mt-4 max-w-[620px]">
-Premium Industrial & Power Transmission Products            </h2>
+              Premium Industrial & Power Transmission Products
+            </h2>
             <p data-reveal className="section-copy mt-5 max-w-[620px]">
               AL-BURHAN Industrial Drives supports OEMs, manufacturers, and maintenance teams with practical procurement support for transmission components across India.
             </p>
@@ -48,7 +51,12 @@ Premium Industrial & Power Transmission Products            </h2>
                 const Icon = item.icon
 
                 return (
-                  <div key={item.title} data-reveal className="flex gap-4 rounded-2xl border border-[rgba(0,51,102,0.08)] bg-[var(--color-offwhite)] p-4" style={{ animationDelay: `${index * 80}ms` }}>
+                  <div
+                    key={item.title}
+                    data-reveal
+                    className="flex gap-4 rounded-2xl border border-[rgba(0,51,102,0.08)] bg-[var(--color-offwhite)] p-4"
+                    style={{ animationDelay: `${index * 80}ms` }}
+                  >
                     <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-white text-[#d62828] shadow-[0_10px_24px_rgba(9,25,41,0.08)]">
                       <Icon size={20} />
                     </div>
@@ -62,22 +70,21 @@ Premium Industrial & Power Transmission Products            </h2>
             </div>
           </div>
 
-          <div className="space-y-6" data-reveal>
-            <div className="about-image-shell about-image-shell--featured">
-              <Image
-                src="/BG%20Image%20.jpeg"
-                alt="AL-BURHAN Industries storefront in Mumbai"
-                fill
-                sizes="(max-width: 1024px) 100vw, 50vw"
-                className="object-contain object-center"
-              />
-            </div>
-
+          <div className="min-w-0 space-y-6 self-start" data-reveal>
             <div className="grid gap-4 sm:grid-cols-2">
-              <div className="about-image-shell about-image-shell--thumb">
+              <div className="about-image-shell about-image-shell--featured sm:row-span-2">
+                <Image
+                  src="/BG%20Image%20.jpeg"
+                  alt="AL-BURHAN Industries storefront in Mumbai"
+                  fill
+                  sizes="(max-width: 1024px) 100vw, 50vw"
+                  className="object-contain object-center"
+                />
+              </div>
+              <div className="about-image-shell min-h-[200px]">
                 <Image src="/products/gear.jpg" alt="Industrial gear products" fill sizes="(max-width: 640px) 50vw, 25vw" className="object-cover" />
               </div>
-              <div className="about-image-shell about-image-shell--thumb">
+              <div className="about-image-shell min-h-[200px]">
                 <Image src="/products/coupling.jpg" alt="Industrial coupling products" fill sizes="(max-width: 640px) 50vw, 25vw" className="object-cover" />
               </div>
             </div>
@@ -89,7 +96,9 @@ Premium Industrial & Power Transmission Products            </h2>
                 </div>
                 <div>
                   <p className="text-[0.72rem] font-bold uppercase tracking-[0.24em] text-white/72">Mission Statement</p>
-                  <p className="mt-1 text-[1rem] font-semibold normal-case tracking-normal text-white">Reliable industrial supply is a service discipline, not just a product list.</p>
+                  <p className="mt-1 text-[1rem] font-semibold normal-case tracking-normal text-white">
+                    Reliable industrial supply is a service discipline, not just a product list.
+                  </p>
                 </div>
               </div>
 
