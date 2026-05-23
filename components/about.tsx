@@ -72,7 +72,7 @@ Premium Industrial & Power Transmission Products            </h2>
           <div className="space-y-6" data-reveal>
             <div className="grid gap-4 sm:grid-cols-2">
               <div className="about-image-shell sm:row-span-2">
-                <Image src="/hero-industrial.jpg" alt="Industrial workshop operations" fill className="object-cover" />
+                <Image src="/BG%20Image%20.jpeg" alt="Industrial facility and precision drive components" fill className="object-cover object-center" />
               </div>
               <div className="about-image-shell min-h-[200px]">
                 <Image src="/products/gear.jpg" alt="Industrial gear products" fill className="object-cover" />
