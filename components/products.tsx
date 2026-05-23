@@ -1,7 +1,7 @@
 'use client'
 
 import Image from 'next/image'
-import { Filter, MessageCircle } from 'lucide-react'
+import { Filter, MessageCircle, Search } from 'lucide-react'
 import { useMemo, useState } from 'react'
 import { useScrollReveal } from '@/hooks/use-scroll-reveal'
 import ProductModal, { type CatalogProduct } from '@/components/product-modal'
@@ -176,13 +176,22 @@ const catalogItems: CatalogProduct[] = imageFiles.map(createCatalogProduct)
 
 export default function Products() {
   const [category, setCategory] = useState<(typeof categories)[number]>('All')
+  const [searchQuery, setSearchQuery] = useState('')
   const [selectedProduct, setSelectedProduct] = useState<CatalogProduct | null>(null)
   const sectionRef = useScrollReveal<HTMLElement>()
 
-  const filteredProducts = useMemo<CatalogProduct[]>(
-    () => catalogItems.filter((product) => category === 'All' || product.category === category),
-    [category],
-  )
+  const filteredProducts = useMemo<CatalogProduct[]>(() => {
+    const query = searchQuery.trim().toLowerCase()
+
+    return catalogItems.filter((product) => {
+      const matchesCategory = category === 'All' || product.category === category
+      if (!matchesCategory) return false
+      if (!query) return true
+
+      const haystack = `${product.name} ${product.category} ${product.spec} ${product.description}`.toLowerCase()
+      return haystack.includes(query)
+    })
+  }, [category, searchQuery])
 
   return (
     <section ref={sectionRef} id="products" className="section-shell bg-[var(--color-offwhite)] py-24">
@@ -195,7 +204,24 @@ export default function Products() {
           </p>
         </div>
 
-        <div data-reveal className="mt-10 flex flex-wrap items-center justify-center gap-3">
+        <div data-reveal className="mx-auto mt-10 max-w-xl w-full">
+          <label htmlFor="product-search" className="sr-only">
+            Search products
+          </label>
+          <div className="relative">
+            <Search size={18} className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-[#0A3D62]" aria-hidden />
+            <input
+              id="product-search"
+              type="search"
+              value={searchQuery}
+              onChange={(event) => setSearchQuery(event.target.value)}
+              placeholder="Search products by name or category..."
+              className="product-filter w-full py-3 pl-11 pr-4"
+            />
+          </div>
+        </div>
+
+        <div data-reveal className="mt-6 flex flex-wrap items-center justify-center gap-3">
           <div className="inline-flex items-center gap-2 rounded-full border border-[rgba(0,51,102,0.12)] bg-white px-4 py-2 text-[#003366] shadow-[0_10px_24px_rgba(9,25,41,0.06)]">
             <Filter size={16} />
             <span className="text-[14px] font-semibold">Filter by category</span>
@@ -271,7 +297,9 @@ export default function Products() {
 
         {filteredProducts.length === 0 && (
           <div className="mt-10 rounded-2xl border border-dashed border-[rgba(0,51,102,0.14)] bg-white p-10 text-center text-[#425062]">
-            No products match the current filters.
+            {searchQuery.trim()
+              ? `No products found for "${searchQuery.trim()}". Try another name or clear the search.`
+              : 'No products match the current filters.'}
           </div>
         )}
       </div>
