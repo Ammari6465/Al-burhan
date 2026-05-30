@@ -43,19 +43,19 @@ export default function Hero() {
   }, [])
 
   return (
-    <section id="home" className="hero-shell section-shell -mt-20 md:-mt-[96px] flex min-h-[520px] md:min-h-[640px] items-center pt-20 md:pt-[96px]">
+    <section id="home" className="hero-shell section-shell -mt-6 md:-mt-[96px] flex items-center pt-4 md:pt-[96px]">
       <Image
         src="/BG%20Image%20.jpeg"
         alt="Industrial machinery in a modern production environment"
         fill
         priority
-        className="hero-media object-cover object-center w-full h-full"
+        className="hero-media object-cover object-top md:object-center w-full h-full"
       />
       <div className="hero-overlay" />
       <div className="hero-grid-overlay" />
 
       <div className="relative z-10 mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="grid items-center gap-12 py-10 lg:grid-cols-[1.2fr_0.8fr] lg:py-14">
+        <div className="grid items-center gap-8 py-6 lg:grid-cols-[1.2fr_0.8fr] lg:py-14">
           <div className="max-w-[720px]">
             <div className="hero-badge hero-load">
               INDUSTRIAL DRIVES & POWER TRANSMISSION
@@ -115,7 +115,7 @@ export default function Hero() {
                 alt="Industrial facility and precision drive components"
                 width={900}
                 height={1100}
-                className="h-[320px] w-full object-cover object-center sm:h-[420px]"
+                className="h-[320px] w-full object-contain object-center sm:h-[420px]"
                 priority={false}
               />
             </div>
