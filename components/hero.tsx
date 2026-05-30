@@ -1,13 +1,13 @@
 'use client'
 
-import { ChevronDown, ShieldCheck, Truck, Users } from 'lucide-react'
+import { ChevronDown, MessageCircle, PackageCheck, ShieldCheck, Truck, Users } from 'lucide-react'
 import Image from 'next/image'
 import { useEffect, useState } from 'react'
 
 const stats = [
-  { value: 25, suffix: '+', label: 'Years of experience' },
-  { value: 500, suffix: '+', label: 'Clients served' },
-  { value: 0, suffix: '', label: 'Industrial product range' },
+  { value: 25, suffix: '+', label: 'Years' },
+  { value: 500, suffix: '+', label: 'Clients' },
+  { value: 200, suffix: '+', label: 'Products' },
 ]
 
 const trustBadges = ['ISO Certified', 'OEM Partner', 'Pan-India Delivery']
@@ -43,37 +43,50 @@ export default function Hero() {
   }, [])
 
   return (
-    <section id="home" className="hero-shell section-shell flex items-center pt-4 md:pt-[96px]">
+    <section id="home" className="hero-shell section-shell flex items-center pt-4 md:pt-[88px]">
       <Image
-        src="/BG%20Image%20.jpeg"
-        alt="Industrial machinery in a modern production environment"
+        src="/Images/bg.jpeg"
+        alt="AL-BURHAN Industrial Drives storefront signage"
         fill
         priority
-        className="hero-media object-cover object-top md:object-center w-full h-full"
+        className="hero-media h-full w-full scale-105 object-cover object-top md:object-center blur-[1.5px]"
       />
       <div className="hero-overlay" />
       <div className="hero-grid-overlay" />
 
       <div className="relative z-10 mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="grid items-center gap-8 py-6 lg:grid-cols-[1.2fr_0.8fr] lg:py-14">
-          <div className="max-w-[720px]">
-            <div className="hero-badge hero-load">
-              INDUSTRIAL DRIVES & POWER TRANSMISSION
-            </div>
+        <div className="grid items-center gap-10 py-10 sm:py-14 lg:grid-cols-[1.05fr_0.95fr] lg:py-16">
+          <div className="hero-copy-panel max-w-[760px] rounded-2xl p-5 sm:p-7 lg:p-8">
+            <div className="hero-badge hero-load">INDUSTRIAL DRIVES & POWER TRANSMISSION</div>
 
-            <h1 className="hero-load hero-load-delay-1 mt-5 max-w-[720px] text-[36px] sm:text-[56px] lg:text-[56px] font-extrabold leading-[1.08] tracking-[-0.02em] text-white">
-              Premium Industrial & Power Transmission <span className="text-[#C0392B]">Products</span> Built for Reliability
+            <h1 className="hero-load hero-load-delay-1 mt-5 max-w-[760px] text-[38px] font-extrabold leading-[1.04] text-white sm:text-[56px] lg:text-[68px]">
+              Industrial Products Built for <span className="text-[#ff7a1a]">Reliability</span>
             </h1>
 
-            <p className="hero-load hero-load-delay-2 mt-4 text-[15px] sm:text-[18px] max-w-[640px] leading-7 text-white/72">
-              25+ Years of Excellence · Industrial Product Range · Pan-India Delivery
+            <p className="hero-load hero-load-delay-2 mt-5 max-w-[640px] text-[16px] font-semibold leading-7 text-white/88 sm:text-[19px]">
+              25+ Years of Excellence | 200+ Product Range | Pan-India Delivery
             </p>
 
-            <p className="hero-load hero-load-delay-3 mt-4 max-w-[640px] text-[16px] leading-7 text-white/66">
+            <p className="hero-load hero-load-delay-3 mt-4 max-w-[640px] text-[15px] leading-7 text-white/78 sm:text-[17px]">
               AL-BURHAN Industrial Drives combines dependable stock, responsive support, and industrial-grade quality for manufacturers, distributors, and maintenance teams across India.
             </p>
 
-            <div className="mt-7 flex flex-wrap gap-3" data-reveal>
+            <div className="hero-load hero-load-delay-4 mt-8 grid gap-3 sm:flex sm:flex-wrap">
+              <a href="#products" className="inline-flex min-h-12 items-center justify-center gap-2 rounded-xl bg-[#ff7a1a] px-7 py-3.5 font-ui text-[15px] font-extrabold text-white shadow-[0_18px_34px_rgba(255,122,26,0.28)] transition hover:-translate-y-0.5 hover:bg-[#f97316]">
+                Explore Products
+              </a>
+              <a
+                href={`https://wa.me/919819036787?text=${encodeURIComponent('Hi AL-BURHAN, I would like a quotation for industrial products.')}`}
+                target="_blank"
+                rel="noreferrer"
+                className="inline-flex min-h-12 items-center justify-center gap-2 rounded-xl border-2 border-[#25D366] bg-[#25D366]/10 px-7 py-3.5 font-ui text-[15px] font-extrabold text-white transition hover:-translate-y-0.5 hover:bg-[#25D366]"
+              >
+                <MessageCircle size={18} />
+                WhatsApp Us
+              </a>
+            </div>
+
+            <div className="mt-7 flex flex-wrap gap-2.5 sm:gap-3" data-reveal>
               {trustBadges.map((badge) => (
                 <span key={badge} className="hero-trust">
                   {badge}
@@ -81,21 +94,7 @@ export default function Hero() {
               ))}
             </div>
 
-            <div className="mt-9 flex flex-wrap gap-4 hero-load hero-load-delay-4">
-              <a href="#products" className="inline-flex min-h-12 items-center justify-center gap-2 rounded-lg bg-white px-7 py-3.5 font-ui text-[15px] font-semibold text-[#0A3D62] shadow-[0_4px_20px_rgba(0,0,0,0.15)]">
-                Explore Products
-              </a>
-              <a
-                href={`https://wa.me/919819036787?text=${encodeURIComponent('Hi AL-BURHAN, I would like a quotation for industrial products.')}`}
-                target="_blank"
-                rel="noreferrer"
-                className="inline-flex min-h-12 items-center justify-center gap-2 rounded-lg border-2 border-white bg-transparent px-7 py-3.5 font-ui text-[15px] font-semibold text-white"
-              >
-                WhatsApp Us
-              </a>
-            </div>
-
-            <div className="mt-10 grid gap-3 sm:grid-cols-3" data-reveal>
+            <div className="mt-8 grid grid-cols-3 gap-2 sm:mt-10 sm:gap-3" data-reveal>
               {stats.map((item, idx) => (
                 <div key={item.label} className="hero-metric">
                   <p className="hero-metric__value">
@@ -108,16 +107,29 @@ export default function Hero() {
             </div>
           </div>
 
-          <div className="hero-frame rounded-[28px] p-5 sm:p-6" data-reveal>
-            <div className="overflow-hidden rounded-[24px] border border-white/10 bg-white/6">
-              <Image
-                src="/BG%20Image%20.jpeg"
-                alt="Industrial facility and precision drive components"
-                width={900}
-                height={1100}
-                className="h-[320px] w-full object-contain object-center sm:h-[420px]"
-                priority={false}
-              />
+          <div className="hero-frame hidden rounded-2xl p-5 lg:block" data-reveal>
+            <div className="grid gap-4">
+              <div className="grid grid-cols-2 gap-4">
+                <div className="relative h-52 overflow-hidden rounded-xl border border-white/10 bg-white">
+                  <Image src="/products/gear.jpg" alt="Precision industrial gear component" fill sizes="240px" className="object-cover" />
+                </div>
+                <div className="relative h-52 overflow-hidden rounded-xl border border-white/10 bg-white">
+                  <Image src="/products/coupling.jpg" alt="Industrial coupling component" fill sizes="240px" className="object-cover" />
+                </div>
+              </div>
+              <div className="relative overflow-hidden rounded-xl border border-white/10 bg-[#101827] p-5">
+                <div className="flex items-start gap-4">
+                  <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-[#ff7a1a]/15 text-[#ff7a1a]">
+                    <PackageCheck size={24} />
+                  </div>
+                  <div>
+                    <p className="text-[0.75rem] font-black uppercase tracking-[0.2em] text-[#ff7a1a]">Ready Stock Support</p>
+                    <p className="mt-2 text-[15px] leading-7 text-white/78">
+                      Pulleys, couplings, gears, sprockets, roller chains, and accessories supplied with quick enquiry follow-up.
+                    </p>
+                  </div>
+                </div>
+              </div>
             </div>
 
             <div className="mt-5 grid gap-3">
