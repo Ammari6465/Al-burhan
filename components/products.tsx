@@ -258,14 +258,7 @@ export default function Products() {
                 <h3 className="product-card__title mt-4 text-[18px] font-bold text-[#0A3D62]">{product.name}</h3>
                 <p className="product-card__spec mt-1 text-[14px] leading-6 text-[#4A5568]">{product.spec}</p>
 
-                <div className="product-card__action mt-auto grid grid-cols-[0.9fr_1.1fr] gap-2 pt-5">
-                  <button
-                    type="button"
-                    onClick={() => setSelectedProduct(product)}
-                    className="inline-flex min-h-11 w-full items-center justify-center rounded-full border border-[#0A3D62]/15 bg-white px-4 py-3 text-[13px] font-bold text-[#0A3D62] transition hover:border-[#0A3D62]/30 hover:bg-[#EAF6FF]"
-                  >
-                    Details
-                  </button>
+                <div className="product-card__action mt-auto pt-5">
                   <a
                     href={`https://wa.me/919819036787?text=${encodeURIComponent(`Hello AL-BURHAN, I am interested in ${product.name}. Please share details and pricing.`)}`}
                     target="_blank"
