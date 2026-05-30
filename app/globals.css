@@ -953,7 +953,8 @@
 
   /* Make hero height fill viewport minus header (h-14 = 56px on mobile) so image scales to available space */
   .hero-shell {
-    min-height: calc(100vh - 56px);
+    min-height: calc(100vh - var(--header-height, 56px) - env(safe-area-inset-top));
+    padding-top: env(safe-area-inset-top);
   }
 
   .section-title {
