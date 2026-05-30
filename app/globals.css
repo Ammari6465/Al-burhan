@@ -991,9 +991,9 @@
       position: fixed !important;
       right: 1rem;
       bottom: 1.25rem;
-      width: 48px;
-      height: 48px;
-      padding: 0.4rem;
+      width: 40px;
+      height: 40px;
+      padding: 0.25rem;
       border-radius: 9999px;
       background: #25D366;
       box-shadow: 0 8px 24px rgba(0,0,0,0.24);
@@ -1005,12 +1005,15 @@
     }
 
     .whatsapp-fab svg {
-      width: 20px;
-      height: 20px;
+      width: 18px;
+      height: 18px;
       color: white;
     }
 
     .whatsapp-fab span { display: none !important; }
+
+    /* Hide inline footer WhatsApp action on mobile to avoid duplicate buttons */
+    .footer-action { display: none !important; }
   }
 }
 
