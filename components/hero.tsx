@@ -45,7 +45,7 @@ export default function Hero() {
   return (
     <section id="home" className="hero-shell section-shell flex items-center pt-4 md:pt-[88px]">
       <Image
-        src="/Images/bg.jpeg"
+        src="/BG%20Image%20.jpeg"
         alt="AL-BURHAN Industrial Drives storefront signage"
         fill
         priority
