@@ -9,7 +9,7 @@ type BrandLogoProps = {
 }
 
 export default function BrandLogo({ compact = false, large = false, inverse = false, className = '' }: BrandLogoProps) {
-  const sizeClass = large ? 'h-20 w-auto sm:h-24' : compact ? 'h-11' : 'h-[52px] sm:h-14'
+  const sizeClass = large ? 'h-28 w-auto sm:h-32 md:h-36' : compact ? 'h-11' : 'h-[52px] sm:h-14'
   const toneClass = inverse ? 'brightness-0 invert' : ''
 
   return (
