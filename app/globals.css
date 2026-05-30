@@ -945,6 +945,17 @@
     padding-bottom: 1.25rem;
   }
 
+  /* Make hero background prioritize the top of image and fill viewport under header */
+  .hero-media > img,
+  .hero-media img {
+    object-position: top center !important;
+  }
+
+  /* Make hero height fill viewport minus header (h-14 = 56px on mobile) so image scales to available space */
+  .hero-shell {
+    min-height: calc(100vh - 56px);
+  }
+
   .section-title {
     font-size: clamp(1.65rem, 7vw, 2rem);
   }
