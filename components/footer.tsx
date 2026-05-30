@@ -20,8 +20,8 @@ export default function Footer() {
           <div className="min-w-0">
             <div className="relative inline-flex max-w-full">
               <a href="#home" aria-label="AL-BURHAN home" className="inline-flex">
-                <div className="rounded-xl bg-white w-28 h-28 sm:w-36 sm:h-36 flex items-center justify-center shadow-[0_18px_42px_rgba(0,0,0,0.18)]">
-                  <BrandLogo large className="h-16 sm:h-20" />
+                <div className="rounded-xl bg-white w-36 h-36 sm:w-44 sm:h-44 flex items-center justify-center shadow-[0_18px_42px_rgba(0,0,0,0.18)]">
+                  <BrandLogo large className="h-20 sm:h-24 md:h-28" />
                 </div>
               </a>
               <a
