@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 200" role="img" aria-label="AL-BURHAN Industrial Drives">
+  <defs>
+    <style>
+      .brand-title { 
+        font-family: 'Georgia', 'Times New Roman', serif; 
+        font-size: 72px; 
+        font-weight: 700; 
+        fill: #1a3a63;
+        letter-spacing: 2px;
+      }
+      .brand-subtitle { 
+        font-family: 'Georgia', 'Times New Roman', serif;
+        font-size: 28px; 
+        font-weight: 600; 
+        fill: #1a3a63; 
+        letter-spacing: 3px;
+      }
+    </style>
+  </defs>
+
+  <!-- Red Gear Icon with proper teeth -->
+  <g transform="translate(65, 100)">
+    <!-- Outer gear circle with 12 teeth -->
+    <g fill="none" stroke="#c12b2b" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round">
+      <!-- Main gear circle -->
+      <circle cx="0" cy="0" r="32"/>
+      
+      <!-- 12 gear teeth radiating outward -->
+      <path d="M 0,-42 L 0,-52 M 29.6,-16.5 L 36.9,-20.6 M 42,-2 L 52,-2 M 29.6,12.5 L 36.9,20.6 M 0,42 L 0,52 M -29.6,12.5 L -36.9,20.6 M -42,-2 L -52,-2 M -29.6,-16.5 L -36.9,-20.6"/>
+    </g>
+    
+    <!-- Inner concentric circles -->
+    <circle cx="0" cy="0" r="22" fill="none" stroke="#c12b2b" stroke-width="3"/>
+    <circle cx="0" cy="0" r="8" fill="#c12b2b"/>
+  </g>
+
+  <!-- Brand Text Section -->
+  <g transform="translate(160, 60)">
+    <!-- Main title -->
+    <text x="0" y="65" class="brand-title">AL-BURHAN</text>
+    
+    <!-- Subtitle -->
+    <text x="0" y="115" class="brand-subtitle">INDUSTRIAL DRIVES</text>
+  </g>
+</svg>
