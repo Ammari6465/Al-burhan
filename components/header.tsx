@@ -47,8 +47,8 @@ export default function Header() {
       <div className="mx-auto max-w-7xl px-3 sm:px-6 lg:px-8">
         <div className="flex h-14 items-center justify-between sm:h-16">
           <div className="flex min-w-0 items-center gap-4">
-            <a href="#home" className="flex shrink-0 items-center" aria-label="AL-BURHAN Industrial Drives home">
-              <BrandLogo compact className="origin-left scale-[1.35] sm:scale-[1.85] lg:scale-[2.2]" />
+              <a href="#home" className="flex shrink-0 items-center" aria-label="AL-BURHAN Industrial Drives home">
+              <BrandLogo large className="origin-left scale-95 sm:scale-100 md:scale-110 lg:scale-125" />
             </a>
           </div>
 
