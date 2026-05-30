@@ -43,7 +43,7 @@ export default function Header() {
   return (
     <header
       style={{ ['--header-height' as any]: '56px' }}
-      className={`fixed top-0 left-1/2 z-50 w-[min(96%,1100px)] -translate-x-1/2 transform rounded-xl bg-white/95 backdrop-blur-md transition-shadow duration-200 sm:top-6 ${isScrolled ? 'shadow-sm' : 'shadow-md'}`}>
+      className={`fixed top-0 left-1/2 z-50 w-[min(96%,1100px)] -translate-x-1/2 transform rounded-xl bg-white/95 backdrop-blur-md transition-shadow duration-200 ${isScrolled ? 'shadow-sm' : 'shadow-md'}`}>
       <div className="mx-auto max-w-7xl px-3 sm:px-6 lg:px-8">
         <div className="flex h-14 items-center justify-between sm:h-16">
           <div className="flex min-w-0 items-center gap-4">
