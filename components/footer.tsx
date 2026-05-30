@@ -21,7 +21,7 @@ export default function Footer() {
             <div className="relative inline-flex max-w-full">
               <a href="#home" aria-label="AL-BURHAN home" className="inline-flex">
                 <div className="rounded-xl bg-white px-6 py-5 shadow-[0_18px_42px_rgba(0,0,0,0.18)] sm:px-8 sm:py-6">
-                  <BrandLogo large />
+                  <BrandLogo large className="origin-center scale-[1.25] sm:scale-[1.45] md:scale-[1.6]" />
                 </div>
               </a>
               <a
