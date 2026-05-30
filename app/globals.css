@@ -5,9 +5,6 @@
 @custom-variant dark (&:is(.dark *));
 
 :root {
-  --color-primary: #003366;
-  --color-primary-dark: #001f3d;
-  --color-primary-light: #0b4c7f;
   --color-accent: #C0392B;
   --color-accent-hover: #a83429;
   --color-accent-glow: rgba(192, 57, 43, 0.32);
@@ -144,7 +141,7 @@
   h6 {
     font-family: 'Raleway', sans-serif;
     text-transform: uppercase;
-    letter-spacing: 0.04em;
+    letter-spacing: 0;
   }
 
   [data-reveal] {
@@ -259,8 +256,9 @@
 
 .hero-shell {
   position: relative;
-  min-height: auto;
+  min-height: 820px;
   overflow: hidden;
+  background: #111827;
 }
 
 .hero-media {
@@ -281,27 +279,28 @@
   position: absolute;
   inset: 0;
   background:
-    linear-gradient(135deg, rgba(10,61,98,0.94), rgba(13,79,122,0.7) 48%, rgba(192,57,43,0.18)),
-    radial-gradient(circle at 20% 20%, rgba(255,255,255,0.06), transparent 30%),
-    radial-gradient(circle at 80% 30%, rgba(255,255,255,0.03), transparent 34%);
+    linear-gradient(90deg, rgba(9, 16, 28, 0.96) 0%, rgba(9, 16, 28, 0.88) 42%, rgba(9, 16, 28, 0.54) 100%),
+    radial-gradient(circle at 18% 28%, rgba(255, 122, 26, 0.2), transparent 34%),
+    linear-gradient(180deg, rgba(9, 16, 28, 0.24), rgba(9, 16, 28, 0.82));
 }
 
 .hero-grid-overlay {
   position: absolute;
   inset: 0;
   background:
-    linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px),
-    linear-gradient(180deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
-  background-size: 24px 24px;
+    radial-gradient(circle at 18px 18px, rgba(255, 122, 26, 0.16) 0 2px, transparent 2px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.055) 1px, transparent 1px),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.055) 1px, transparent 1px);
+  background-size: 56px 56px, 28px 28px, 28px 28px;
   mask-image: radial-gradient(circle at center, black, transparent 86%);
 }
 
 .hero-frame {
   position: relative;
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  background: rgba(255, 255, 255, 0.06);
-  backdrop-filter: blur(18px);
-  box-shadow: 0 25px 80px rgba(2,6,23,0.30);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  background: rgba(8, 15, 27, 0.76);
+  backdrop-filter: blur(20px);
+  box-shadow: 0 30px 90px rgba(0, 0, 0, 0.38);
 }
 
 .hero-badge {
@@ -310,8 +309,8 @@
   align-items: center;
   gap: 0.5rem;
   border-radius: 999px;
-  border: 1px solid rgba(255, 255, 255, 0.16);
-  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 122, 26, 0.32);
+  background: rgba(255, 122, 26, 0.12);
   padding: 0.45rem 0.9rem;
   font-family: 'Raleway', sans-serif;
   font-size: 0.7rem;
@@ -390,18 +389,18 @@
 }
 
 .hero-metric {
-  border-radius: 1rem;
-  border: 1px solid rgba(255, 255, 255, 0.14);
-  background: rgba(255, 255, 255, 0.08);
+  border-radius: 0.75rem;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(8, 15, 27, 0.72);
   padding: 1rem 1.05rem;
   backdrop-filter: blur(16px);
 }
 
 .hero-metric__value {
   font-family: 'Raleway', sans-serif;
-  font-size: 1.8rem;
+  font-size: 1.7rem;
   font-weight: 900;
-  color: #ffffff;
+  color: #ff7a1a;
 }
 
 .hero-metric__label {
@@ -418,7 +417,8 @@
   align-items: center;
   gap: 0.4rem;
   border-radius: 999px;
-  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(8, 15, 27, 0.62);
   padding: 0.38rem 0.8rem;
   font-size: 0.76rem;
   font-weight: 700;
@@ -440,9 +440,9 @@
   display: flex;
   flex-direction: column;
   height: 100%;
-  min-height: 420px;
+  min-height: 400px;
   overflow: hidden;
-  border-radius: 1.25rem;
+  border-radius: 0.75rem;
   border: 1px solid rgba(0, 51, 102, 0.08);
   background: #ffffff;
   box-shadow: var(--shadow-card);
@@ -456,7 +456,7 @@
 }
 
 .product-card__media {
-  height: 220px;
+  height: 210px;
 }
 
 .product-card__title {
@@ -516,6 +516,7 @@
 }
 
 .product-filter {
+  min-height: 44px;
   border-radius: 999px;
   border: 1px solid rgba(0, 51, 102, 0.1);
   background: rgba(255, 255, 255, 0.82);
@@ -925,7 +926,7 @@
 
 @media (max-width: 1279px) {
   .hero-shell {
-    min-height: auto;
+    min-height: 760px;
   }
 }
 
@@ -945,16 +946,10 @@
     padding-bottom: 1.25rem;
   }
 
-  /* Make hero background prioritize the top of image and fill viewport under header */
+  /* Keep the factory image readable behind the text on mobile */
   .hero-media > img,
   .hero-media img {
-    object-position: top center !important;
-  }
-
-  /* Make hero height fill viewport minus header (h-14 = 56px on mobile) so image scales to available space */
-  .hero-shell {
-    min-height: calc(100vh - var(--header-height, 56px) - env(safe-area-inset-top));
-    padding-top: env(safe-area-inset-top);
+    object-position: center !important;
   }
 
   .section-title {
@@ -971,53 +966,39 @@
   }
 
   .product-card {
-    min-height: 400px;
+    min-height: 360px;
   }
 
   .product-card__media {
-    height: 200px;
+    height: 180px;
   }
 
-  .footer-shell .whatsapp-fab {
-    position: static;
-    margin-top: 1rem;
-    width: 100%;
+  .whatsapp-fab {
+    position: fixed !important;
+    right: 1rem;
+    bottom: calc(1rem + env(safe-area-inset-bottom));
+    width: 56px;
+    height: 56px;
+    padding: 0.4rem;
+    border-radius: 9999px;
+    background: #25D366;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.24);
+    display: inline-flex;
+    align-items: center;
     justify-content: center;
+    z-index: 60;
+    border: 2px solid rgba(255,255,255,0.08);
+    animation: fab-pulse 2.6s infinite ease-in-out;
   }
 
-  /* Mobile FAB for WhatsApp: small circle at bottom-right */
-  @media (max-width: 767px) {
-    .whatsapp-fab {
-      position: fixed !important;
-      right: 1rem;
-      bottom: 1.25rem;
-      width: 56px;
-      height: 56px;
-      padding: 0.4rem;
-      border-radius: 9999px;
-      background: #25D366;
-      box-shadow: 0 8px 24px rgba(0,0,0,0.24);
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      z-index: 60;
-      border: 2px solid rgba(255,255,255,0.08);
-      animation: fab-pulse 2.6s infinite ease-in-out;
-    }
-
-    .whatsapp-fab svg {
-      width: 24px;
-      height: 24px;
-      color: white;
-    }
-
-    .whatsapp-fab span { display: none !important; }
-
-    /* Hide inline footer WhatsApp action on mobile to avoid duplicate buttons */
-    .footer-action { display: none !important; }
-    /* Also hide any floating whatsapp/pill remnants on mobile */
-    .whatsapp-fab, .floating-whatsapp { display: none !important; }
+  .whatsapp-fab svg {
+    width: 24px;
+    height: 24px;
+    color: white;
   }
+
+  .whatsapp-fab span { display: none !important; }
+  .footer-action { display: none !important; }
 
   /* FAB pulse animation */
   @keyframes fab-pulse {

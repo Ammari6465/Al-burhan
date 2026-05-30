@@ -49,7 +49,7 @@ export default function CTA() {
   }, [])
 
   return (
-    <section ref={sectionRef} className="section-shell bg-[var(--color-offwhite)] py-24">
+    <section ref={sectionRef} className="section-shell bg-[var(--color-offwhite)] py-16 sm:py-24">
       <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 xl:px-20">
         <div className="mx-auto max-w-3xl text-center">
           <p data-reveal className="section-kicker mx-auto">KEY HIGHLIGHTS</p>
@@ -57,7 +57,7 @@ export default function CTA() {
             Built for Industrial Dependability
           </h2>
           <p data-reveal className="section-copy mx-auto mt-4 max-w-2xl">
-            The conversion layer of the site should answer the buyer’s first three questions immediately: what you make, how fast you ship, and why they should trust you.
+            Find the right pulley, coupling, gear, sprocket, chain, or accessory quickly, then send a requirement by WhatsApp for a practical quotation.
           </p>
         </div>
 
@@ -103,19 +103,19 @@ export default function CTA() {
           })}
         </div>
 
-        <div data-reveal className="why-band mt-12 px-8 py-10 lg:flex lg:items-center lg:justify-between lg:px-14">
+        <div data-reveal className="why-band mt-12 px-5 py-8 sm:px-8 sm:py-10 lg:flex lg:items-center lg:justify-between lg:px-14">
           <div className="max-w-2xl">
             <h3 className="text-[clamp(1.8rem,2.6vw,2.8rem)] font-black leading-tight text-white normal-case tracking-normal">Ready for Reliable Industrial Supply?</h3>
             <p className="mt-3 text-[15px] leading-7 text-white/78">
               Share your requirement and the team will suggest the right product combination, quantity, and lead time.
             </p>
           </div>
-          <div className="mt-6 flex flex-wrap gap-3 lg:mt-0">
+          <div className="mt-6 grid gap-3 sm:flex sm:flex-wrap lg:mt-0">
             <a
               href={`https://wa.me/919819036787?text=${encodeURIComponent('Hi AL-BURHAN, I would like a WhatsApp quotation for industrial products.')}`}
               target="_blank"
               rel="noreferrer"
-              className="inline-flex min-h-11 items-center justify-center rounded-full bg-[#25D366] px-5 py-3 text-[13px] font-bold text-white transition-all duration-200 hover:bg-[#1EBE57]"
+              className="inline-flex min-h-12 items-center justify-center rounded-full bg-[#25D366] px-5 py-3 text-[13px] font-bold text-white transition-all duration-200 hover:bg-[#1EBE57]"
             >
               WhatsApp Inquiry
             </a>

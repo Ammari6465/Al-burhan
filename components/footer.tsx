@@ -1,7 +1,7 @@
 'use client'
 
 import BrandLogo from '@/components/brand-logo'
-import { Mail, MapPin, Phone } from 'lucide-react'
+import { Mail, MapPin, MessageCircle, Phone } from 'lucide-react'
 
 const companyLinks = [
   { name: 'Home', href: '#home' },
@@ -20,7 +20,7 @@ export default function Footer() {
           <div className="min-w-0">
             <div className="relative inline-flex max-w-full">
               <a href="#home" aria-label="AL-BURHAN home" className="inline-flex">
-                <div className="rounded-[1.25rem] bg-white px-8 py-7 shadow-[0_18px_42px_rgba(0,0,0,0.18)] sm:px-10 sm:py-8">
+                <div className="rounded-xl bg-white px-6 py-5 shadow-[0_18px_42px_rgba(0,0,0,0.18)] sm:px-8 sm:py-6">
                   <BrandLogo large />
                 </div>
               </a>
@@ -31,16 +31,14 @@ export default function Footer() {
                 className="whatsapp-fab"
                 aria-label="WhatsApp inquiry"
               >
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-message-circle" aria-hidden="true"><path d="M2.992 16.342a2 2 0 0 1 .094 1.167l-1.065 3.29a1 1 0 0 0 1.236 1.168l3.413-.998a2 2 0 0 1 1.099.092 10 10 0 1 0-4.777-4.719"></path></svg>
+                <MessageCircle size={20} />
                 <span className="hidden font-ui text-[14px] font-semibold text-white sm:inline">Chat on WhatsApp</span>
               </a>
             </div>
             <p className="mt-4 max-w-[320px] text-[13px] leading-7 text-white/72 sm:max-w-[360px]">
               Premium power transmission products for OEMs and industrial buyers across India.
             </p>
-            <p className="mt-3 text-[12px] text-white/42">Est. 1999 - Mumbai, India</p>
-
-            {/* Social icons removed for a cleaner mobile-first layout */}
+            <p className="mt-3 text-[12px] text-white/42">Est. 1999 | Mumbai, India</p>
           </div>
 
           <div>
@@ -90,7 +88,7 @@ export default function Footer() {
 
         <div className="mt-10 border-t border-white/10 py-5 sm:mt-12 md:flex md:items-center md:justify-between">
           <p className="text-center text-[12px] text-white/46 md:text-left">
-            © {currentYear} AL-BURHAN Industrial Drives. All rights reserved.
+            Copyright {currentYear} AL-BURHAN Industrial Drives. All rights reserved.
           </p>
           <div className="mt-3 flex items-center justify-center gap-3 text-[12px] text-white/46 md:mt-0 md:justify-start">
             <a href="#" className="transition hover:text-white">

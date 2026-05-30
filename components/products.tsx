@@ -171,21 +171,24 @@ const createCatalogProduct = (fileName: string): CatalogProduct => {
 }
 
 const catalogItems: CatalogProduct[] = imageFiles.map(createCatalogProduct)
+const categories = ['All', 'Pulleys', 'Couplings', 'Gears', 'Sprockets', 'Chains', 'Accessories'] as const
 
 export default function Products() {
   const [searchQuery, setSearchQuery] = useState('')
+  const [activeCategory, setActiveCategory] = useState<(typeof categories)[number]>('All')
   const [selectedProduct, setSelectedProduct] = useState<CatalogProduct | null>(null)
   const sectionRef = useScrollReveal<HTMLElement>()
 
   const filteredProducts = useMemo<CatalogProduct[]>(() => {
     const query = searchQuery.trim().toLowerCase()
-    if (!query) return catalogItems
+    const scopedItems = activeCategory === 'All' ? catalogItems : catalogItems.filter((product) => product.category === activeCategory)
+    if (!query) return scopedItems
 
-    return catalogItems.filter((product) => {
+    return scopedItems.filter((product) => {
       const haystack = `${product.name} ${product.category} ${product.spec} ${product.description}`.toLowerCase()
       return haystack.includes(query)
     })
-  }, [searchQuery])
+  }, [activeCategory, searchQuery])
 
   return (
     <section ref={sectionRef} id="products" className="section-shell bg-[var(--color-offwhite)] py-16 sm:py-24">
@@ -198,7 +201,7 @@ export default function Products() {
           </p>
         </div>
 
-        <div data-reveal className="mx-auto mt-8 w-full max-w-xl sm:mt-10">
+        <div data-reveal className="mx-auto mt-8 w-full max-w-2xl sm:mt-10">
           <label htmlFor="product-search" className="sr-only">
             Search products
           </label>
@@ -213,6 +216,20 @@ export default function Products() {
               className="product-search-wrap__field"
             />
           </div>
+        </div>
+
+        <div data-reveal className="-mx-4 mt-5 flex gap-2 overflow-x-auto px-4 pb-2 sm:mx-auto sm:max-w-4xl sm:flex-wrap sm:justify-center sm:overflow-visible sm:px-0">
+          {categories.map((category) => (
+            <button
+              key={category}
+              type="button"
+              onClick={() => setActiveCategory(category)}
+              className="product-filter shrink-0 transition hover:border-[#C0392B]/30 hover:bg-white data-[active=true]:border-[#C0392B]/30 data-[active=true]:bg-[#C0392B] data-[active=true]:text-white"
+              data-active={activeCategory === category}
+            >
+              {category}
+            </button>
+          ))}
         </div>
 
         <div className="mt-10 grid gap-5 sm:mt-12 sm:grid-cols-2 sm:gap-6 lg:grid-cols-3 xl:grid-cols-4">
@@ -241,15 +258,22 @@ export default function Products() {
                 <h3 className="product-card__title mt-4 text-[18px] font-bold text-[#0A3D62]">{product.name}</h3>
                 <p className="product-card__spec mt-1 text-[14px] leading-6 text-[#4A5568]">{product.spec}</p>
 
-                <div className="product-card__action mt-auto pt-5">
+                <div className="product-card__action mt-auto grid grid-cols-[0.9fr_1.1fr] gap-2 pt-5">
+                  <button
+                    type="button"
+                    onClick={() => setSelectedProduct(product)}
+                    className="inline-flex min-h-11 w-full items-center justify-center rounded-full border border-[#0A3D62]/15 bg-white px-4 py-3 text-[13px] font-bold text-[#0A3D62] transition hover:border-[#0A3D62]/30 hover:bg-[#EAF6FF]"
+                  >
+                    Details
+                  </button>
                   <a
                     href={`https://wa.me/919819036787?text=${encodeURIComponent(`Hello AL-BURHAN, I am interested in ${product.name}. Please share details and pricing.`)}`}
                     target="_blank"
                     rel="noreferrer"
-                    className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-[#25D366] px-4 py-3 text-[13px] font-semibold text-white transition hover:bg-[#1EBE57]"
+                    className="inline-flex min-h-11 w-full items-center justify-center gap-2 rounded-full bg-[#25D366] px-4 py-3 text-[13px] font-bold text-white transition hover:bg-[#1EBE57]"
                   >
                     <MessageCircle size={16} />
-                    WhatsApp Us
+                    Quote
                   </a>
                 </div>
               </div>
