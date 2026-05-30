@@ -991,9 +991,9 @@
       position: fixed !important;
       right: 1rem;
       bottom: 1.25rem;
-      width: 40px;
-      height: 40px;
-      padding: 0.25rem;
+      width: 56px;
+      height: 56px;
+      padding: 0.4rem;
       border-radius: 9999px;
       background: #25D366;
       box-shadow: 0 8px 24px rgba(0,0,0,0.24);
@@ -1002,11 +1002,12 @@
       justify-content: center;
       z-index: 60;
       border: 2px solid rgba(255,255,255,0.08);
+      animation: fab-pulse 2.6s infinite ease-in-out;
     }
 
     .whatsapp-fab svg {
-      width: 18px;
-      height: 18px;
+      width: 24px;
+      height: 24px;
       color: white;
     }
 
@@ -1014,6 +1015,13 @@
 
     /* Hide inline footer WhatsApp action on mobile to avoid duplicate buttons */
     .footer-action { display: none !important; }
+  }
+
+  /* FAB pulse animation */
+  @keyframes fab-pulse {
+    0% { transform: scale(1); box-shadow: 0 6px 18px rgba(0,0,0,0.18); }
+    50% { transform: scale(1.03); box-shadow: 0 10px 28px rgba(0,0,0,0.22); }
+    100% { transform: scale(1); box-shadow: 0 6px 18px rgba(0,0,0,0.18); }
   }
 }
 
