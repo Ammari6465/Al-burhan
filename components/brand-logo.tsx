@@ -5,11 +5,12 @@ type BrandLogoProps = {
   large?: boolean
   inverse?: boolean
   className?: string
+  imgClassName?: string
   useSvgFile?: boolean
 }
 
-export default function BrandLogo({ compact = false, large = false, inverse = false, className = '' }: BrandLogoProps) {
-  const sizeClass = large ? 'h-14 w-auto sm:h-1' : compact ? 'h-11' : 'h-[52px] sm:h-14'
+export default function BrandLogo({ compact = false, large = false, inverse = false, className = '', imgClassName = '' }: BrandLogoProps) {
+  const sizeClass = large ? 'h-12 w-auto sm:h-14' : compact ? 'h-11' : 'h-[52px] sm:h-14'
   const toneClass = inverse ? 'brightness-0 invert' : ''
 
   return (
@@ -17,7 +18,7 @@ export default function BrandLogo({ compact = false, large = false, inverse = fa
       <img
         src="/Logo.png"
         alt="AL-BURHAN Industrial Drives"
-        className={`${sizeClass} w-auto flex-none object-contain select-none ${toneClass}`}
+        className={`${sizeClass} w-auto flex-none object-contain select-none ${toneClass} ${imgClassName}`}
       />
     </div>
   )
