@@ -43,7 +43,7 @@ export default function Hero() {
   }, [])
 
   return (
-    <section id="home" className="hero-shell section-shell -mt-6 md:-mt-[96px] flex items-center pt-4 md:pt-[96px]">
+    <section id="home" className="hero-shell section-shell flex items-center pt-4 md:pt-[96px]">
       <Image
         src="/BG%20Image%20.jpeg"
         alt="Industrial machinery in a modern production environment"

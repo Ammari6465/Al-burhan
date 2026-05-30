@@ -32,7 +32,7 @@ export default function About() {
   const sectionRef = useScrollReveal<HTMLElement>()
 
   return (
-    <section id="about" ref={sectionRef} className="section-shell bg-white py-16 sm:py-24">
+    <section id="about" ref={sectionRef} className="section-shell bg-white pt-16 md:pt-[96px] pb-16 sm:pb-24">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 xl:px-20">
         <div className="grid items-start gap-14 lg:grid-cols-[0.95fr_1.05fr]">
           <div className="min-w-0 self-start">
