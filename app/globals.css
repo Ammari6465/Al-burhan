@@ -1015,6 +1015,8 @@
 
     /* Hide inline footer WhatsApp action on mobile to avoid duplicate buttons */
     .footer-action { display: none !important; }
+    /* Also hide any floating whatsapp/pill remnants on mobile */
+    .whatsapp-fab, .floating-whatsapp { display: none !important; }
   }
 
   /* FAB pulse animation */
