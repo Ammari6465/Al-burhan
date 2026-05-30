@@ -9,7 +9,7 @@ import BackToTop from '@/components/back-to-top'
 
 export default function Home() {
   return (
-    <main className="w-full overflow-x-hidden bg-[var(--color-offwhite)] pt-[56px]">
+    <main className="w-full overflow-x-hidden bg-[var(--color-offwhite)] pt-0">
       <Header />
       <Hero />
       <Highlights />
