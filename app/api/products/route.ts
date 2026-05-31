@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server'
 import { getFirestoreInstance } from '@/lib/firebase-admin'
 import type { CatalogProduct } from '@/lib/product-catalog'
+import { catalogItems } from '@/lib/product-catalog'
 
 const productsCollection = 'products'
 
@@ -8,6 +9,19 @@ export const dynamic = 'force-dynamic'
 export const revalidate = 0
 
 export async function GET() {
+  // Fast local-only path: when `LOCAL_ONLY=1` use the bundled catalog
+  // This avoids Firestore access and returns immediately for fast local testing.
+  if (process.env.LOCAL_ONLY === '1' || process.env.USE_LOCAL_CATALOG === '1') {
+    return NextResponse.json(
+      { products: catalogItems },
+      {
+        status: 200,
+        headers: {
+          'Cache-Control': 'public, max-age=86400',
+        },
+      },
+    )
+  }
   try {
     const firestore = getFirestoreInstance()
     const snapshot = await firestore.collection(productsCollection).orderBy('name', 'asc').get()
