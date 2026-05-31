@@ -205,6 +205,9 @@ export const catalogItems: CatalogProduct[] = groupedSources.map((group) => {
   const renameMap: Record<string, string> = {
     'avm': 'Cushy Foot Mounting',
     'anti vibration mounting': 'Cushy Foot Mounting',
+    'rrl coupling': 'RRS Coupling',
+    'rrl coupling(1)': 'RRS Coupling',
+    'rrl': 'RRS Coupling',
   }
 
   const details = categoryDetails[group.category]
