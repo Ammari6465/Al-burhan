@@ -2,8 +2,8 @@
 
 import Image from 'next/image'
 import {
-  IconCircleCheck,
   IconBuildingFactory,
+  IconCircleCheck,
   IconHeadphones,
   IconMapPin,
   IconQuote,
@@ -13,10 +13,10 @@ import {
 import { useScrollReveal } from '@/hooks/use-scroll-reveal'
 
 const stats = [
-  { value: '20+', label: 'Years' },
+  { value: '40+', label: 'Years' },
   { value: '10,000+', label: 'SKUs' },
   { value: 'Pan-India', label: 'Supply' },
-  { value: 'OEM', label: 'Trusted' },
+  { value: 'OEM Trusted', label: 'Buyers' },
 ]
 
 const trustTiles = [
@@ -49,15 +49,15 @@ const features = [
 
 const principles = [
   {
-    title: 'Mission',
+    title: 'MISSION',
     text: 'Make industrial procurement simpler, faster, and more reliable for teams that cannot afford downtime.',
   },
   {
-    title: 'Values',
+    title: 'VALUES',
     text: 'Integrity, precision, and response speed shape every enquiry and every dispatch decision.',
   },
   {
-    title: 'Expertise',
+    title: 'EXPERTISE',
     text: 'Deep familiarity with pulleys, couplings, gears, sprockets, and related power transmission parts.',
   },
 ]
@@ -66,56 +66,65 @@ export default function About() {
   const sectionRef = useScrollReveal<HTMLElement>()
 
   return (
-    <section id="about" ref={sectionRef} className="bg-white py-16 sm:py-20 lg:py-24">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="grid gap-12 lg:grid-cols-[1.08fr_0.92fr] lg:items-start xl:gap-16">
-          <div className="min-w-0">
-            <span
-              data-reveal
-              className="inline-flex rounded-full border border-[#D7E3F1] bg-[#F7FAFD] px-4 py-2 text-[11px] font-medium tracking-[0.04em] text-[#0F3460]"
-            >
-              About us
-            </span>
-
-            <div className="mt-5 max-w-2xl space-y-4">
-              <h2
+    <section id="about" ref={sectionRef} className="bg-[#F4F6FA] py-[60px]">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-20">
+        <div className="grid gap-6 lg:grid-cols-2 lg:items-stretch">
+          <div className="flex h-full min-w-0 flex-col justify-between">
+            <div>
+              <span
                 data-reveal
-                className="max-w-[16ch] text-[32px] font-medium leading-[1.12] tracking-[-0.02em] text-[#0F3460] sm:text-[34px]"
+                className="inline-flex rounded-full border border-[0.5px] border-[rgba(0,0,0,0.1)] bg-[#E6F1FB] px-4 py-2 text-[11px] font-medium tracking-[0.04em] text-[#0F3460]"
               >
-                Premium industrial & power transmission products
-              </h2>
-              <p data-reveal className="text-[14px] font-normal leading-6 text-[#5A6D83]">
-                Trusted by OEMs and maintenance teams across India since 2004.
-              </p>
-              <p data-reveal className="max-w-2xl text-[15px] font-normal leading-7 text-[#425062]">
-                AL-BURHAN Industrial Drives is a Mumbai-based B2B stockist supporting manufacturers, maintenance teams, and repeat procurement buyers with practical sourcing guidance.
-                We check fit, finish, and specification alignment before dispatch, then coordinate dependable pan-India supply for urgent orders and ongoing production needs.
-              </p>
+                About us
+              </span>
+
+              <div className="mt-5 max-w-2xl space-y-4">
+                <h2
+                  data-reveal
+                  className="max-w-[16ch] text-[32px] font-medium leading-[1.12] tracking-[-0.02em] text-[#0F3460]"
+                >
+                  Premium industrial & power transmission products
+                </h2>
+                <p data-reveal className="text-[14px] font-normal leading-6 text-[#6B7280]">
+                  Trusted by OEMs and maintenance teams across India since 2004.
+                </p>
+                <p data-reveal className="max-w-2xl text-[14px] font-normal leading-7 text-[#6B7280]">
+                  AL-BURHAN Industrial Drives is a Mumbai-based B2B stockist supporting manufacturers,
+                  maintenance teams, and repeat procurement buyers with practical sourcing guidance.
+                  We check fit, finish, and specification alignment before dispatch, then coordinate
+                  dependable pan-India supply for urgent orders and ongoing production needs.
+                </p>
+              </div>
+
+              <div data-reveal className="mt-6 grid max-w-2xl grid-cols-2 gap-3">
+                {stats.map((stat) => (
+                  <article
+                    key={stat.label}
+                    className="rounded-[12px] border border-[0.5px] border-[rgba(0,0,0,0.1)] bg-[#F4F6FA] px-4 py-4"
+                  >
+                    <p className="text-[22px] font-medium leading-none tracking-[-0.02em] text-[#0F3460]">
+                      {stat.value}
+                    </p>
+                    <p className="mt-2 text-[12px] font-normal text-[#6B7280]">{stat.label}</p>
+                  </article>
+                ))}
+              </div>
             </div>
 
-            <div data-reveal className="mt-8 grid max-w-2xl grid-cols-2 gap-3 sm:gap-4">
-              {stats.map((stat) => (
-                <article key={stat.label} className="rounded-[12px] border border-[#E2E8F0] bg-[#F6F8FB] px-4 py-4 sm:px-5 sm:py-5">
-                  <p className="text-[22px] font-medium leading-none tracking-[-0.02em] text-[#0F3460] sm:text-[24px]">{stat.value}</p>
-                  <p className="mt-2 text-[12px] font-normal text-[#5A6D83]">{stat.label}</p>
-                </article>
-              ))}
-            </div>
-
-            <div data-reveal className="mt-8">
+            <div data-reveal className="mt-6">
               <a
                 href="#contact"
-                className="inline-flex min-h-11 items-center justify-center rounded-full bg-[#0F3460] px-5 text-[13px] font-medium text-white transition-colors hover:bg-[#185FA5]"
+                className="inline-flex min-h-11 items-center justify-center rounded-[12px] bg-[#0F3460] px-5 text-[13px] font-medium text-white transition-colors hover:bg-[#185FA5]"
               >
                 Request a quote →
               </a>
             </div>
           </div>
 
-          <div className="min-w-0" data-reveal>
-            <div className="rounded-[12px] border border-[rgba(15,52,96,0.14)] bg-white p-3">
-              <div className="relative overflow-hidden rounded-[10px] border border-[#E2E8F0] bg-[#F8FAFC]">
-                <div className="absolute right-3 top-3 z-10 inline-flex items-center rounded-full bg-[#1F9D55] px-3 py-1 text-[11px] font-medium text-white">
+          <div className="flex h-full min-w-0 flex-col justify-between gap-3" data-reveal>
+            <div className="rounded-[12px] border border-[0.5px] border-[rgba(0,0,0,0.1)] bg-white p-3">
+              <div className="relative overflow-hidden rounded-[12px] border border-[0.5px] border-[rgba(0,0,0,0.1)] bg-white">
+                <div className="absolute right-3 top-3 z-10 inline-flex items-center rounded-full border border-[0.5px] border-[rgba(0,0,0,0.1)] bg-[#1F9D55] px-3 py-1 text-[11px] font-medium text-white">
                   Verified Stockist ✓
                 </div>
 
@@ -129,23 +138,26 @@ export default function About() {
                   />
                 </div>
 
-                <div className="absolute bottom-3 left-3 z-10 inline-flex items-center gap-2 rounded-full bg-[#0F3460] px-3 py-1.5 text-[11px] font-medium text-white">
+                <div className="absolute bottom-3 left-3 z-10 inline-flex items-center gap-2 rounded-full border border-[0.5px] border-[rgba(0,0,0,0.1)] bg-[#0F3460] px-3 py-1.5 text-[11px] font-medium text-white">
                   <IconMapPin size={14} stroke={1.8} />
-                  <span>Nagdevi Street, Mumbai</span>
+                  <span>Nagdevi St, Mumbai</span>
                 </div>
               </div>
             </div>
 
-            <div className="mt-4 grid grid-cols-2 gap-3">
+            <div className="grid grid-cols-2 gap-3">
               {trustTiles.map((tile) => {
                 const Icon = tile.icon
 
                 return (
-                  <div key={tile.title} className="flex items-center gap-3 rounded-[10px] border border-[#E2E8F0] bg-[#F6F8FB] px-4 py-3">
-                    <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-white text-[#185FA5]">
+                  <div
+                    key={tile.title}
+                    className="flex items-center gap-3 rounded-[12px] border border-[0.5px] border-[rgba(0,0,0,0.1)] bg-[#F4F6FA] px-4 py-3"
+                  >
+                    <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-[10px] bg-[#E6F1FB] text-[#185FA5]">
                       <Icon size={16} stroke={1.8} />
                     </div>
-                    <span className="text-[12px] font-medium text-[#425062]">{tile.title}</span>
+                    <span className="text-[12px] font-normal text-[#6B7280]">{tile.title}</span>
                   </div>
                 )
               })}
@@ -153,45 +165,53 @@ export default function About() {
           </div>
         </div>
 
-        <div data-reveal className="mt-12 grid gap-4 xl:grid-cols-4">
+        <div data-reveal className="mt-6 grid gap-4 md:grid-cols-2 xl:grid-cols-4">
           {features.map((item) => {
             const Icon = item.icon
 
             return (
-              <article key={item.title} className="flex gap-4 rounded-[12px] border border-[#E2E8F0] bg-white px-4 py-4">
+              <article
+                key={item.title}
+                className="flex gap-4 rounded-[12px] border border-[0.5px] border-[rgba(0,0,0,0.1)] bg-white px-4 py-4"
+              >
                 <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-[10px] bg-[#E6F1FB] text-[#185FA5]">
                   <Icon size={18} stroke={1.8} />
                 </div>
                 <div>
                   <h3 className="text-[14px] font-medium text-[#0F3460]">{item.title}</h3>
-                  <p className="mt-1 text-[12px] font-normal leading-5 text-[#5A6D83]">{item.description}</p>
+                  <p className="mt-1 text-[12px] font-normal leading-5 text-[#6B7280]">{item.description}</p>
                 </div>
               </article>
             )
           })}
         </div>
 
-        <div data-reveal className="mt-6 rounded-[12px] border border-[#0F3460] bg-[#0F3460] px-5 py-6 text-white sm:px-6">
+        <div data-reveal className="mt-6 rounded-[12px] border border-[0.5px] border-[rgba(0,0,0,0.1)] bg-[#0F3460] px-5 py-6 text-white">
           <div className="flex items-start gap-4">
-            <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-[10px] border border-white/15 bg-white/5 text-white">
+            <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-[10px] bg-[#132952] text-[#185FA5]">
               <IconQuote size={18} stroke={1.8} />
             </div>
             <div className="min-w-0">
-              <p className="text-[11px] font-medium tracking-[0.18em] text-[#B7D3F1]">Mission statement</p>
-              <p className="mt-2 text-[15px] font-normal leading-7 text-white">
+              <p style={{ fontVariant: 'small-caps' }} className="text-[11px] font-medium tracking-[0.18em] text-[#85B7EB]">
+                Mission statement
+              </p>
+              <p className="mt-2 text-[16px] font-medium leading-7 text-white">
                 Reliable industrial supply is a service discipline, not just a product list.
               </p>
             </div>
           </div>
-        </div>
 
-        <div data-reveal className="mt-4 grid gap-4 md:grid-cols-3">
-          {principles.map((item) => (
-            <article key={item.title} className="rounded-[12px] border border-[#1E4573] bg-[#132952] px-5 py-5 text-white">
-              <h3 className="text-[12px] font-medium tracking-[0.14em] text-[#B7D3F1]">{item.title}</h3>
-              <p className="mt-3 text-[14px] font-normal leading-7 text-[#D8E6F4]">{item.text}</p>
-            </article>
-          ))}
+          <div className="mt-5 grid gap-4 md:grid-cols-3">
+            {principles.map((item) => (
+              <article
+                key={item.title}
+                className="rounded-[12px] border border-[0.5px] border-[rgba(255,255,255,0.1)] bg-[#132952] px-5 py-5"
+              >
+                <h3 className="text-[11px] font-medium tracking-[0.18em] text-[#85B7EB]">{item.title}</h3>
+                <p className="mt-3 text-[12px] font-normal leading-6 text-[#B5D4F4]">{item.text}</p>
+              </article>
+            ))}
+          </div>
         </div>
       </div>
     </section>
