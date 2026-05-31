@@ -111,26 +111,22 @@ export default function About() {
           </div>
 
           <div className="flex h-full min-w-0 flex-col justify-between gap-3" data-reveal>
-            <div className="rounded-[12px] border border-[0.5px] border-[rgba(0,0,0,0.1)] bg-white p-3">
-              <div className="relative overflow-hidden rounded-[12px] border border-[0.5px] border-[rgba(0,0,0,0.1)] bg-white">
-                <div className="absolute right-3 top-3 z-10 inline-flex items-center rounded-full border border-[0.5px] border-[rgba(0,0,0,0.1)] bg-[#1F9D55] px-3 py-1 text-[11px] font-medium text-white">
-                  Verified Stockist ✓
-                </div>
+            <div className="relative h-full min-h-[380px] overflow-hidden rounded-[12px] border border-[#E2E6ED] bg-white shadow-[0_1px_0_rgba(15,23,42,0.03)]">
+              <Image
+                src="/BG%20Image%20.jpeg"
+                alt="AL-BURHAN Industries storefront in Mumbai"
+                fill
+                sizes="(max-width: 1024px) 100vw, 50vw"
+                className="block object-cover object-center"
+              />
 
-                <div className="relative aspect-[4/5] w-full">
-                  <Image
-                    src="/BG%20Image%20.jpeg"
-                    alt="AL-BURHAN Industries storefront in Mumbai"
-                    fill
-                    sizes="(max-width: 1024px) 100vw, 50vw"
-                    className="object-cover object-center"
-                  />
-                </div>
+              <div className="absolute right-3 top-3 z-10 inline-flex items-center rounded-full border border-[0.5px] border-[rgba(0,0,0,0.1)] bg-[#1F9D55] px-3 py-1 text-[11px] font-medium text-white">
+                Verified Stockist ✓
+              </div>
 
-                <div className="absolute bottom-3 left-3 z-10 inline-flex items-center gap-2 rounded-full border border-[0.5px] border-[rgba(0,0,0,0.1)] bg-[#0F3460] px-3 py-1.5 text-[11px] font-medium text-white">
-                  <IconMapPin size={14} stroke={1.8} />
-                  <span>Nagdevi St, Mumbai</span>
-                </div>
+              <div className="absolute bottom-3 left-3 z-10 inline-flex items-center gap-2 rounded-full border border-[0.5px] border-[rgba(0,0,0,0.1)] bg-[#0F3460]/90 px-3 py-1.5 text-[11px] font-medium text-white">
+                <IconMapPin size={14} stroke={1.8} />
+                <span>Nagdevi St, Mumbai</span>
               </div>
             </div>
 
