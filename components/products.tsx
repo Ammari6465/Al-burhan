@@ -193,9 +193,9 @@ export default function Products() {
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 xl:px-20">
         <div className="mx-auto max-w-3xl text-center">
           <p data-reveal className="section-kicker mx-auto">PRODUCT CATALOGUE</p>
-          <h2 data-reveal className="section-title mt-4">Products Built for Industry</h2>
+          <h2 data-reveal className="section-title mt-4">Products Build for the Industry</h2>
           <p data-reveal className="section-copy mx-auto mt-4 max-w-2xl">
-            Browse our full range of industrial drive and power transmission products.
+            Browse our full range of industrial and power transmission products.
           </p>
         </div>
 
