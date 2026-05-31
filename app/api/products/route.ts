@@ -1,5 +1,4 @@
 import { NextResponse } from 'next/server'
-import { getFirestoreInstance } from '@/lib/firebase-admin'
 import type { CatalogProduct } from '@/lib/product-catalog'
 import { catalogItems } from '@/lib/product-catalog'
 
@@ -41,41 +40,14 @@ export async function GET() {
             : []
 
       return {
-        id: data.id ?? doc.id,
-        name: data.name ?? doc.id,
-        category: data.category ?? 'Accessories',
-        image: data.image ?? images[0] ?? '',
-        images,
-        spec: data.spec ?? '',
-        description: data.description ?? '',
-        features: Array.isArray(data.features) ? data.features : [],
-        specs: Array.isArray(data.specs) ? data.specs : [],
+        // Local-only: always return the bundled catalog items
+        return NextResponse.json(
+          { products: catalogItems },
+          {
+            status: 200,
+            headers: {
+              'Cache-Control': 'public, max-age=86400',
+            },
+          },
+        )
       }
-    })
-
-    return NextResponse.json(
-      { products },
-      {
-        status: 200,
-        headers: {
-          'Cache-Control': 'no-store, max-age=0, must-revalidate',
-        },
-      },
-    )
-  } catch (error) {
-    console.error('Failed to fetch products from Firestore:', error)
-
-    return NextResponse.json(
-      {
-        message: 'Unable to fetch products from the database.',
-        products: [],
-      },
-      {
-        status: 500,
-        headers: {
-          'Cache-Control': 'no-store, max-age=0, must-revalidate',
-        },
-      },
-    )
-  }
-}

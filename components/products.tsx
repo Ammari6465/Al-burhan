@@ -18,41 +18,9 @@ export default function Products() {
   const sectionRef = useScrollReveal<HTMLElement>()
 
   useEffect(() => {
-    let isActive = true
-
-    const loadProducts = async () => {
-      try {
-        const response = await fetch('/api/products', { cache: 'no-store' })
-
-        if (!response.ok) {
-          throw new Error(`Products API returned ${response.status}`)
-        }
-
-        const data = (await response.json()) as { products?: CatalogProduct[] }
-
-        if (!isActive) {
-          return
-        }
-
-        setProducts(Array.isArray(data.products) ? data.products : catalogItems)
-      } catch (error) {
-        console.warn('Falling back to local product catalog:', error)
-
-        if (isActive) {
-          setProducts(catalogItems)
-        }
-      } finally {
-        if (isActive) {
-          setIsLoading(false)
-        }
-      }
-    }
-
-    loadProducts()
-
-    return () => {
-      isActive = false
-    }
+    // Local-only mode: use bundled catalog immediately (no network)
+    setProducts(catalogItems)
+    setIsLoading(false)
   }, [])
 
   const filteredProducts = useMemo<CatalogProduct[]>(() => {
