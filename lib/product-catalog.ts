@@ -208,6 +208,8 @@ export const catalogItems: CatalogProduct[] = groupedSources.map((group) => {
     'rrl coupling': 'RRS Coupling',
     'rrl coupling(1)': 'RRS Coupling',
     'rrl': 'RRS Coupling',
+    'rubber spider': 'Rubber Spider (PU)',
+    'rubber spider(1)': 'Rubber Spider (PU)',
   }
 
   const details = categoryDetails[group.category]
