@@ -6,7 +6,7 @@ import { ThemeProvider } from '@/components/theme-provider'
 import './globals.css'
 
 export const metadata: Metadata = {
-  title: 'AL-BURHAN Industrial Drives | Precision Industrial Power Transmission',
+  title: 'Al-Burhan Industrial Drives | Precision Industrial Power Transmission',
   description: 'Modern industrial website for AL-BURHAN Industrial Drives, featuring pulleys, couplings, gears, sprockets, fast dispatch, and OEM support across India.',
   icons: {
     icon: '/icon',

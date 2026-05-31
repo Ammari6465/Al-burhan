@@ -14,13 +14,13 @@ import { useScrollReveal } from '@/hooks/use-scroll-reveal'
 
 const stats = [
   { value: '40+', label: 'Years' },
-  { value: '10,000+', label: 'SKUs' },
+  { value: '500+', label: 'Happy Clients' },
   { value: 'Pan-India', label: 'Supply' },
   { value: 'OEM Trusted', label: 'Buyers' },
 ]
 
 const trustTiles = [
-  { icon: IconMapPin, title: 'Mumbai HQ' },
+  { icon: IconMapPin, title: 'Mumbai - 03' },
   { icon: IconShieldCheck, title: 'GSTIN Verified' },
 ]
 
@@ -43,7 +43,7 @@ const features = [
   {
     icon: IconTruckDelivery,
     title: 'Fast dispatch',
-    description: 'Coordinated supply handling for urgent jobs and routine replacement needs.',
+    description: 'Coordinated supply handling and routine replacement needs.',
   },
 ]
 
@@ -71,12 +71,9 @@ export default function About() {
         <div className="grid gap-5 lg:grid-cols-[1.04fr_0.96fr] lg:items-stretch xl:gap-6">
           <div className="flex h-full min-w-0 flex-col justify-between">
             <div>
-              <span
-                data-reveal
-                className="inline-flex rounded-full border border-[0.5px] border-[rgba(0,0,0,0.1)] bg-[#E6F1FB] px-4 py-2 text-[11px] font-medium tracking-[0.04em] text-[#0F3460]"
-              >
-                About us
-              </span>
+              <div className="mb-10 text-left">
+          <p data-reveal className="section-kicker mx-auto">ABOUT US</p>
+        </div>
 
               <div className="mt-5 max-w-2xl space-y-4">
                 <h2
@@ -86,10 +83,10 @@ export default function About() {
                   Premium industrial & power transmission products
                 </h2>
                 <p data-reveal className="text-[14px] font-normal leading-6 text-[#6B7280]">
-                  Trusted by OEMs and maintenance teams across India since 2004.
+                  
                 </p>
                 <p data-reveal className="max-w-2xl text-[14px] font-normal leading-7 text-[#6B7280]">
-                  AL-BURHAN Industrial Drives is a Mumbai-based B2B stockist supporting manufacturers,
+                  Al-Burhan Industrial Drives is a Mumbai-based B2B stockist supporting manufacturers,
                   maintenance teams, and repeat procurement buyers with practical sourcing guidance.
                   We check fit, finish, and specification alignment before dispatch, then coordinate
                   dependable pan-India supply for urgent orders and ongoing production needs.

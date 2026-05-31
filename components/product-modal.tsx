@@ -1,19 +1,10 @@
 'use client'
 
-import { X } from 'lucide-react'
+import { ChevronLeft, ChevronRight, X } from 'lucide-react'
 import Image from 'next/image'
 import { useEffect, useState } from 'react'
-
-export type CatalogProduct = {
-  id: string
-  name: string
-  category: 'Pulleys' | 'Couplings' | 'Gears' | 'Sprockets' | 'Chains' | 'Accessories'
-  image: string
-  spec: string
-  description: string
-  features: string[]
-  specs: { label: string; value: string }[]
-}
+import { createPortal } from 'react-dom'
+import type { CatalogProduct } from '@/lib/product-catalog'
 
 interface ProductModalProps {
   product: CatalogProduct | null
@@ -21,98 +12,99 @@ interface ProductModalProps {
 }
 
 export default function ProductModal({ product, onClose }: ProductModalProps) {
-  const [inquiry, setInquiry] = useState({
-    name: '',
-    quantity: '',
-    location: '',
-    note: '',
-  })
+  const [selectedImageIndex, setSelectedImageIndex] = useState(0)
+  const [isMounted, setIsMounted] = useState(false)
 
   useEffect(() => {
-    const handleEscape = (event: KeyboardEvent) => {
+    setIsMounted(true)
+  }, [])
+
+  useEffect(() => {
+    const handleKeyDown = (event: KeyboardEvent) => {
+      const imageCount = product?.images.length ?? 0
+
       if (event.key === 'Escape') {
         onClose()
+        return
+      }
+
+      if (imageCount <= 1) {
+        return
+      }
+
+      if (event.key === 'ArrowLeft') {
+        event.preventDefault()
+        setSelectedImageIndex((current) => (current - 1 + imageCount) % imageCount)
+      }
+
+      if (event.key === 'ArrowRight') {
+        event.preventDefault()
+        setSelectedImageIndex((current) => (current + 1) % imageCount)
       }
     }
 
-    window.addEventListener('keydown', handleEscape)
+    window.addEventListener('keydown', handleKeyDown)
 
-    return () => window.removeEventListener('keydown', handleEscape)
-  }, [onClose])
+    return () => window.removeEventListener('keydown', handleKeyDown)
+  }, [onClose, product])
 
   useEffect(() => {
-    setInquiry({
-      name: '',
-      quantity: '',
-      location: '',
-      note: '',
-    })
+    setSelectedImageIndex(0)
   }, [product])
 
   if (!product) {
     return null
   }
 
-  return (
+  if (!isMounted) {
+    return null
+  }
+
+  const images = product.images.length ? product.images : [product.image]
+  const currentImageIndex = Math.min(selectedImageIndex, images.length - 1)
+  const currentImage = images[currentImageIndex] ?? product.image
+  const hasMultipleImages = images.length > 1
+
+  return createPortal(
     <div className="modal-backdrop fixed inset-0 z-[120] flex items-center justify-center p-4">
-      <div className="modal-panel max-h-[92vh] w-full max-w-5xl overflow-hidden rounded-[1.5rem] overflow-y-auto">
-        <div className="sticky top-0 z-10 flex items-center justify-between border-b border-[rgba(0,51,102,0.08)] bg-white px-5 py-4 sm:px-7">
-          <div>
-            <p className="text-[0.7rem] font-bold uppercase tracking-[0.24em] text-[#d62828]">Quick View</p>
-            <h2 className="mt-1 text-[1.4rem] font-black text-[#0f1720] normal-case tracking-normal">{product.name}</h2>
-          </div>
+      <div className="modal-panel relative w-full max-w-4xl overflow-hidden rounded-[1.5rem]">
+        <div className="absolute right-4 top-4 z-20">
           <button type="button" onClick={onClose} className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-[rgba(0,51,102,0.1)] bg-[var(--color-offwhite)] transition hover:bg-white" aria-label="Close quick view">
             <X size={20} />
           </button>
         </div>
 
-        <div className="grid gap-6 p-5 sm:p-7 lg:grid-cols-[0.95fr_1.05fr]">
-          <div className="space-y-4">
-            <div className="relative overflow-hidden rounded-[1.25rem] bg-[var(--color-offwhite)]" style={{ minHeight: '320px' }}>
-              <Image src={product.image} alt={product.name} fill className="object-contain p-6" priority />
-            </div>
+        <div className="relative bg-[var(--color-offwhite)] p-4 sm:p-6">
+          <div className="relative overflow-hidden rounded-[1.25rem] bg-[var(--color-offwhite)]" style={{ minHeight: 'min(72vh, 760px)' }}>
+            <Image src={currentImage} alt={product.name} fill className="object-contain p-4 sm:p-8" priority />
 
-            <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
-              {product.specs.map((spec) => (
-                <div key={spec.label} className="rounded-2xl border border-[rgba(0,51,102,0.08)] bg-[var(--color-offwhite)] p-3">
-                  <p className="text-[0.68rem] font-bold uppercase tracking-[0.2em] text-[#425062]">{spec.label}</p>
-                  <p className="mt-1 text-[0.95rem] font-bold text-[#0f1720] normal-case tracking-normal">{spec.value}</p>
+            {hasMultipleImages && (
+              <>
+                <button
+                  type="button"
+                  aria-label="Previous image"
+                  onClick={() => setSelectedImageIndex((current) => (current - 1 + images.length) % images.length)}
+                  className="absolute left-3 top-1/2 inline-flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full bg-white/95 text-[#0F3460] shadow-[0_10px_24px_rgba(9,25,41,0.18)] transition hover:bg-white"
+                >
+                  <ChevronLeft size={20} />
+                </button>
+                <button
+                  type="button"
+                  aria-label="Next image"
+                  onClick={() => setSelectedImageIndex((current) => (current + 1) % images.length)}
+                  className="absolute right-3 top-1/2 inline-flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full bg-white/95 text-[#0F3460] shadow-[0_10px_24px_rgba(9,25,41,0.18)] transition hover:bg-white"
+                >
+                  <ChevronRight size={20} />
+                </button>
+                <div className="absolute bottom-4 left-1/2 -translate-x-1/2 rounded-full bg-[#0F3460]/90 px-3 py-1 text-[11px] font-semibold text-white">
+                  {currentImageIndex + 1} / {images.length}
                 </div>
-              ))}
-            </div>
-          </div>
-
-          <div className="space-y-6">
-            <div>
-              <p className="section-kicker">{product.category}</p>
-              <p className="mt-3 text-[1.05rem] leading-8 text-[#425062] normal-case tracking-normal">{product.description}</p>
-            </div>
-
-            <div>
-              <h3 className="text-[1rem] font-bold text-[#0f1720] normal-case tracking-normal">Key Features</h3>
-              <ul className="mt-3 grid gap-3 sm:grid-cols-2">
-                {product.features.map((feature) => (
-                  <li key={feature} className="rounded-2xl border border-[rgba(0,51,102,0.08)] bg-[var(--color-offwhite)] px-4 py-3 text-[14px] text-[#425062]">
-                    {feature}
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            <form className="rounded-[1.25rem] border border-[rgba(0,51,102,0.08)] bg-white p-5 shadow-[0_12px_34px_rgba(9,25,41,0.08)]">
-              <div className="grid gap-3 sm:grid-cols-2">
-                <input value={inquiry.name} onChange={(event) => setInquiry((current) => ({ ...current, name: event.target.value }))} className="contact-field" placeholder="Your name" />
-                <input value={inquiry.quantity} onChange={(event) => setInquiry((current) => ({ ...current, quantity: event.target.value }))} className="contact-field" placeholder="Quantity" />
-              </div>
-              <div className="mt-3 grid gap-3 sm:grid-cols-2">
-                <input value={inquiry.location} onChange={(event) => setInquiry((current) => ({ ...current, location: event.target.value }))} className="contact-field" placeholder="Location" />
-                <input value={inquiry.note} onChange={(event) => setInquiry((current) => ({ ...current, note: event.target.value }))} className="contact-field" placeholder="Inquiry note" />
-              </div>
-
-            </form>
+              </>
+            )}
           </div>
         </div>
       </div>
-    </div>
+    </div>,
+    document.body,
   )
 }

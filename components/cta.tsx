@@ -1,6 +1,6 @@
 'use client'
 
-import { Gauge, Headset, PackageSearch, ShieldCheck, Truck } from 'lucide-react'
+import { Gauge, Headset, PackageSearch, ShieldCheck, Truck, Settings, Wrench} from 'lucide-react'
 import { useEffect, useState } from 'react'
 import { useScrollReveal } from '@/hooks/use-scroll-reveal'
 
@@ -25,7 +25,7 @@ const benefits = [
 const stats = [
   { icon: PackageSearch, value: 1000, suffix: '+', label: 'Products' },
   { icon: Gauge, value: 500, suffix: '+', label: 'Clients' },
-  { icon: ShieldCheck, value: 40, suffix: '+ Years', label: 'Established. in 1986' },
+  { icon: ShieldCheck, value: 40, suffix: '+ Years', label: 'Experience' },
 ]
 
 export default function CTA() {
@@ -110,6 +110,12 @@ export default function CTA() {
               Share your requirement and the team will suggest the right product combination, quantity, and lead time.
             </p>
           </div>
+          <div className="icon-badge-check">
+            <Settings size={80} className="text-[#ff7a1a]" />
+            <Settings size={48} className="text-[#ff7a1a]" />
+            <Settings size={24}  className="text-[#ff7a1a]" />
+          </div>
+          
         </div>
       </div>
     </section>

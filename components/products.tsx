@@ -4,193 +4,60 @@ import Image from 'next/image'
 import { CircleX, MessageCircle, Search } from 'lucide-react'
 import { useEffect, useMemo, useRef, useState } from 'react'
 import { useScrollReveal } from '@/hooks/use-scroll-reveal'
-import ProductModal, { type CatalogProduct } from '@/components/product-modal'
-
-const imageFiles = [
-  'Aluminium Coupling.jpg',
-  'Aluminium Handle.jpg',
-  'Aluminium Step Pulley.jpg',
-  'Anti Vibration Mounting.jpg',
-  'avm.png',
-  'Bevel Gear.jpg',
-  'C.I. Break Drum Coupling.jpg',
-  'C.I. Flat Pulley.jpg',
-  'C.I. Handle.jpg',
-  'C.I. Step Pulley.jpg',
-  'C.I. V-Belt Pulley - Arms.jpg',
-  'C.I. V-Belt Pulley - Semi Solid.jpg',
-  'C.I. V-Belt Pulley- Solid.jpg',
-  'Chain Coupling.jpg',
-  'CI Spur Gear.jpg',
-  'CI Worm Gear.jpg',
-  'Duplex Sprocket.jpg',
-  'Encoder Coupling.jpg',
-  'Flexible Coupling.jpg',
-  'Full Lock - Diamond.jpg',
-  'Gear Coupling.jpg',
-  'GR Coupling(1).jpg',
-  'GR Coupling.jpg',
-  'GR Spider.jpg',
-  'Half Lock.jpg',
-  'HRC Coupling(1).jpg',
-  'HRC Coupling.jpg',
-  'HRC Rubber.jpg',
-  'M.S. Breakdrum Coupling.jpeg',
-  'Nylon Sleeve Coupling.jpg',
-  'Nylon Sleeve.jpg',
-  'Rack and Pinion.jpg',
-  'Roller Chain.jpg',
-  'rope pulley.png',
-  'rrl coupling.png',
-  'Rubber Spider.jpg',
-  'Rubber Tyre.jpg',
-  'rubber.png',
-  'Simplex Sprocket.jpg',
-  'spur gear.png',
-  'Star Coupling.jpg',
-  'TaperLock Pulley.jpeg',
-  'Timing Belt Pulley.jpg',
-  'Triplex Sprocket.jpg',
-  'Variable Speed Pulley.jpeg',
-  'worm gear.jpg',
-] as const
-
-const categoryDetails: Record<Exclude<CatalogProduct['category'], never>, {
-  spec: string
-  description: string
-  features: string[]
-  specs: { label: string; value: string }[]
-}> = {
-  Pulleys: {
-    spec: 'Precision pulley solution for dependable belt transfer',
-    description: 'Pulley products for stable fitment, clean belt tracking, and repeatable industrial use.',
-    features: ['Stable groove profile', 'Reliable belt transfer', 'Easy replacement planning'],
-    specs: [
-      { label: 'Material', value: 'CI / Steel / Alloy' },
-      { label: 'Use', value: 'Power transmission' },
-      { label: 'Fit', value: 'Industrial pulley' },
-      { label: 'Supply', value: 'Made to order' },
-    ],
-  },
-  Couplings: {
-    spec: 'Industrial coupling for torque transfer and alignment support',
-    description: 'Coupling products for shaft connection, shock control, and low-maintenance field use.',
-    features: ['Shock absorption', 'Torque transfer', 'Service-friendly design'],
-    specs: [
-      { label: 'Material', value: 'CI / Steel / Rubber' },
-      { label: 'Use', value: 'Shaft connection' },
-      { label: 'Type', value: 'Coupling part' },
-      { label: 'Supply', value: 'Custom order' },
-    ],
-  },
-  Gears: {
-    spec: 'Precision gear component for stable motion transfer',
-    description: 'Gear products for dependable engagement, controlled movement, and industrial durability.',
-    features: ['Controlled motion', 'Durable tooth form', 'Industrial-ready profile'],
-    specs: [
-      { label: 'Material', value: 'CI / Steel / Bronze' },
-      { label: 'Use', value: 'Gear drive' },
-      { label: 'Profile', value: 'Precision gear' },
-      { label: 'Supply', value: 'Made to order' },
-    ],
-  },
-  Sprockets: {
-    spec: 'Chain-ready sprocket for dependable engagement',
-    description: 'Sprocket products for industrial chain systems that need clean engagement and long service life.',
-    features: ['Chain engagement', 'Durable profile', 'Industrial fit'],
-    specs: [
-      { label: 'Material', value: 'CI / Steel' },
-      { label: 'Use', value: 'Chain drive' },
-      { label: 'Type', value: 'Sprocket' },
-      { label: 'Supply', value: 'Custom tooth count' },
-    ],
-  },
-  Chains: {
-    spec: 'Industrial chain solution for drive applications',
-    description: 'Chain products for motion transfer, load handling, and industrial replacement planning.',
-    features: ['Load handling', 'Repeatable drive transfer', 'Industrial replacement ready'],
-    specs: [
-      { label: 'Material', value: 'Alloy steel' },
-      { label: 'Use', value: 'Chain drive' },
-      { label: 'Type', value: 'Roller chain' },
-      { label: 'Supply', value: 'By length / custom' },
-    ],
-  },
-  Accessories: {
-    spec: 'Industrial accessory for support and fitment use',
-    description: 'Accessory products used for mounting, protection, or application-specific fitment.',
-    features: ['Support component', 'Fitment aid', 'Industrial use ready'],
-    specs: [
-      { label: 'Material', value: 'Varies' },
-      { label: 'Use', value: 'Accessory' },
-      { label: 'Type', value: 'Support part' },
-      { label: 'Supply', value: 'Custom order' },
-    ],
-  },
-}
-
-const inferCategory = (fileName: string): CatalogProduct['category'] => {
-  const name = fileName.toLowerCase()
-
-  if (name.includes('pulley')) return 'Pulleys'
-  if (name.includes('coupling') || name.includes('spider') || name.includes('lock') || name.includes('sleeve') || name.includes('diamond')) return 'Couplings'
-  if (name.includes('gear') || name.includes('pinion')) return 'Gears'
-  if (name.includes('sprocket')) return 'Sprockets'
-  if (name.includes('chain')) return 'Chains'
-
-  return 'Accessories'
-}
-
-const toTitleFromFileName = (fileName: string) =>
-  fileName
-    .replace(/\.[^.]+$/, '')
-    .replace(/\s+/g, ' ')
-    .trim()
-
-const toProductId = (fileName: string) =>
-  fileName
-    .toLowerCase()
-    .replace(/\.[^.]+$/, '')
-    .replace(/[^a-z0-9]+/g, '-')
-    .replace(/^-+|-+$/g, '')
-
-const createCatalogProduct = (fileName: string): CatalogProduct => {
-  const category = inferCategory(fileName)
-  const details = categoryDetails[category]
-  const transparentFileName = fileName.replace(/\.[^.]+$/, '.png')
-
-  return {
-    id: toProductId(fileName),
-    name: toTitleFromFileName(fileName),
-    category,
-    image: `/Images/${encodeURI(transparentFileName)}`,
-    spec: details.spec,
-    description: details.description,
-    features: details.features,
-    specs: details.specs,
-  }
-}
-
-const catalogItems: CatalogProduct[] = imageFiles.map(createCatalogProduct)
-
-const normalizeSearchText = (value: string) =>
-  value
-    .toLowerCase()
-    .replace(/[^a-z0-9]+/g, ' ')
-    .replace(/\s+/g, ' ')
-    .trim()
+import ProductModal from '@/components/product-modal'
+import { catalogItems, normalizeSearchText, type CatalogProduct } from '@/lib/product-catalog'
 
 export default function Products() {
   const [searchQuery, setSearchQuery] = useState('')
   const [selectedProduct, setSelectedProduct] = useState<CatalogProduct | null>(null)
+  const [products, setProducts] = useState<CatalogProduct[]>([])
+  const [isLoading, setIsLoading] = useState(true)
   const searchInputRef = useRef<HTMLInputElement>(null)
   const productsTopRef = useRef<HTMLDivElement>(null)
   const hasMountedRef = useRef(false)
   const sectionRef = useScrollReveal<HTMLElement>()
 
+  useEffect(() => {
+    let isActive = true
+
+    const loadProducts = async () => {
+      try {
+        const response = await fetch('/api/products', { cache: 'no-store' })
+
+        if (!response.ok) {
+          throw new Error(`Products API returned ${response.status}`)
+        }
+
+        const data = (await response.json()) as { products?: CatalogProduct[] }
+
+        if (!isActive) {
+          return
+        }
+
+        setProducts(Array.isArray(data.products) ? data.products : catalogItems)
+      } catch (error) {
+        console.warn('Falling back to local product catalog:', error)
+
+        if (isActive) {
+          setProducts(catalogItems)
+        }
+      } finally {
+        if (isActive) {
+          setIsLoading(false)
+        }
+      }
+    }
+
+    loadProducts()
+
+    return () => {
+      isActive = false
+    }
+  }, [])
+
   const filteredProducts = useMemo<CatalogProduct[]>(() => {
     const query = normalizeSearchText(searchQuery)
-    const scopedItems = catalogItems
+    const scopedItems = products.length ? products : catalogItems
     if (!query) return scopedItems
 
     return scopedItems.filter((product) => {
@@ -205,7 +72,7 @@ export default function Products() {
 
       return haystack.includes(query)
     })
-  }, [searchQuery])
+  }, [products, searchQuery])
 
   const handleSearchValue = (value: string) => {
     setSearchQuery(value)
@@ -234,7 +101,7 @@ export default function Products() {
           <p data-reveal className="section-kicker mx-auto">PRODUCT CATALOGUE</p>
           <h2 data-reveal className="section-title mt-4">Products Build for the Industry</h2>
           <p data-reveal className="section-copy mx-auto mt-4 max-w-2xl">
-            Browse our full range of industrial and power transmission products.
+            Browse our full range of Industrial and Power Transmission Products.
           </p>
         </div>
 
@@ -273,7 +140,12 @@ export default function Products() {
         {/* category filters removed — search box is the single filter */}
 
         <div ref={productsTopRef} className="mt-10 grid gap-5 sm:mt-12 sm:grid-cols-2 sm:gap-6 lg:grid-cols-3 xl:grid-cols-4">
-          {filteredProducts.map((product, index) => (
+          {isLoading && !products.length ? (
+            <div className="col-span-full rounded-2xl border border-dashed border-[rgba(0,51,102,0.14)] bg-white p-8 text-center text-[#425062] sm:p-10">
+              Loading products from the database...
+            </div>
+          ) : null}
+          {!isLoading && filteredProducts.map((product, index) => (
             <article key={product.id} data-reveal className="product-card group flex h-full flex-col" style={{ animationDelay: `${index * 80}ms` }} onClick={() => setSelectedProduct(product)}>
               <div className="product-card__media relative shrink-0 overflow-hidden bg-white">
                 <Image
@@ -313,7 +185,7 @@ Thank you.`)}`}
           ))}
         </div>
 
-        {filteredProducts.length === 0 && (
+        {!isLoading && filteredProducts.length === 0 && (
           <div className="mt-10 rounded-2xl border border-dashed border-[rgba(0,51,102,0.14)] bg-white p-8 text-center text-[#425062] sm:p-10">
             {normalizeSearchText(searchQuery)
               ? `No products found for "${searchQuery.trim()}". Try another search term.`

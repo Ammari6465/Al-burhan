@@ -11,8 +11,8 @@ export default function Home() {
     <main className="w-full overflow-x-hidden bg-[var(--color-offwhite)] pt-0">
       <Hero />
       <Highlights />
-      <Products />
       <About />
+      <Products />
       <Contact />
       <Footer />
       <BackToTop />

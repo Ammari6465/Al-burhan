@@ -55,9 +55,15 @@ export default function Footer() {
               </div>
               <div className="flex items-start gap-3">
                 <Mail size={14} className="mt-1 shrink-0 text-[#ff6b00]" />
-                <a href="mailto:alburhanind.drives@gmail.com" className="footer-link break-all">
-                  alburhanind.drives@gmail.com
-                </a>
+
+<a
+  href="https://mail.google.com/mail/?view=cm&fs=1&to=alburhanind.drives@gmail.com"
+  target="_blank"
+  rel="noopener noreferrer"
+  className="footer-link break-all"
+>
+  alburhanind.drives@gmail.com
+</a>
               </div>
               <div className="flex items-start gap-3">
                 <MapPin size={14} className="mt-1 shrink-0 text-[#ff6b00]" />
