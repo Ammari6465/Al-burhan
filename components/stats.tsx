@@ -4,8 +4,8 @@ import { useEffect, useRef, useState } from 'react'
 
 const stats = [
   {
-    value: 25,
-    label: 'Years',
+    value: 40,
+    label: 'Years estd. in 1986',
   },
   {
     value: 500,

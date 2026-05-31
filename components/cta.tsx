@@ -25,7 +25,7 @@ const benefits = [
 const stats = [
   { icon: PackageSearch, value: 1000, suffix: '+', label: 'Products' },
   { icon: Gauge, value: 500, suffix: '+', label: 'Clients' },
-  { icon: ShieldCheck, value: 25, suffix: '+', label: 'Years' },
+  { icon: ShieldCheck, value: 40, suffix: '+ Years', label: 'Established. in 1986' },
 ]
 
 export default function CTA() {

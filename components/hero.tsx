@@ -5,7 +5,7 @@ import Image from 'next/image'
 import { useEffect, useState } from 'react'
 
 const stats = [
-  { value: 25, suffix: '+', label: 'Years' },
+  { value: 40, suffix: '+', label: 'Years estd. in 1986' },
   { value: 500, suffix: '+', label: 'Clients' },
   { value: 200, suffix: '+', label: 'Products' },
 ]
@@ -46,7 +46,7 @@ export default function Hero() {
     <section id="home" className="hero-shell section-shell flex items-center">
       <Image
         src="/BG%20Image%20.jpeg"
-        alt="AL-BURHAN Industrial Drives storefront signage"
+        alt="Al-Burhan Industrial Drives storefront signage"
         fill
         priority
         className="hero-media h-full w-full scale-105 object-cover object-top md:object-center blur-[1.5px]"
@@ -57,18 +57,18 @@ export default function Hero() {
       <div className="relative z-10 mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="grid items-center gap-10 py-10 sm:py-14 lg:grid-cols-[1.05fr_0.95fr] lg:py-16">
           <div className="hero-copy-panel max-w-[760px] rounded-2xl p-5 sm:p-7 lg:p-8">
-            <div className="hero-badge hero-load">INDUSTRIAL DRIVES & POWER TRANSMISSION</div>
+            
 
             <h1 className="hero-load hero-load-delay-1 mt-5 max-w-[760px] text-[38px] font-extrabold leading-[1.04] text-white sm:text-[56px] lg:text-[68px]">
               Industrial Products Built for <span className="text-[#ff7a1a]">Reliability</span>
             </h1>
 
             <p className="hero-load hero-load-delay-2 mt-5 max-w-[640px] text-[16px] font-semibold leading-7 text-white/88 sm:text-[19px]">
-              25+ Years of Excellence | 200+ Product Range | Pan-India Delivery
+              40+ years Industrial Drives Products | Pan-India Delivery | Reliable Products
             </p>
 
             <p className="hero-load hero-load-delay-3 mt-4 max-w-[640px] text-[15px] leading-7 text-white/78 sm:text-[17px]">
-              AL-BURHAN Industrial Drives combines dependable stock, responsive support, and industrial-grade quality for manufacturers, distributors, and maintenance teams across India.
+              Al-Burhan Industrial Drives combines dependable stock, responsive support, and industrial-grade quality for manufacturers, distributors, and maintenance teams across India.
             </p>
 
             <div className="hero-load hero-load-delay-4 mt-8 grid gap-3 sm:flex sm:flex-wrap">

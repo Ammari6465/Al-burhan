@@ -20,7 +20,7 @@ export default function Footer() {
           <div className="min-w-0">
             <div className="relative inline-flex max-w-full">
               <a href="#home" aria-label="AL-BURHAN home" className="inline-flex">
-                <div className="rounded-xl bg-white w-36 h-36 sm:w-44 sm:h-44 flex items-center justify-center shadow-[0_18px_42px_rgba(0,0,0,0.18)]">
+                <div className="rounded-xl bg-white w-36 h-36 sm:w-75 sm:h-36 flex items-center justify-center shadow-[0_18px_42px_rgba(0,0,0,0.18)]">
                   <BrandLogo large imgClassName="h-20 sm:h-24 md:h-28" />
                 </div>
               </a>
@@ -38,7 +38,7 @@ export default function Footer() {
             <p className="mt-4 max-w-[320px] text-[13px] leading-7 text-white/72 sm:max-w-[360px]">
               Premium power transmission products for OEMs and industrial buyers across India.
             </p>
-            <p className="mt-3 text-[12px] text-white/42">Est. 1999 | Mumbai, India</p>
+            <p className="mt-3 text-[12px] text-white/42">Est. 1986 | Mumbai, India</p>
           </div>
 
           <div>
@@ -71,7 +71,7 @@ export default function Footer() {
               </div>
               <div className="flex items-start gap-3">
                 <MapPin size={14} className="mt-1 shrink-0 text-[#ff6b00]" />
-                <p className="leading-7">109/111 Nagdevi Street, Mumbai 400003, Maharashtra</p>
+                <a className="leading-7" href='https://maps.app.goo.gl/CCFxysnL3jKhKp678'>109/111 Nagdevi Street, Mumbai 400003, Maharashtra</a>
               </div>
             </div>
 

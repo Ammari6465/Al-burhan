@@ -171,24 +171,22 @@ const createCatalogProduct = (fileName: string): CatalogProduct => {
 }
 
 const catalogItems: CatalogProduct[] = imageFiles.map(createCatalogProduct)
-const categories = ['All', 'Pulleys', 'Couplings', 'Gears', 'Sprockets', 'Chains', 'Accessories'] as const
 
 export default function Products() {
   const [searchQuery, setSearchQuery] = useState('')
-  const [activeCategory, setActiveCategory] = useState<(typeof categories)[number]>('All')
   const [selectedProduct, setSelectedProduct] = useState<CatalogProduct | null>(null)
   const sectionRef = useScrollReveal<HTMLElement>()
 
   const filteredProducts = useMemo<CatalogProduct[]>(() => {
     const query = searchQuery.trim().toLowerCase()
-    const scopedItems = activeCategory === 'All' ? catalogItems : catalogItems.filter((product) => product.category === activeCategory)
+    const scopedItems = catalogItems
     if (!query) return scopedItems
 
     return scopedItems.filter((product) => {
       const haystack = `${product.name} ${product.category} ${product.spec} ${product.description}`.toLowerCase()
       return haystack.includes(query)
     })
-  }, [activeCategory, searchQuery])
+  }, [searchQuery])
 
   return (
     <section ref={sectionRef} id="products" className="section-shell bg-[var(--color-offwhite)] py-16 sm:py-24">
@@ -218,23 +216,11 @@ export default function Products() {
           </div>
         </div>
 
-        <div data-reveal className="-mx-4 mt-5 flex gap-2 overflow-x-auto px-4 pb-2 sm:mx-auto sm:max-w-4xl sm:flex-wrap sm:justify-center sm:overflow-visible sm:px-0">
-          {categories.map((category) => (
-            <button
-              key={category}
-              type="button"
-              onClick={() => setActiveCategory(category)}
-              className="product-filter shrink-0 transition hover:border-[#C0392B]/30 hover:bg-white data-[active=true]:border-[#C0392B]/30 data-[active=true]:bg-[#C0392B] data-[active=true]:text-white"
-              data-active={activeCategory === category}
-            >
-              {category}
-            </button>
-          ))}
-        </div>
+        {/* category filters removed — search box is the single filter */}
 
         <div className="mt-10 grid gap-5 sm:mt-12 sm:grid-cols-2 sm:gap-6 lg:grid-cols-3 xl:grid-cols-4">
           {filteredProducts.map((product, index) => (
-            <article key={product.id} data-reveal className="product-card group flex h-full flex-col" style={{ animationDelay: `${index * 80}ms` }}>
+            <article key={product.id} data-reveal className="product-card group flex h-full flex-col" style={{ animationDelay: `${index * 80}ms` }} onClick={() => setSelectedProduct(product)}>
               <div className="product-card__media relative shrink-0 overflow-hidden bg-white">
                 <Image
                   src={product.image}
@@ -246,14 +232,7 @@ export default function Products() {
               </div>
 
               <div className="product-card__body flex flex-1 flex-col px-5 pt-4 pb-5">
-                <div className="flex flex-wrap gap-2">
-                  <span className="rounded-full bg-[#FDECEA] px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.18em] text-[#C0392B]">
-                    {product.category}
-                  </span>
-                  <span className="rounded-full bg-[#EAF6FF] px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.18em] text-[#0A3D62]">
-                    Fast quote
-                  </span>
-                </div>
+                {/* badges removed: category and "Fast quote" */}
 
                 <h3 className="product-card__title mt-4 text-[18px] font-bold text-[#0A3D62]">{product.name}</h3>
                 <p className="product-card__spec mt-1 text-[14px] leading-6 text-[#4A5568]">{product.spec}</p>
