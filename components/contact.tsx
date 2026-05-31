@@ -28,7 +28,7 @@ export default function Contact() {
           <p data-reveal className="section-kicker mx-auto">CONTACT</p>
           <h2 data-reveal className="section-title mt-4">Get in Touch</h2>
           <p data-reveal className="section-copy mx-auto mt-4 max-w-2xl">
-            Reach out via email or WhatsApp for enquiries and quotations.
+            Reach out via Email or WhatsApp for enquiries and quotations.
           </p>
         </div>
 

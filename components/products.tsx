@@ -172,18 +172,33 @@ const createCatalogProduct = (fileName: string): CatalogProduct => {
 
 const catalogItems: CatalogProduct[] = imageFiles.map(createCatalogProduct)
 
+const normalizeSearchText = (value: string) =>
+  value
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, ' ')
+    .replace(/\s+/g, ' ')
+    .trim()
+
 export default function Products() {
   const [searchQuery, setSearchQuery] = useState('')
   const [selectedProduct, setSelectedProduct] = useState<CatalogProduct | null>(null)
   const sectionRef = useScrollReveal<HTMLElement>()
 
   const filteredProducts = useMemo<CatalogProduct[]>(() => {
-    const query = searchQuery.trim().toLowerCase()
+    const query = normalizeSearchText(searchQuery)
     const scopedItems = catalogItems
     if (!query) return scopedItems
 
     return scopedItems.filter((product) => {
-      const haystack = `${product.name} ${product.category} ${product.spec} ${product.description}`.toLowerCase()
+      const haystack = normalizeSearchText([
+        product.name,
+        product.category,
+        product.spec,
+        product.description,
+        product.features.join(' '),
+        product.id,
+      ].join(' '))
+
       return haystack.includes(query)
     })
   }, [searchQuery])
@@ -255,7 +270,7 @@ export default function Products() {
 
         {filteredProducts.length === 0 && (
           <div className="mt-10 rounded-2xl border border-dashed border-[rgba(0,51,102,0.14)] bg-white p-8 text-center text-[#425062] sm:p-10">
-            {searchQuery.trim()
+            {normalizeSearchText(searchQuery)
               ? `No products found for "${searchQuery.trim()}". Try another search term.`
               : 'No products available.'}
           </div>
