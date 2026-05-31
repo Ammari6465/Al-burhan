@@ -4,6 +4,9 @@ import type { CatalogProduct } from '@/lib/product-catalog'
 
 const productsCollection = 'products'
 
+export const dynamic = 'force-dynamic'
+export const revalidate = 0
+
 export async function GET() {
   try {
     const firestore = getFirestoreInstance()
@@ -36,7 +39,15 @@ export async function GET() {
       }
     })
 
-    return NextResponse.json({ products }, { status: 200 })
+    return NextResponse.json(
+      { products },
+      {
+        status: 200,
+        headers: {
+          'Cache-Control': 'no-store, max-age=0, must-revalidate',
+        },
+      },
+    )
   } catch (error) {
     console.error('Failed to fetch products from Firestore:', error)
 
@@ -45,7 +56,12 @@ export async function GET() {
         message: 'Unable to fetch products from the database.',
         products: [],
       },
-      { status: 500 },
+      {
+        status: 500,
+        headers: {
+          'Cache-Control': 'no-store, max-age=0, must-revalidate',
+        },
+      },
     )
   }
 }

@@ -32,7 +32,7 @@ export function getFirestoreInstance() {
   const fallbackServiceAccount = loadServiceAccountFromFallbackFile()
   const projectId = process.env.FIREBASE_PROJECT_ID ?? fallbackServiceAccount?.project_id
   const clientEmail = process.env.FIREBASE_CLIENT_EMAIL ?? fallbackServiceAccount?.client_email
-  const privateKey = process.env.FIREBASE_PRIVATE_KEY?.replace(/\n/g, '\n') ?? fallbackServiceAccount?.private_key?.replace(/\n/g, '\n')
+  const privateKey = process.env.FIREBASE_PRIVATE_KEY?.replace(/\\n/g, '\n') ?? fallbackServiceAccount?.private_key?.replace(/\\n/g, '\n')
 
   if (!projectId || !clientEmail || !privateKey) {
     throw new Error('Missing Firebase Admin credentials.')
