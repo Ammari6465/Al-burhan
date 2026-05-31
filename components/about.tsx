@@ -66,9 +66,9 @@ export default function About() {
   const sectionRef = useScrollReveal<HTMLElement>()
 
   return (
-    <section id="about" ref={sectionRef} className="bg-[#F4F6FA] py-[60px]">
+    <section id="about" ref={sectionRef} className="bg-[#F4F6FA] py-[48px] sm:py-[56px] lg:py-[60px]">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-20">
-        <div className="grid gap-6 lg:grid-cols-2 lg:items-stretch">
+        <div className="grid gap-5 lg:grid-cols-[1.04fr_0.96fr] lg:items-stretch xl:gap-6">
           <div className="flex h-full min-w-0 flex-col justify-between">
             <div>
               <span
@@ -145,7 +145,7 @@ export default function About() {
               </div>
             </div>
 
-            <div className="grid grid-cols-2 gap-3">
+            <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
               {trustTiles.map((tile) => {
                 const Icon = tile.icon
 
@@ -165,7 +165,7 @@ export default function About() {
           </div>
         </div>
 
-        <div data-reveal className="mt-6 grid gap-4 md:grid-cols-2 xl:grid-cols-4">
+        <div data-reveal className="mt-6 grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
           {features.map((item) => {
             const Icon = item.icon
 

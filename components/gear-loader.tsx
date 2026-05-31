@@ -2,26 +2,18 @@
 
 import { useEffect, useMemo, useState } from 'react'
 
-const LOADER_KEY = 'alburhan-loader-seen-v1'
-
 export default function GearLoader() {
-  const [isVisible, setIsVisible] = useState(false)
+  const [isVisible, setIsVisible] = useState(true)
   const [isStopping, setIsStopping] = useState(false)
   const [isLeaving, setIsLeaving] = useState(false)
 
   const loadingText = useMemo(() => 'Preparing the industrial-grade experience…', [])
 
   useEffect(() => {
-    const hasSeenLoader = window.localStorage.getItem(LOADER_KEY) === 'true'
-    if (hasSeenLoader) return
-
-    setIsVisible(true)
-
     const stopTimer = window.setTimeout(() => setIsStopping(true), 1900)
     const leaveTimer = window.setTimeout(() => setIsLeaving(true), 2350)
     const hideTimer = window.setTimeout(() => {
       setIsVisible(false)
-      window.localStorage.setItem(LOADER_KEY, 'true')
     }, 2850)
 
     return () => {
@@ -30,6 +22,15 @@ export default function GearLoader() {
       window.clearTimeout(hideTimer)
     }
   }, [])
+
+  useEffect(() => {
+    if (isVisible) {
+      document.body.dataset.gearLoaderActive = 'true'
+      return
+    }
+
+    delete document.body.dataset.gearLoaderActive
+  }, [isVisible])
 
   if (!isVisible) return null
 

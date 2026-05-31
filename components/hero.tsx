@@ -64,7 +64,7 @@ export default function Hero() {
             </h1>
 
             <p className="hero-load hero-load-delay-2 mt-5 max-w-[640px] text-[16px] font-semibold leading-7 text-white/88 sm:text-[19px]">
-              40+ years Industrial Drives Products | Pan-India Delivery | Reliable Products
+              40+ Years of Excellence| Pan-India Delivery
             </p>
 
             <p className="hero-load hero-load-delay-3 mt-4 max-w-[640px] text-[15px] leading-7 text-white/78 sm:text-[17px]">

@@ -161,7 +161,15 @@
   }
 
   .page-enter {
-    animation: pageEnter 0.5s ease-out;
+    opacity: 1;
+    transform: translateY(0);
+    transition: opacity 0.48s ease, transform 0.48s ease;
+    will-change: opacity, transform;
+  }
+
+  body[data-gear-loader-active='true'] .page-enter {
+    opacity: 0;
+    transform: translateY(14px);
   }
 }
 
