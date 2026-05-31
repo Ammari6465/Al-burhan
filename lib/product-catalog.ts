@@ -201,11 +201,18 @@ const groupedSources = imageFiles.reduce<Array<{
 }, [])
 
 export const catalogItems: CatalogProduct[] = groupedSources.map((group) => {
+  // Allow overriding certain base names to friendlier product titles
+  const renameMap: Record<string, string> = {
+    'avm': 'Cushy Foot Mounting',
+    'anti vibration mounting': 'Cushy Foot Mounting',
+  }
+
   const details = categoryDetails[group.category]
+  const displayName = renameMap[group.baseName.toLowerCase()] ?? group.baseName
 
   return {
     id: toProductId(`${group.category}-${group.baseName}`),
-    name: group.baseName,
+    name: displayName,
     category: group.category,
     image: group.imageLinks[0],
     images: group.imageLinks,
