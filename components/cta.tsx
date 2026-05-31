@@ -1,6 +1,6 @@
 'use client'
 
-import { Gauge, Headset, PackageSearch, ShieldCheck, Truck, Settings, Wrench} from 'lucide-react'
+import { Gauge, Headset, PackageSearch, Settings, ShieldCheck, Truck } from 'lucide-react'
 import { useEffect, useState } from 'react'
 import { useScrollReveal } from '@/hooks/use-scroll-reveal'
 
@@ -104,16 +104,35 @@ export default function CTA() {
         </div>
 
         <div data-reveal className="why-band mt-12 px-5 py-8 sm:px-8 sm:py-10 lg:flex lg:items-center lg:justify-between lg:px-14">
-          <div className="max-w-2xl">
+          <div className="max-w-2xl lg:pr-24">
             <h3 className="text-[clamp(1.8rem,2.6vw,2.8rem)] font-black leading-tight text-white normal-case tracking-normal">Ready for Reliable Industrial Supply?</h3>
             <p className="mt-3 text-[15px] leading-7 text-white/78">
               Share your requirement and the team will suggest the right product combination, quantity, and lead time.
             </p>
           </div>
-          <div className="icon-badge-check">
-            <Settings size={80} className="text-[#ff7a1a]" />
-            <Settings size={48} className="text-[#ff7a1a]" />
-            <Settings size={24}  className="text-[#ff7a1a]" />
+          <div className="relative mt-8 h-[148px] w-[132px] shrink-0 lg:mt-0">
+            <Settings
+              size={92}
+              strokeWidth={1.5}
+              className="text-[#ff7a1a]"
+              style={{
+                position: 'absolute',
+                top: 0,
+                right: 0,
+              }}
+            />
+            <Settings
+              size={50}
+              strokeWidth={1.5}
+              className="text-[#ff7a1a]"
+              style={{
+                position: 'absolute',
+                top: 82,
+                right: 52,
+                marginRight: 16,
+                opacity: 0.5,
+              }}
+            />
           </div>
           
         </div>
