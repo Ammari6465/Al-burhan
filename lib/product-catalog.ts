@@ -203,8 +203,9 @@ const groupedSources = imageFiles.reduce<Array<{
 export const catalogItems: CatalogProduct[] = groupedSources.map((group) => {
   // Allow overriding certain base names to friendlier product titles
   const renameMap: Record<string, string> = {
-    'avm': 'Cushy Foot Mounting',
-    'anti vibration mounting': 'Cushy Foot Mounting',
+    'avm': 'Anti Vibration Mounting',
+    'anti vibration mounting': 'Anti Vibration Mounting',
+    'anti vibrating mount': 'Anti Vibration Mounting',
     'rrl coupling': 'RRS Coupling',
     'rrl coupling(1)': 'RRS Coupling',
     'rrl': 'RRS Coupling',
