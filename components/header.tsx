@@ -1,7 +1,7 @@
 'use client'
 
 import BrandLogo from '@/components/brand-logo'
-import { MessageCircle, Menu, X } from 'lucide-react'
+import { Menu, X } from 'lucide-react'
 import { useEffect, useState } from 'react'
 
 const navLinks = [
@@ -17,17 +17,42 @@ export default function Header() {
   const [isScrolled, setIsScrolled] = useState(false)
 
   useEffect(() => {
-    const onScroll = () => setIsScrolled(window.scrollY > 80)
+    const sectionIds = navLinks.map((link) => link.href.slice(1))
+
+    const updateActiveSection = () => {
+      setIsScrolled(window.scrollY > 80)
+
+      const viewportMid = window.innerHeight * 0.45
+      let currentHash = '#home'
+      let closestDistance = Number.POSITIVE_INFINITY
+
+      for (const id of sectionIds) {
+        const element = document.getElementById(id)
+        if (!element) continue
+
+        const { top, bottom } = element.getBoundingClientRect()
+        const distance =
+          viewportMid < top ? top - viewportMid : viewportMid > bottom ? viewportMid - bottom : 0
+
+        if (distance < closestDistance) {
+          closestDistance = distance
+          currentHash = `#${id}`
+        }
+      }
+
+      setActiveHash(currentHash)
+    }
+
     const onHashChange = () => setActiveHash(window.location.hash || '#home')
 
-    onScroll()
+    updateActiveSection()
     onHashChange()
 
-    window.addEventListener('scroll', onScroll, { passive: true })
+    window.addEventListener('scroll', updateActiveSection, { passive: true })
     window.addEventListener('hashchange', onHashChange)
 
     return () => {
-      window.removeEventListener('scroll', onScroll)
+      window.removeEventListener('scroll', updateActiveSection)
       window.removeEventListener('hashchange', onHashChange)
     }
   }, [])
@@ -63,15 +88,6 @@ export default function Header() {
           </nav>
 
           <div className="flex items-center gap-2 sm:gap-3">
-            <a
-              href="https://wa.me/919819036787?text=Hi%20AL-BURHAN,%20I%20would%20like%20a%20quote"
-              target="_blank"
-              rel="noreferrer"
-              className="hidden min-h-10 items-center justify-center gap-2 rounded-full bg-[#25D366] px-4 text-[13px] font-bold text-white shadow-[0_10px_22px_rgba(37,211,102,0.22)] transition hover:-translate-y-0.5 hover:bg-[#1EBE57] sm:inline-flex"
-            >
-              <MessageCircle size={16} />
-              Quote
-            </a>
             <button
               type="button"
               aria-label="Open navigation"
@@ -119,15 +135,6 @@ export default function Header() {
                   {link.name}
                 </a>
               ))}
-              <a
-                href="https://wa.me/919819036787?text=Hi%20AL-BURHAN,%20I%20would%20like%20a%20quote"
-                target="_blank"
-                rel="noreferrer"
-                className="mt-6 inline-flex min-h-12 items-center justify-center gap-2 rounded-full bg-[#25D366] px-5 text-[14px] font-bold text-white"
-              >
-                <MessageCircle size={18} />
-                WhatsApp Inquiry
-              </a>
             </nav>
           </aside>
         </>

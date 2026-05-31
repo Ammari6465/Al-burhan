@@ -1,4 +1,3 @@
-import Header from '@/components/header'
 import Hero from '@/components/hero'
 import Highlights from '@/components/cta'
 import About from '@/components/about'
@@ -10,7 +9,6 @@ import BackToTop from '@/components/back-to-top'
 export default function Home() {
   return (
     <main className="w-full overflow-x-hidden bg-[var(--color-offwhite)] pt-0">
-      <Header />
       <Hero />
       <Highlights />
       <Products />

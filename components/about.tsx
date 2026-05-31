@@ -111,14 +111,6 @@ export default function About() {
               </div>
             </div>
 
-            <div data-reveal className="mt-6">
-              <a
-                href="#contact"
-                className="inline-flex min-h-11 items-center justify-center rounded-[12px] bg-[#0F3460] px-5 text-[13px] font-medium text-white transition-colors hover:bg-[#185FA5]"
-              >
-                Request a quote →
-              </a>
-            </div>
           </div>
 
           <div className="flex h-full min-w-0 flex-col justify-between gap-3" data-reveal>

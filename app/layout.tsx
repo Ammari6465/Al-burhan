@@ -1,5 +1,7 @@
 import type { Metadata } from 'next'
+import Header from '@/components/header'
 import GearLoader from '@/components/gear-loader'
+import FloatingWhatsAppButton from '@/components/floating-whatsapp-button'
 import { ThemeProvider } from '@/components/theme-provider'
 import './globals.css'
 
@@ -30,7 +32,9 @@ export default function RootLayout({
       <body className="overflow-x-hidden bg-[var(--color-offwhite)] font-sans antialiased text-[#0f1720]" suppressHydrationWarning>
         <ThemeProvider attribute="class" defaultTheme="light" forcedTheme="light" enableSystem={false}>
           <GearLoader />
+          <Header />
           <div className="page-enter">{children}</div>
+          <FloatingWhatsAppButton />
         </ThemeProvider>
       </body>
     </html>

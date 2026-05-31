@@ -1,6 +1,6 @@
 'use client'
 
-import { ChevronDown, MessageCircle, PackageCheck, ShieldCheck, Truck, Users } from 'lucide-react'
+import { ChevronDown, PackageCheck, ShieldCheck, Truck, Users } from 'lucide-react'
 import Image from 'next/image'
 import { useEffect, useState } from 'react'
 
@@ -74,15 +74,6 @@ export default function Hero() {
             <div className="hero-load hero-load-delay-4 mt-8 grid gap-3 sm:flex sm:flex-wrap">
               <a href="#products" className="inline-flex min-h-12 items-center justify-center gap-2 rounded-xl bg-[#ff7a1a] px-7 py-3.5 font-ui text-[15px] font-extrabold text-white shadow-[0_18px_34px_rgba(255,122,26,0.28)] transition hover:-translate-y-0.5 hover:bg-[#f97316]">
                 Explore Products
-              </a>
-              <a
-                href={`https://wa.me/919819036787?text=${encodeURIComponent('Hi AL-BURHAN, I would like a quotation for industrial products.')}`}
-                target="_blank"
-                rel="noreferrer"
-                className="inline-flex min-h-12 items-center justify-center gap-2 rounded-xl border-2 border-[#25D366] bg-[#25D366]/10 px-7 py-3.5 font-ui text-[15px] font-extrabold text-white transition hover:-translate-y-0.5 hover:bg-[#25D366]"
-              >
-                <MessageCircle size={18} />
-                WhatsApp Us
               </a>
             </div>
 

@@ -1,7 +1,7 @@
 'use client'
 
 import BrandLogo from '@/components/brand-logo'
-import { Mail, MapPin, MessageCircle, Phone } from 'lucide-react'
+import { Mail, MapPin, Phone } from 'lucide-react'
 
 const companyLinks = [
   { name: 'Home', href: '#home' },
@@ -23,16 +23,6 @@ export default function Footer() {
                 <div className="rounded-xl bg-white w-36 h-36 sm:w-75 sm:h-36 flex items-center justify-center shadow-[0_18px_42px_rgba(0,0,0,0.18)]">
                   <BrandLogo large imgClassName="h-20 sm:h-24 md:h-28" />
                 </div>
-              </a>
-              <a
-                href="https://wa.me/919819036787?text=Hi%20AL-BURHAN,%20I%20would%20like%20a%20quote"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="whatsapp-fab"
-                aria-label="WhatsApp inquiry"
-              >
-                <MessageCircle size={20} />
-                <span className="hidden font-ui text-[14px] font-semibold text-white sm:inline">Chat on WhatsApp</span>
               </a>
             </div>
             <p className="mt-4 max-w-[320px] text-[13px] leading-7 text-white/72 sm:max-w-[360px]">
@@ -74,21 +64,12 @@ export default function Footer() {
                 <a className="leading-7" href='https://maps.app.goo.gl/CCFxysnL3jKhKp678'>109/111 Nagdevi Street, Mumbai 400003, Maharashtra</a>
               </div>
             </div>
-
-            <a
-              href={`https://wa.me/919819036787?text=${encodeURIComponent('Hi AL-BURHAN, I would like a quote for industrial drives.')}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="footer-action mt-5 inline-flex min-h-11 w-full items-center justify-center rounded-full px-5 py-3 text-[13px] font-bold sm:w-auto"
-            >
-              WhatsApp Us
-            </a>
           </div>
         </div>
 
         <div className="mt-10 border-t border-white/10 py-5 sm:mt-12 md:flex md:items-center md:justify-between">
           <p className="text-center text-[12px] text-white/46 md:text-left">
-            Copyright {currentYear} AL-BURHAN Industrial Drives. All rights reserved.
+            @Copyright {currentYear} Al-Burhan Industrial Drives. All rights reserved.
           </p>
           <div className="mt-3 flex items-center justify-center gap-3 text-[12px] text-white/46 md:mt-0 md:justify-start">
             <a href="#" className="transition hover:text-white">

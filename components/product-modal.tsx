@@ -1,6 +1,6 @@
 'use client'
 
-import { MessageCircle, X } from 'lucide-react'
+import { X } from 'lucide-react'
 import Image from 'next/image'
 import { useEffect, useState } from 'react'
 
@@ -52,20 +52,6 @@ export default function ProductModal({ product, onClose }: ProductModalProps) {
   if (!product) {
     return null
   }
-
-  const whatsappMessage = encodeURIComponent(
-    [
-      `Hi AL-BURHAN, I am interested in ${product.name}.`,
-      inquiry.name ? `Name: ${inquiry.name}` : null,
-      inquiry.quantity ? `Quantity: ${inquiry.quantity}` : null,
-      inquiry.location ? `Location: ${inquiry.location}` : null,
-      inquiry.note ? `Requirement: ${inquiry.note}` : null,
-    ]
-      .filter(Boolean)
-      .join(' '),
-  )
-
-  const whatsappLink = `https://wa.me/919819036787?text=${whatsappMessage}`
 
   return (
     <div className="modal-backdrop fixed inset-0 z-[120] flex items-center justify-center p-4">
@@ -123,12 +109,6 @@ export default function ProductModal({ product, onClose }: ProductModalProps) {
                 <input value={inquiry.note} onChange={(event) => setInquiry((current) => ({ ...current, note: event.target.value }))} className="contact-field" placeholder="Inquiry note" />
               </div>
 
-              <div className="mt-4 flex flex-wrap gap-3">
-                <a href={whatsappLink} target="_blank" rel="noreferrer" onClick={onClose} className="product-cta inline-flex items-center justify-center gap-2 rounded-full px-5 py-3 text-[14px] font-bold">
-                  <MessageCircle size={16} />
-                  WhatsApp Inquiry
-                </a>
-              </div>
             </form>
           </div>
         </div>

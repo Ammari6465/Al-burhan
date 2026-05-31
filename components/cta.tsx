@@ -110,16 +110,6 @@ export default function CTA() {
               Share your requirement and the team will suggest the right product combination, quantity, and lead time.
             </p>
           </div>
-          <div className="mt-6 grid gap-3 sm:flex sm:flex-wrap lg:mt-0">
-            <a
-              href={`https://wa.me/919819036787?text=${encodeURIComponent('Hi AL-BURHAN, I would like a WhatsApp quotation for industrial products.')}`}
-              target="_blank"
-              rel="noreferrer"
-              className="inline-flex min-h-12 items-center justify-center rounded-full bg-[#25D366] px-5 py-3 text-[13px] font-bold text-white transition-all duration-200 hover:bg-[#1EBE57]"
-            >
-              WhatsApp Inquiry
-            </a>
-          </div>
         </div>
       </div>
     </section>

@@ -1,8 +1,8 @@
 'use client'
 
 import Image from 'next/image'
-import { MessageCircle, Search } from 'lucide-react'
-import { useMemo, useState } from 'react'
+import { CircleX, MessageCircle, Search } from 'lucide-react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import { useScrollReveal } from '@/hooks/use-scroll-reveal'
 import ProductModal, { type CatalogProduct } from '@/components/product-modal'
 
@@ -157,12 +157,13 @@ const toProductId = (fileName: string) =>
 const createCatalogProduct = (fileName: string): CatalogProduct => {
   const category = inferCategory(fileName)
   const details = categoryDetails[category]
+  const transparentFileName = fileName.replace(/\.[^.]+$/, '.png')
 
   return {
     id: toProductId(fileName),
     name: toTitleFromFileName(fileName),
     category,
-    image: `/Images/${encodeURI(fileName)}`,
+    image: `/Images/${encodeURI(transparentFileName)}`,
     spec: details.spec,
     description: details.description,
     features: details.features,
@@ -182,6 +183,9 @@ const normalizeSearchText = (value: string) =>
 export default function Products() {
   const [searchQuery, setSearchQuery] = useState('')
   const [selectedProduct, setSelectedProduct] = useState<CatalogProduct | null>(null)
+  const searchInputRef = useRef<HTMLInputElement>(null)
+  const productsTopRef = useRef<HTMLDivElement>(null)
+  const hasMountedRef = useRef(false)
   const sectionRef = useScrollReveal<HTMLElement>()
 
   const filteredProducts = useMemo<CatalogProduct[]>(() => {
@@ -203,6 +207,26 @@ export default function Products() {
     })
   }, [searchQuery])
 
+  const handleSearchValue = (value: string) => {
+    setSearchQuery(value)
+  }
+
+  const handleClearSearch = () => {
+    setSearchQuery('')
+    searchInputRef.current?.focus()
+  }
+
+  useEffect(() => {
+    if (!hasMountedRef.current) {
+      hasMountedRef.current = true
+      return
+    }
+
+    if (searchQuery.trim()) return
+
+    productsTopRef.current?.scrollIntoView({ block: 'start', behavior: 'smooth' })
+  }, [searchQuery])
+
   return (
     <section ref={sectionRef} id="products" className="section-shell bg-[var(--color-offwhite)] py-16 sm:py-24">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 xl:px-20">
@@ -221,19 +245,34 @@ export default function Products() {
           <div className="product-search-wrap">
             <Search size={18} className="product-search-wrap__icon" aria-hidden />
             <input
+              ref={searchInputRef}
               id="product-search"
-              type="search"
+              type="text"
+              inputMode="search"
               value={searchQuery}
-              onChange={(event) => setSearchQuery(event.target.value)}
+              onChange={(event) => handleSearchValue(event.target.value)}
+              onKeyDown={(event) => {
+                if (event.key === 'Escape') handleClearSearch()
+              }}
               placeholder="Search products..."
-              className="product-search-wrap__field"
+              className="product-search-wrap__field pr-11"
             />
+            {searchQuery.trim() ? (
+              <button
+                type="button"
+                onClick={handleClearSearch}
+                className="absolute right-3 top-1/2 -translate-y-1/2 rounded-full p-1 text-[#0A3D62] transition hover:bg-[#E6F1FB]"
+                aria-label="Clear search"
+              >
+                <CircleX size={18} aria-hidden />
+              </button>
+            ) : null}
           </div>
         </div>
 
         {/* category filters removed — search box is the single filter */}
 
-        <div className="mt-10 grid gap-5 sm:mt-12 sm:grid-cols-2 sm:gap-6 lg:grid-cols-3 xl:grid-cols-4">
+        <div ref={productsTopRef} className="mt-10 grid gap-5 sm:mt-12 sm:grid-cols-2 sm:gap-6 lg:grid-cols-3 xl:grid-cols-4">
           {filteredProducts.map((product, index) => (
             <article key={product.id} data-reveal className="product-card group flex h-full flex-col" style={{ animationDelay: `${index * 80}ms` }} onClick={() => setSelectedProduct(product)}>
               <div className="product-card__media relative shrink-0 overflow-hidden bg-white">
@@ -254,15 +293,21 @@ export default function Products() {
 
                 <div className="product-card__action mt-auto pt-5">
                   <a
-                    href={`https://wa.me/919819036787?text=${encodeURIComponent(`Hello AL-BURHAN, I am interested in ${product.name}. Please share details and pricing.`)}`}
+                    href={`https://wa.me/919819036787?text=${encodeURIComponent(`Hello Al-Burhan,
+
+I am interested in your product, ${product.name}. Kindly share the product details and pricing at your earliest convenience.
+
+Thank you.`)}`}
                     target="_blank"
                     rel="noreferrer"
+                    onClick={(event) => event.stopPropagation()}
                     className="inline-flex min-h-11 w-full items-center justify-center gap-2 rounded-full bg-[#25D366] px-4 py-3 text-[13px] font-bold text-white transition hover:bg-[#1EBE57]"
                   >
                     <MessageCircle size={16} />
                     Quote
                   </a>
                 </div>
+
               </div>
             </article>
           ))}
