@@ -20,7 +20,7 @@ const stats = [
 ]
 
 const trustTiles = [
-  { icon: IconMapPin, title: 'Mumbai - 03' },
+  { icon: IconMapPin, title: 'Mumbai' },
   { icon: IconShieldCheck, title: 'GSTIN Verified' },
 ]
 
