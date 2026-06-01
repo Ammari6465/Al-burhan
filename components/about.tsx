@@ -5,6 +5,7 @@ import {
   IconBuildingFactory,
   IconCircleCheck,
   IconHeadphones,
+  IconPhoneCall,
   IconMapPin,
   IconQuote,
   IconShieldCheck,
@@ -171,7 +172,7 @@ export default function About() {
           })}
         </div>
 
-        <div data-reveal className="mt-6 rounded-[12px] border border-[0.5px] border-[rgba(0,0,0,0.1)] bg-[#0F3460] px-5 py-6 text-white">
+        <div data-reveal className="relative mt-6 rounded-[12px] border border-[0.5px] border-[rgba(0,0,0,0.1)] bg-[#0F3460] px-5 py-6 text-white">
           <div className="flex items-start gap-4">
             <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-[10px] bg-[#132952] text-[#185FA5]">
               <IconQuote size={18} stroke={1.8} />
@@ -197,6 +198,13 @@ export default function About() {
               </article>
             ))}
           </div>
+          <a
+            href="tel:+919999999999"
+            className="absolute right-5 bottom-5 inline-flex items-center gap-2 rounded-md bg-white px-4 py-2 text-sm font-medium text-[#0F3460] shadow-sm ring-1 ring-white/10"
+          >
+            <IconPhoneCall size={16} stroke={1.8} />
+            <span>Call now</span>
+          </a>
         </div>
       </div>
     </section>
