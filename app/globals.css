@@ -935,6 +935,12 @@
   position: absolute;
   inset: 0;
   background: radial-gradient(circle at top right, rgba(255, 107, 0, 0.16), transparent 25%);
+  pointer-events: none;
+}
+
+.why-band .call-now {
+  position: relative;
+  z-index: 20;
 }
 
 .floating-chip {

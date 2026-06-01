@@ -137,7 +137,7 @@ export default function CTA() {
           <div className="mt-6 grid gap-3 sm:flex sm:flex-wrap lg:mt-0">
             <a
               href="tel:+919819036787"
-              className="inline-flex items-center gap-2 rounded-full bg-[#ff7a1a] px-5 py-3 text-white font-semibold shadow-sm ring-1 ring-[#ff7a1a]/30"
+              className="call-now inline-flex items-center gap-2 rounded-full bg-[#ff7a1a] px-5 py-3 text-white font-semibold shadow-sm ring-1 ring-[#ff7a1a]/30"
             >
               <PhoneCall size={18} />
               <span>Call now</span>
