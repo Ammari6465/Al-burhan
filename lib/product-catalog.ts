@@ -45,9 +45,9 @@ const imageFiles = [
   'Rack and Pinion.jpg',
   'Roller Chain.jpg',
   'rope pulley.png',
-  'rrl coupling.png',
+  'rrs coupling.jpeg',
   'Rubber Spider.jpg',
-  'Rubber Tyre.jpg',
+  'Rubber Tyre.jpeg',
   'rubber.png',
   'Simplex Sprocket.jpg',
   'spur gear.png',
@@ -57,6 +57,9 @@ const imageFiles = [
   'Triplex Sprocket.jpg',
   'Variable Speed Pulley.jpeg',
   'worm gear.jpg',
+  'Tyre Coupling.jpeg',
+  'Tyre Coupling(1).jpeg'
+  
 ] as const
 
 const categoryDetails: Record<Exclude<CatalogProduct['category'], never>, {
@@ -173,7 +176,7 @@ const toProductId = (value: string) =>
     .replace(/[^a-z0-9]+/g, '-')
     .replace(/^-+|-+$/g, '')
 
-const buildImageLink = (fileName: string) => `/Images/${encodeURI(fileName.replace(/\.[^.]+$/, '.png'))}`
+const buildImageLink = (fileName: string) => `/Images/${encodeURI(fileName)}`
 
 const groupedSources = imageFiles.reduce<Array<{
   baseName: string
@@ -204,7 +207,7 @@ export const catalogItems: CatalogProduct[] = groupedSources.map((group) => {
   // Allow overriding certain base names to friendlier product titles
   const renameMap: Record<string, string> = {
     'avm': 'Cushy Foot Mounting',
-    'anti vibration mounting': 'Anti Vibration Mounting',
+    'anti vibration mounting': 'Round Mounting',
     'anti vibrating mount': 'Anti Vibration Mounting',
     'rrl coupling': 'RRS Coupling',
     'rrl coupling(1)': 'RRS Coupling',
