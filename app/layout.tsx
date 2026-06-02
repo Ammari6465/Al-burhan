@@ -9,8 +9,8 @@ export const metadata: Metadata = {
   title: 'Al-Burhan Industrial Drives | Precision Industrial Power Transmission',
   description: 'Modern industrial website for AL-BURHAN Industrial Drives, featuring pulleys, couplings, gears, sprockets, fast dispatch, and OEM support across India.',
   icons: {
-    icon: '/favicon.png',
-    apple: '/favicon.png',
+    icon: '/Favicon.png',
+    apple: '/Favicon.png',
   },
 }
 
