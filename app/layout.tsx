@@ -29,6 +29,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="bg-white" suppressHydrationWarning>
+      <head>
+        <link rel="icon" href="/Favicon.png" />
+        <link rel="icon" href="/icon.svg" type="image/svg+xml" />
+        <link rel="apple-touch-icon" href="/Favicon.png" />
+      </head>
       <body className="overflow-x-hidden bg-[var(--color-offwhite)] font-sans antialiased text-[#0f1720]" suppressHydrationWarning>
         <ThemeProvider attribute="class" defaultTheme="light" forcedTheme="light" enableSystem={false}>
           <GearLoader />
