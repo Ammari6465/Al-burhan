@@ -1,0 +1,6 @@
+{
+  "name": "Al-Burhan Industrial Drives",
+  "description": "Industrial power transmission website featuring precision pulleys, couplings, gears, sprockets, fast dispatch, and OEM support across India.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
