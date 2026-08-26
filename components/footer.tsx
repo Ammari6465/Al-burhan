@@ -77,9 +77,13 @@ export default function Footer() {
           <p className="text-center text-[12px] text-white/46 md:text-left">
             @Copyright {currentYear} Al-Burhan Industrial Drives. All rights reserved.
           </p>
-          <div className="mt-3 flex items-center justify-center gap-3 text-[12px] text-white/46 md:mt-0 md:justify-start">
+          <div className="mt-3 flex items-center justify-center gap-4 text-[12px] text-white/46 md:mt-0 md:justify-start">
             <a href="#" className="transition hover:text-white">
               Privacy Policy
+            </a>
+            <span className="text-white/20">•</span>
+            <a href="/admin" className="inline-flex items-center gap-1 text-white/50 hover:text-white transition">
+              <span>🔒</span> Staff / Add Products
             </a>
           </div>
         </div>
