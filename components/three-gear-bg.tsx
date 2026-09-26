@@ -4,7 +4,12 @@ import React, { useRef, useMemo } from 'react'
 import { Canvas, useFrame } from '@react-three/fiber'
 import type { Mesh } from 'three'
 
-function Gear({ rotationSpeed = 0.4, color = '#c53030', position = [0, 0, 0], scale = 1 }: any) {
+function Gear({ rotationSpeed = 0.4, color = '#c53030', position = [0, 0, 0], scale = 1 }: {
+  rotationSpeed?: number
+  color?: string
+  position?: [number, number, number]
+  scale?: number
+}) {
   const ref = useRef<Mesh | null>(null)
   useFrame((_state, delta) => {
     if (ref.current) ref.current.rotation.z += rotationSpeed * delta

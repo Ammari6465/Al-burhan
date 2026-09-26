@@ -81,10 +81,6 @@ export default function Footer() {
             <a href="#" className="transition hover:text-white">
               Privacy Policy
             </a>
-            <span className="text-white/20">•</span>
-            <a href="/admin" className="inline-flex items-center gap-1 text-white/50 hover:text-white transition">
-              <span>🔒</span> Staff / Add Products
-            </a>
           </div>
         </div>
       </div>

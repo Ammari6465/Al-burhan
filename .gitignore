@@ -13,4 +13,5 @@ public/*firebase-adminsdk*.json
 # Common ignores
 node_modules
 .next/
+data/
 .DS_Store

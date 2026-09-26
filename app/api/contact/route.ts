@@ -40,12 +40,16 @@ export async function POST(request: Request) {
       createdAt: new Date().toISOString(),
     }
 
-    // Try to save to Firebase if credentials are configured
-    try {
-      const firestore = getFirestoreInstance()
-      await firestore.collection(contactCollection).add(payload)
-    } catch (firebaseError) {
-      console.warn('Firebase not configured, skipping Firestore save:', firebaseError)
+    let delivered = false
+
+    if (process.env.FIREBASE_PROJECT_ID && process.env.FIREBASE_CLIENT_EMAIL && process.env.FIREBASE_PRIVATE_KEY) {
+      try {
+        const firestore = getFirestoreInstance()
+        await firestore.collection(contactCollection).add(payload)
+        delivered = true
+      } catch (firebaseError) {
+        console.error('Failed to save contact submission:', firebaseError)
+      }
     }
 
     // Try to forward to Google Sheets if webhook is configured
@@ -60,12 +64,18 @@ export async function POST(request: Request) {
           body: JSON.stringify(payload),
         })
 
-        if (!sheetResponse.ok) {
-          console.warn('Failed to forward submission to Google Sheets.')
-        }
+        if (sheetResponse.ok) delivered = true
+        else console.warn('Failed to forward submission to Google Sheets.')
       } catch (sheetsError) {
         console.warn('Error forwarding to Google Sheets:', sheetsError)
       }
+    }
+
+    if (!delivered) {
+      return NextResponse.json(
+        { message: 'Unable to submit the form right now.' },
+        { status: 503 },
+      )
     }
 
     return NextResponse.json(

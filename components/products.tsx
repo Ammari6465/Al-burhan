@@ -22,7 +22,7 @@ export default function Products() {
       const res = await fetch('/api/products', { cache: 'no-store' })
       if (res.ok) {
         const data = await res.json()
-        if (Array.isArray(data.products) && data.products.length > 0) {
+        if (Array.isArray(data.products)) {
           setProducts(data.products)
         }
       }
@@ -36,23 +36,16 @@ export default function Products() {
   useEffect(() => {
     loadProducts()
 
-    // Listen for custom catalog updates from admin module
-    const handleCatalogUpdate = () => {
-      loadProducts()
-    }
-
-    window.addEventListener('catalog-updated', handleCatalogUpdate)
     window.addEventListener('focus', loadProducts)
 
     return () => {
-      window.removeEventListener('catalog-updated', handleCatalogUpdate)
       window.removeEventListener('focus', loadProducts)
     }
   }, [])
 
   const filteredProducts = useMemo<CatalogProduct[]>(() => {
     const query = normalizeSearchText(searchQuery)
-    const scopedItems = products.length ? products : catalogItems
+    const scopedItems = products
     if (!query) return scopedItems
 
     return scopedItems.filter((product) => {

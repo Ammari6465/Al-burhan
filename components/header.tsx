@@ -67,7 +67,7 @@ export default function Header() {
 
   return (
     <header
-      style={{ ['--header-height' as any]: '64px' }}
+      style={{ '--header-height': '64px' } as React.CSSProperties}
       className={`fixed left-0 right-0 top-0 z-50 border-b border-slate-200/70 bg-white/96 backdrop-blur-md transition-all duration-200 sm:left-1/2 sm:right-auto sm:top-3 sm:w-[min(96%,1120px)] sm:-translate-x-1/2 sm:rounded-2xl sm:border sm:shadow-md ${isScrolled ? 'shadow-sm sm:top-2' : 'shadow-md'}`}>
       <div className="mx-auto max-w-7xl px-3 sm:px-6 lg:px-8">
         <div className="flex h-16 items-center justify-between sm:h-18">
