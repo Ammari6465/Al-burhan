@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import { Analytics } from '@vercel/analytics/next'
 import Header from '@/components/header'
 import GearLoader from '@/components/gear-loader'
 import FloatingWhatsAppButton from '@/components/floating-whatsapp-button'
@@ -41,6 +42,7 @@ export default function RootLayout({
           <div className="page-enter">{children}</div>
           <FloatingWhatsAppButton />
         </ThemeProvider>
+        <Analytics />
       </body>
     </html>
   )
