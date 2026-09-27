@@ -23,6 +23,7 @@ const imageFiles = [
   'C.I. Step Pulley.jpg',
   'C.I. V-Belt Pulley - Arms.jpg',
   'C.I. V-Belt Pulley - Semi Solid.jpg',
+  'C.I. V-Belt Pulley - Special Make.jpg',
   'C.I. V-Belt Pulley- Solid.jpg',
   'Chain Coupling.jpg',
   'CI Spur Gear.jpg',
@@ -219,6 +220,7 @@ export const catalogItems: CatalogProduct[] = groupedSources.map((group) => {
 
   const details = categoryDetails[group.category]
   const displayName = renameMap[group.baseName.toLowerCase()] ?? group.baseName
+  const isSpecialMakePulley = group.baseName === 'C.I. V-Belt Pulley - Special Make'
 
   return {
     id: toProductId(`${group.category}-${group.baseName}`),
@@ -226,9 +228,19 @@ export const catalogItems: CatalogProduct[] = groupedSources.map((group) => {
     category: group.category,
     image: group.imageLinks[0],
     images: group.imageLinks,
-    spec: details.spec,
-    description: details.description,
-    features: details.features,
-    specs: details.specs,
+    spec: isSpecialMakePulley ? 'Special-make cast iron V-belt pulley' : details.spec,
+    description: isSpecialMakePulley
+      ? 'Custom-made C.I. V-belt pulley for industrial power transmission applications.'
+      : details.description,
+    features: isSpecialMakePulley
+      ? ['Special-make design', 'Multi-groove V-belt profile', 'Made to order']
+      : details.features,
+    specs: isSpecialMakePulley
+      ? [
+          { label: 'Material', value: 'Cast Iron (C.I.)' },
+          { label: 'Type', value: 'V-belt pulley' },
+          { label: 'Supply', value: 'Special make / custom order' },
+        ]
+      : details.specs,
   }
 })
